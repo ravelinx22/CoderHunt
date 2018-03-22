@@ -1,0 +1,52 @@
+/* Card Component */
+.moving.tinder--card {
+	-webkit-transition: none;
+	transition: none;
+	cursor: -webkit-grabbing;
+	cursor: grabbing;
+}
+
+.card_info {
+	width: 100%;
+	padding: 10px 20px;
+	pointer-events: none;
+}
+
+.tinder--card img {
+	object-fit: cover;
+	height: 60%;
+	width: 100%;
+	pointer-events: none;
+}
+
+.card_name {
+	font-size: 26px;
+	font-weight: 600;
+	text-align: left;
+	pointer-events: none;
+}
+
+.card_username {
+	font-size: 20px;
+	font-weight: 400;
+	text-align: left;
+	pointer-events: none;
+}
+
+.card_description {
+	font-size: 15px;
+	text-align: left;
+	margin-top: 5px;
+	pointer-events: none;
+}
+
+/* Card Flag Component */
+.card_flag {
+	color:white;
+	background: red;
+	border-radius: 5px;
+	padding: 2px;
+	font-weight: 500;
+	text-align: center;
+	margin-top: 20px;
+}
