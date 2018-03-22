@@ -12,7 +12,7 @@ export default class NotFoundPage extends Component {
 
 	render() {
 		return(
-			<div>Hello World</div>
+			<h1>404 Not Found</h1>
 		);
 	}
 }
