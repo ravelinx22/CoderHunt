@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 
 // Erase
-import ChatItem from "../components/ChatItem.jsx";
+import ChatList from "../components/ChatList.jsx";
 
 export default class AppContainer extends Component {
 	constructor(props) {
@@ -23,7 +23,7 @@ export default class AppContainer extends Component {
 						<Row>
 							<Col md={4}> 
 								<h1>Chat</h1>
-								<ChatItem/>
+								<ChatList />
 							</Col>
 							<Col md={8}>
 								{this.props.children}
