@@ -23,14 +23,7 @@ export default class Home extends Component {
 	render() {
 
 		return(
-			<Row>
-				<Col md={4}> 
-					<h1>Chat</h1>
-				</Col>
-				<Col md={8}>
-					<h1>Home</h1>
-				</Col>
-			</Row>
+			<h1>Home</h1>
 		);
 	}
 }
