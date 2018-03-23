@@ -18,3 +18,8 @@
 .chat_item_container {
 	width: 100%;
 }
+
+.posi {
+	display: inline-block;
+}
+

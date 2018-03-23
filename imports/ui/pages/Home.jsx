@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Row, Grid, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from "reactstrap";
+
 
 export default class Home extends Component {
 	constructor(props) {

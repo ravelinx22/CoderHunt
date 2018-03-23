@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Grid, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from "reactstrap";
 
 // Erase
 import ChatItem from "../components/ChatItem.jsx";
@@ -14,9 +14,11 @@ export default class AppContainer extends Component {
 
 	render() {
 		return(
-			<Grid>
+			<Container>
 				{ this.state.loggedIn ? 
-						<div>Hello World</div>
+						<Row>
+							<h1>Hello World</h1>
+						</Row>
 						:
 						<Row>
 							<Col md={4}> 
@@ -28,7 +30,7 @@ export default class AppContainer extends Component {
 							</Col>
 						</Row>
 				}
-			</Grid>
+			</Container>
 		);
 	}
 }

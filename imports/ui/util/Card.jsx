@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Hammer from "react-hammerjs";
 import "../css/card.css";
 import CardFlag from "./CardFlag.jsx"
-import { Row, Grid, Col } from 'react-bootstrap';
+import { Container as Grid, Row, Col, Button } from "reactstrap";
 
 export default class Card extends Component {
 	constructor(props) {
