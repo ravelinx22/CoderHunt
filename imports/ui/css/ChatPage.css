@@ -1,13 +1,13 @@
 /* Chat Page */
 .chats {
 	height: 100%;
-	background-color: green;
 	width: 100%;
 	border: 1px solid lightgrey;
 }
 
 .chat-content {
-	height: 92%;
+	background-color: green;
+	height: 86%;
 	box-sizing: border-box;
 	padding: 10px 20px;
 	overflow-y: scroll;

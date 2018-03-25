@@ -4,6 +4,7 @@ import "../css/ChatPage.css";
 import ChatMessage from "../components/ChatMessage.jsx";
 import ReactDOM from 'react-dom';
 import { chats } from "../testdata.jsx";
+import ChatNavbar from "../components/navbars/ChatNavbar.jsx";
 
 export default class ChatPage extends Component {
 	constructor(props) {
@@ -52,6 +53,7 @@ export default class ChatPage extends Component {
 	render() {
 		return(
 			<div className="chats">
+				<ChatNavbar history={this.props.history}/>
 				<div className="chat-content" ref="chats"> 
 					{this.renderMessages()}	
 				</div>
