@@ -11,9 +11,28 @@ export default class ChatNavbar extends Component {
 	componentDidMount() {
 	}
 
+	goBack() {
+		this.props.history.goBack();	
+	}
+
+	removeChat() {
+
+	}
+
 	render() {  
 		return(
-			<div className="chat_navbar">Hola</div>
+			<Container className="chat_navbar d-flex align-items-center">
+				<Row className="chat_navbar_row">
+					<a className="btn_go_back mr-auto" onClick={this.goBack.bind(this)}>
+						<i className="fa fa-arrow-left"></i>
+						Go Back
+					</a>
+					<div className="chat_title">Nicolás</div>
+					<a className="btn_remove_chat ml-auto" onClick={this.removeChat.bind(this)}>
+						<i className="fa fa-trash"></i>
+					</a>
+				</Row>
+			</Container>
 		);
 	}
 }

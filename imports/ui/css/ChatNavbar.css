@@ -4,3 +4,28 @@
 	height: 6%;
 	width: 100%;
 }
+
+.chat_navbar_row {
+	width: 100%;
+	padding: 0 15px;
+	text-align: center;
+}
+
+.btn_go_back {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.btn_go_back > .fa-arrow-left {
+	margin-right: 10px;
+}
+
+.btn_remove_chat {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.chat_title {
+	font-size: 18px;
+	font-weight: 600;
+}
