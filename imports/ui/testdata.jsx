@@ -104,11 +104,38 @@ export function chats_preview() {
 
 export function detail_card() {
 	return 	{
-			_id: "1",
-			name: "William",
-			username: "Ravelinx22",
-			email: "asfasf",
-			languages: ["Java"],
-			image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-		};
+		_id: "1",
+		name: "William",
+		username: "Ravelinx22",
+		email: "asfasf",
+		languages: ["Java"],
+		image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
+	};
+}
+
+export function repos() {
+	var repos = [
+		{
+			name: "CoderHunt",
+			description: "Web application developed so users looking for a new car can find the right new car according to their needs",
+			language: "Java",
+			url: "https://www.google.com",
+			_id: "12lkj124"
+		},
+		{
+			name: "CoderHunt",
+			description: "Web application developed so users looking for a new car can find the right new car according to their needs",
+			language: "Java",
+			url: "https://www.google.com",
+			_id: "12lkj124ljk12"
+		},
+		{
+			name: "CoderHunt",
+			description: "Web application developed so users looking for a new car can find the right new car according to their needs",
+			language: "Java",
+			url: "https://www.google.com",
+			_id: "21lkj124ljk"
+		}
+	]
+	return repos;
 }

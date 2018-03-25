@@ -1,10 +1,12 @@
 .data_detail {
 	height: 100%;
 	width: 100;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 div > .data_detail {
-	font-size: 20px;
+	font-size: 14px;
 	font-weight: 400;
 }
 
@@ -23,7 +25,12 @@ div > .data_detail {
 	font-weight: 600;
 }
 
+.detail_username {
+	font-size: 20px;
+}
+
 .info_title {
 	font-size: 26px;
 	font-weight: 600;
 }
+

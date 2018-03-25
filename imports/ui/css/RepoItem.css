@@ -1,0 +1,42 @@
+/* Repo Item */
+.repo_item {
+	width: 100%;
+	border: 1px solid lightgrey;
+	padding: 16px;
+	border-radius: 3px;
+	box-sizing: border-box;
+	margin-top: 10px;
+}
+
+.repo_name {
+	font-size: 14px;
+	color: #0366d6 !important;
+	font-weight: 600;
+}
+
+.repo_name:hover {
+	border-bottom: 1px solid #0366d6 !important;
+}
+
+.repo_info {
+	color: #586069;
+	font-size: 12px;
+	font-weight: 400;
+	margin: 8px 0 16px 0;
+}
+
+.repo_lang {
+	color: #586069;
+	font-size: 12px;
+}
+
+.repo_lang_color {
+	width: 12px;
+	height: 12px;
+	background-color: #f1e05a;
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	top: 1px;
+	margin-right: 5px;
+}
