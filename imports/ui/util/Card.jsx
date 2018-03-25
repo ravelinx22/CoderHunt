@@ -70,9 +70,13 @@ export default class Card extends Component {
 		}
 	}
 
+	onDoubleTap() {
+		this.props.onDoubleTap(this.props.card);
+	}
+
 	render() {
 		return(
-			<Hammer onPan={this.onPan.bind(this)} onPanEnd={this.onPanEnd.bind(this)}>
+			<Hammer onPan={this.onPan.bind(this)} onPanEnd={this.onPanEnd.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}> 
 				<div className={this.state.classList.join(" ")}>
 					<img src={this.props.card.image_url} />
 					<Grid className="card_info">

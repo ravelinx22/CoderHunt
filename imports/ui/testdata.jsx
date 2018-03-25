@@ -43,6 +43,7 @@ export function chats() {
 export function cards() {
 	var data =  [
 		{
+			_id: "1",
 			name: "William",
 			username: "Ravelinx22",
 			email: "asfasf",
@@ -50,6 +51,7 @@ export function cards() {
 			image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
 		},
 		{
+			_id: "2",
 			name: "William",
 			username: "Ravelinx22",
 			email: "asfasf",
@@ -57,6 +59,7 @@ export function cards() {
 			image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
 		},
 		{
+			_id: "3",
 			name: "William",
 			username: "Ravelinx22",
 			email: "asfasf",
@@ -64,6 +67,7 @@ export function cards() {
 			image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
 		},
 		{
+			_id: "4",
 			name: "William",
 			username: "Ravelinx22",
 			email: "asfasf",
@@ -71,6 +75,7 @@ export function cards() {
 			image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
 		},
 		{
+			_id: "5",
 			name: "William",
 			username: "Ravelinx22",
 			email: "asfasf",

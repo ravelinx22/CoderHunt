@@ -6,14 +6,14 @@ export default class Cards extends Component {
 	constructor(props) {
 		super(props);
 	}
-	
+
 	componentDidMount() {
-		this.setupCards();
+		this.setupCards();	
 	}
 
 	renderCards() {
 		return this.props.data.map((card) => {
-			return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} />
+			return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}/>
 		});
 	}
 
@@ -37,6 +37,10 @@ export default class Cards extends Component {
 
 	onSwipeRight(card) {
 		console.log("Right " + card._id);
+	}
+
+	onDoubleTap(card) {
+		this.props.history.push("/user/" + card._id);
 	}
 
 	render() {

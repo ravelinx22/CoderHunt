@@ -19,8 +19,8 @@ export default class Home extends Component {
 	render() {
 
 		return(
-			<div class="swipe_content">
-				<Cards data={this.state.data} />				
+			<div className="swipe_content">
+				<Cards data={this.state.data} history={this.props.history} />				
 			</div>
 		);
 	}
