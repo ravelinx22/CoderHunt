@@ -20,9 +20,8 @@ export default class AppContainer extends Component {
 							<h1>Hello World</h1>
 						</Row>
 						:
-						<Row>
+						<Row className="content-row">
 							<Col md={4}> 
-								<h1>Chat</h1>
 								<ChatList />
 							</Col>
 							<Col md={8}>

@@ -9,17 +9,27 @@ export default class ChatList extends Component {
 	}
 
 	renderChats() {
-		let chats = ["Chat1", "Chat2", "Chat3"];
+		let chats = [
+			{	
+				_id: "124j214kjh214kjh"
+			},
+			{
+				_id: "124124kjhkjh142"
+			}, 
+			{
+				_id: "21421424h12k4jhkj"
+			}
+		];
 		return chats.map((chat) => {
-			return <ChatItem key={chat} />;
+			return <ChatItem key={chat._id} chat={chat} />;
 		});
 	}
 
 	render() {
 		return(
-			<Container className="chat_list">
+			<ul className="chat_list"> 
 				{this.renderChats()}
-			</Container>
+			</ul>
 		);
 	}
 }
