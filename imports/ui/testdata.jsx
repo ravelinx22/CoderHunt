@@ -101,3 +101,14 @@ export function chats_preview() {
 	];
 	return data;
 }
+
+export function detail_card() {
+	return 	{
+			_id: "1",
+			name: "William",
+			username: "Ravelinx22",
+			email: "asfasf",
+			languages: ["Java"],
+			image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
+		};
+}
