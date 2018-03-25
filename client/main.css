@@ -2,3 +2,38 @@
 .content-row {
 	height: 100vh;
 }
+
+/* Media types */
+@media(min-width:576px){
+
+}
+
+@media(min-width:768px){
+	.left_content {
+		padding-right: 0px !important;
+	}
+
+	.right_content {
+		padding-left: 0px !important;
+	}
+}
+
+@media(min-width:992px){
+	.left_content {
+		padding-right: 0px !important;
+	}
+
+	.right_content {
+		padding-left: 0px !important;
+	}
+}
+
+@media(min-width:1200px){
+	.left_content {
+		padding-right: 0px !important;
+	}
+
+	.right_content {
+		padding-left: 0px !important;
+	}
+}

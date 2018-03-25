@@ -21,10 +21,10 @@ export default class AppContainer extends Component {
 						</Row>
 						:
 						<Row className="content-row">
-							<Col md={4}> 
+							<Col className="left_content" md={4}> 
 								<ChatList />
 							</Col>
-							<Col md={8}>
+							<Col className="right_content" md={8}>
 								{this.props.children}
 							</Col>
 						</Row>
