@@ -1,20 +1,15 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
-
+import { cards } from "../testdata.jsx";
+import "../css/Home.css";
+import Cards from "../util/Cards.jsx";
 
 export default class Home extends Component {
 	constructor(props) {
 		super(props);
+		var data = cards();
 		this.state = {
-			data: [
-				{
-					name: "William",
-					username: "Ravelinx22",
-					email: "asfasf",
-					languages: ["Java"],
-					image_url: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-				}
-			]
+			data: data
 		}
 	}
 
@@ -24,7 +19,9 @@ export default class Home extends Component {
 	render() {
 
 		return(
-			<h1>Home</h1>
+			<div class="swipe_content">
+				<Cards data={this.state.data} />				
+			</div>
 		);
 	}
 }

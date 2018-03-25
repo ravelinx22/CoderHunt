@@ -3,50 +3,15 @@ import { Container, Row, Col, Button } from "reactstrap";
 import "../css/ChatPage.css";
 import ChatMessage from "../components/ChatMessage.jsx";
 import ReactDOM from 'react-dom';
+import { chats } from "../testdata.jsx";
 
 export default class ChatPage extends Component {
 	constructor(props) {
 		super(props);
+		var data = chats();
 		this.state = {
 			lastId: 1,
-			data: [
-				{
-					_id: "askfjaf786asf1",
-					content: "afs faf afs sakljfas",
-					username: "ravelinx22",
-					profile_pic: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-				},
-				{
-					_id: "askfjaf786asf2",
-					content: "afs faf afs sakljfas",
-					username: "ravelinx22",
-					profile_pic: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-				},
-				{
-					_id: "askfjaf786asf3",
-					content: "afs faf afs sakljfas",
-					username: "algo",
-					profile_pic: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-				},
-				{
-					_id: "askfjaf786asf4",
-					content: "afs faf afs sakljfas",
-					username: "ravelinx22",
-					profile_pic: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-				},
-				{
-					_id: "askfjaf786asf5",
-					username: "algo",
-					content: "afs faf afs sakljfas",
-					profile_pic: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-				},
-				{
-					_id: "askfjaf786asf6",
-					content: "afs faf afs sakljfas",
-					username: "algo",
-					profile_pic: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-				}
-			]
+			data: data		
 		};
 	}
 
