@@ -1,0 +1,14 @@
+/* Home Navbar */
+.home_navbar {
+	background-color: #f5f1ee;
+	height: 6%;
+	width: 100%;
+}
+
+.home_navbar_row {
+	width: 100%;
+	padding: 0 15px;
+	text-align: center;
+}
+
+

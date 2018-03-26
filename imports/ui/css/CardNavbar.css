@@ -42,6 +42,6 @@
 	border-radius: 50%;
 	background: #FFFFFF;
 	display: inline-block;
-	border: 0;
+	border: 1px solid lightgrey;
 	margin-left: 5px;
 }

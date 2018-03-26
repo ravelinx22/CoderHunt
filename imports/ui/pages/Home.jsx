@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { cards } from "../testdata.jsx";
 import "../css/Home.css";
 import Cards from "../util/Cards.jsx";
+import HomeNavbar from "../components/navbars/HomeNavbar.jsx";
 
 export default class Home extends Component {
 	constructor(props) {
@@ -20,7 +21,8 @@ export default class Home extends Component {
 
 		return(
 			<div className="swipe_content">
-				<Cards data={this.state.data} history={this.props.history} />				
+				<HomeNavbar />
+				<Cards data={this.state.data} history={this.props.history} />	
 			</div>
 		);
 	}
