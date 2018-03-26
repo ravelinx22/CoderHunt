@@ -57,3 +57,26 @@
   cursor: grab;
 }
 
+.card-buttons {
+	margin-bottom: 35px;
+	width: 100%;
+	text-align: center;
+}
+
+.card-buttons i {
+	font-size: 32px;
+	vertical-align: middle;
+}
+
+.card-buttons button {
+	outline: 0 !important;
+	border-radius: 50%;
+	line-height: 60px;
+	width: 60px;
+	border: 0;
+	background: #FFFFFF;
+	display: inline-block;
+	margin: 0 8px;
+	height: 60px;
+	outline: none;
+}

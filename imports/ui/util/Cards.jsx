@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card.jsx";
 import "../css/cards.css";
+import { Container, Row, Col, Button } from "reactstrap";
 
 export default class Cards extends Component {
 	constructor(props) {
@@ -43,11 +44,41 @@ export default class Cards extends Component {
 		this.props.history.push("/user/" + card._id);
 	}
 
+	likeCard(event) {
+		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+		var moveOutWidth = document.body.clientWidth * 1.5;
+		if (!cards.length) return false;
+		var card = cards[0];
+		card.classList.add('removed');
+		card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
+		this.setupCards();
+		event.preventDefault();
+	}
+
+	unlikeCard(event) {
+		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+		var moveOutWidth = document.body.clientWidth * 1.5;
+		if (!cards.length) return false;
+		var card = cards[0];
+		card.classList.add('removed');
+		card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+		this.setupCards();
+		event.preventDefault();
+	}
+
 	render() {
 		return(
 			<div className="tinder">
 				<div className="tinder--cards">
 					{this.renderCards()}
+				</div>
+				<div className="card-buttons">
+					<button className="unlike" onClick={this.unlikeCard.bind(this)}>
+						<i className="fa fa-thumbs-down"></i>
+					</button>
+					<button className="like" onClick={this.likeCard.bind(this)}>
+						<i className="fa fa-thumbs-up"></i>
+					</button>
 				</div>
 			</div>
 		);

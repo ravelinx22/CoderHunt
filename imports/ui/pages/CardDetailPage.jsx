@@ -4,6 +4,7 @@ import "../css/CardDetailPage.css";
 import { detail_card, repos } from "../testdata.jsx";
 import CardFlag from "../util/CardFlag.jsx";
 import RepoItem from "../components/RepoItem.jsx";
+import CardNavbar from "../components/navbars/CardNavbar.jsx";
 
 export default class CardDetailPage extends Component {
 	constructor(props) {
@@ -37,27 +38,34 @@ export default class CardDetailPage extends Component {
 		});
 	}
 
+	goBack() {
+		console.log("buenas");
+	}
+
 	render() {
 		return(
 			<div className="data_detail">
-				<img src={this.state.data.image_url} alt="data_pic" className="detail_img"/>
-				<div className="info_container">
-					<div className="detail_name">William</div>
-					<div className="detail_username">ravelinx22</div>
-				</div>
-				<div className="info_container">
-					<div className="info_title">Bio</div>
-					<div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-				</div>
-				<div className="info_container">
-					<div className="info_title">Tags</div>
-					<Row>
-						{this.renderFlags()}
-					</Row>
-				</div>
-				<div className="info_container">
-					<div className="info_title">Repos</div>
-					<Row>{this.renderRepos()}</Row>
+				<CardNavbar history={this.props.history} />
+				<div className="data_content">
+					<img src={this.state.data.image_url} alt="data_pic" className="detail_img"/>
+					<div className="info_container">
+						<div className="detail_name">William</div>
+						<div className="detail_username">ravelinx22</div>
+					</div>
+					<div className="info_container">
+						<div className="info_title">Bio</div>
+						<div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+					</div>
+					<div className="info_container">
+						<div className="info_title">Tags</div>
+						<Row>
+							{this.renderFlags()}
+						</Row>
+					</div>
+					<div className="info_container">
+						<div className="info_title">Repos</div>
+						<Row>{this.renderRepos()}</Row>
+					</div>
 				</div>
 			</div>
 		);
