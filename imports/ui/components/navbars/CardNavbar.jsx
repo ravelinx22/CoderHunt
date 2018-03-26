@@ -15,6 +15,14 @@ export default class CardNavbar extends Component {
 		this.props.history.goBack();	
 	}
 
+	like() {
+		console.log("like");
+	}
+
+	unlike() {
+		console.log("unlike");
+	}
+
 	render() {  
 		return(
 			<Container className="card_navbar d-flex align-items-center">
@@ -24,10 +32,15 @@ export default class CardNavbar extends Component {
 						Go Back
 					</a>
 					<div className="card_title">Profile</div>
-					<a className="btn_remove_chat ml-auto">
-						<i className="fa fa-trash"></i>
-					</a>
+					<div className="ml-auto detail_card_buttons">
+						<button className="unlike" onClick={this.unlike.bind(this)}>
+							<i className="fa fa-thumbs-down"></i>
+						</button>
+						<button className="like" onClick={this.like.bind(this)}>
+							<i className="fa fa-thumbs-up"></i>
+						</button>
 
+					</div>
 				</Row>
 			</Container>
 		);

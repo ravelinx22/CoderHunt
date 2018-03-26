@@ -29,3 +29,19 @@
 	font-size: 18px;
 	font-weight: 600;
 }
+
+.detail_card_buttons {
+}
+
+.detail_card_buttons {
+
+}
+
+.detail_card_buttons button {
+	outline: 0 !important;
+	border-radius: 50%;
+	background: #FFFFFF;
+	display: inline-block;
+	border: 0;
+	margin-left: 5px;
+}
