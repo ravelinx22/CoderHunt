@@ -1,0 +1,39 @@
+/* New Project Page */
+.create_project {
+	height: 100%;
+	width: 100%;
+	border: 1px solid lightgrey;
+}
+
+.create_project_content {
+	background-color: green;
+	height: calc(100% - 43px);
+	box-sizing: border-box;
+	padding: 10px 20px;
+	overflow-y: scroll;
+	width: 100%;
+}
+
+label, input, textarea {
+	display: block !important;
+}
+
+input[type="text"] {
+	margin: 0;
+	border-radius: 5px;
+	height: 30px;
+}
+
+label {
+	margin: 20px;
+	font-size: 14px;
+}
+
+textarea {
+	outline: 0 !important;
+	resize: none !important;
+}
+
+textarea.description {
+	height: 200px;
+}

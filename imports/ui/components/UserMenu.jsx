@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import "../css/UserMenu.css";
 import { Container, Row, Col, Button } from "reactstrap";
+import { withRouter } from "react-router-dom";
 
-export default class UserMenu extends Component {
+class UserMenu extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -17,18 +18,28 @@ export default class UserMenu extends Component {
 		})
 	}
 
+	componentDidMount() {
+		console.log(this.props);
+	}
+
+	goCreate() {
+		this.props.history.push("/project/new");
+	}
+
 	render() {
 		return(
 			<div className="user-menu vertical" onClick={this.toggle.bind(this)}>
-						<a className="bti-secondary unselectable">ravelinx22</a>
-						{ this.state.open ?
+				<a className="bti-secondary unselectable">ravelinx22</a>
+				{ this.state.open ?
 						<div className="starting_option">
-						<a className="bti-secondary">Change Project</a>
-						<a className="bti-secondary">Create Project</a>
-						<a className="bti-secondary">Logout</a>
-					</div>
+							<a className="bti-secondary">Change Project</a>
+							<a className="bti-secondary" onClick={this.goCreate.bind(this)}>Create Project</a>
+							<a className="bti-secondary">Logout</a>
+						</div>
 						: null }
-			</div>	
+					</div>
 		); 
 	}
 }
+
+export default withRouter(UserMenu);

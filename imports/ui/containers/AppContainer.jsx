@@ -13,6 +13,9 @@ export default class AppContainer extends Component {
 		};
 	}
 
+	componentDidMount() {
+	}
+
 	render() {
 		return(
 			<Container>
@@ -23,7 +26,7 @@ export default class AppContainer extends Component {
 						:
 						<Row className="content-row">
 							<Col className="left_content" md={4}> 
-								<UserMenu />
+								<UserMenu/>
 								<ChatList />
 							</Col>
 							<Col className="right_content" md={8}>
