@@ -1,0 +1,77 @@
+/* User Menu */
+.user-menu.vertical .bti-secondary + .bti-secondary {
+    margin-top: .5rem;
+}
+
+.user-menu.vertical .bti-secondary {
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    padding-right: 2.5em;
+    text-align: left;
+    text-indent: 0;
+    white-space: normal;
+    width: 100%;
+}
+
+
+[class^="bti-"], [class*=" bti-"] {
+    line-height: 20px !important;
+    padding: 0.8em 1.25em;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    transition: all 200ms ease-in;
+    display: inline-block;
+    position: relative;
+    text-decoration: none !important;
+    vertical-align: middle;
+}
+
+.user-menu {
+    margin: 1em auto 2em;
+    width: 80%;
+}
+
+.bti-secondary {
+	font-size: 10px;
+	color: black !important;
+	background-color: transparent;
+	border: 1px solid lightgrey;
+	cursor: pointer;
+}
+
+.user-menu.vertical .bti-secondary + .bti-secondary:before {
+    position: absolute;
+    top: -0.5rem;
+    right: 50%;
+    bottom: auto;
+    left: auto;
+    width: 1px;
+    height: 0.5rem;
+    background: lightgrey;
+    content: '';
+}
+
+.starting_option {
+	margin-top: 5px;
+}
+
+.starting_option:before {
+    position: absolute;
+    top: -0.5rem;
+    right: 50%;
+    bottom: auto;
+    left: auto;
+    width: 1px;
+    height: 0.5rem;
+    background: lightgrey;
+    content: '';
+}
+
+*.unselectable {
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
