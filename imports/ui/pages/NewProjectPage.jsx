@@ -55,7 +55,7 @@ export default class NewProjectPage extends Component {
 				<NewProjectNavbar history={this.props.history}/>
 				<Container className="create_project_content">
 					<div>
-						<form>
+						<form className="create_project_form">
 							<label>
 								Insert Photo
 								<Row className="justify-content-center">

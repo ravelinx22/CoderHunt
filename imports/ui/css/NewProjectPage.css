@@ -13,41 +13,41 @@
 	width: 100%;
 }
 
-label, input, textarea {
+.create_project_form  > label, .create_project_form  > input, .create_project_form  > textarea {
 	display: block !important;
 }
 
-input[type="text"] {
+.create_project_form  > label > input[type="text"] {
 	margin: 0;
 	height: 30px;
 }
 
-label {
+.create_project_form  > label {
 	margin: 20px;
 	font-size: 14px;
 }
 
-textarea {
+.create_project_form  > label > textarea {
 	outline: 0 !important;
 	resize: none !important;
 	padding: 10px 15px;
 }
 
-textarea.description {
+.create_project_form  > label > textarea.description {
 	height: 200px;
 }
 
-input[type="text"], textarea {
+.create_project_form  > label > input[type="text"], .create_project_form  > label > textarea {
 	border: 1px solid lightgrey;
 	border-radius: 5px;
 	width: 100%;
 }
 
-.submit_row {
+.create_project_form  > .submit_row {
 	margin-top: 50px;
 }
 
-input[type="submit"] {
+.submit_row  > input[type="submit"] {
 	border-radius: 5px;
 	height: 40px;
 	width: 100px;
