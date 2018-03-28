@@ -15,6 +15,7 @@ Meteor.methods({
 			name: object.name,
 			description: object.description,
 			tags: object.tags,
+			image_url: object.image_url,
 			createdAt: new Date(),
 			userId: this.userId,
 			username: Meteor.users.findOne(this.userId).services.github.username,

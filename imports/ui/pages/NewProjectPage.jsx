@@ -34,10 +34,22 @@ export default class NewProjectPage extends Component {
 	}
 
 	handleSubmit(e) {
-		Meteor.call("projects.insert", {
+		var uploader = new Slingshot.Upload("projectPhotos");
+		body =   {
 			name: this.refs.name.value,
 			description: this.refs.description.value,
-			tags: this.getTags()
+			tags: this.getTags(),
+		};
+
+		uploader.send(this.refs.fileSelector.files[0], function (error, downloadUrl) {
+			if (error) {
+				alert (error);
+			}
+			else {
+				body["image_url"] = downloadUrl;
+				console.log(body);
+				Meteor.call("projects.insert",body);
+			}
 		});
 	}
 
@@ -59,7 +71,7 @@ export default class NewProjectPage extends Component {
 							<label>
 								Insert Photo
 								<Row className="justify-content-center">
-									<input type="file" accept="image/*"/>
+									<input type="file" accept="image/*" ref="fileSelector" />
 								</Row>
 							</label>
 							<label>
