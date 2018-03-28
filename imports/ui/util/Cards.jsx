@@ -38,6 +38,9 @@ export default class Cards extends Component {
 
 	onSwipeRight(card) {
 		console.log("Right " + card._id);
+		Meteor.call("likes.insert", {
+			destId: 2,
+		});
 	}
 
 	onDoubleTap(card) {
