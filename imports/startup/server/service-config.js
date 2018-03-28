@@ -15,6 +15,7 @@ if(Meteor.isServer) {
 
 	Accounts.onCreateUser((options, user) => {
 		user.prueba = "asfasff";
+		console.log(user);
 		return user;
 	});
 }

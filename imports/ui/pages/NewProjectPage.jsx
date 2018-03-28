@@ -3,17 +3,16 @@ import NewProjectNavbar from "../components/navbars/NewProjectNavbar.jsx";
 import "../css/NewProjectPage.css";
 import { Container, Row, Col, Button } from "reactstrap";
 import { WithContext as ReactTags } from 'react-tag-input';
+import { Meteor } from "meteor/meteor";
 
 export default class NewProjectPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tags: [{ text: "Thailand" }, { text: "India" }],
-			suggestions: ['USA', 'Germany', 'Austria', 'Costa Rica', 'Sri Lanka', 'Thailand']
+			tags: [{ text: "Programming" }],
 		};
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleAddition = this.handleAddition.bind(this);
-		this.handleDrag = this.handleDrag.bind(this);
 	}
 
 	componentDidMount() {
@@ -34,20 +33,22 @@ export default class NewProjectPage extends Component {
 		this.setState({tags: tags});
 	}
 
-	handleDrag(tag, currPos, newPos) {
-		const tags = [...this.state.tags];
-		const newTags = tags.slice();
-
-		newTags.splice(currPos, 1);
-		newTags.splice(newPos, 0, tag);
-
-		// re-render
-		this.setState({ tags: newTags });
+	handleSubmit(e) {
+		Meteor.call("projects.insert", {
+			name: this.refs.name.value,
+			description: this.refs.description.value,
+			tags: this.getTags()
+		});
 	}
 
+	getTags() {
+		return this.state.tags.map((tag) => {
+			return tag.text;
+		});
+	}
 
 	render() {
-		const { tags, suggestions } = this.state;
+		const { tags } = this.state;
 
 		return(
 			<div className="create_project">
@@ -63,21 +64,19 @@ export default class NewProjectPage extends Component {
 							</label>
 							<label>
 								Name
-								<input type="text"/>
+								<input ref="name" type="text"/>
 							</label>
 							<label>
 								Description
-								<textarea className="description"/>
-								</label><label>
+								<textarea ref="description" className="description"/>
 								<ReactTags tags={tags}
-									suggestions={suggestions}
 									handleDelete={this.handleDelete}
 									handleAddition={this.handleAddition}/>
 							</label>
-							<Row className="submit_row justify-content-center">
-								<input type="submit" value="Submit"/>
-							</Row>
 						</form>
+						<Row className="submit_row justify-content-center">
+							<button className="submit" onClick={this.handleSubmit.bind(this)}>Submit</button>
+						</Row>
 					</div>
 				</Container>
 			</div>

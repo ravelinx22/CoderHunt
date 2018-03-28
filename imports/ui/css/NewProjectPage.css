@@ -47,7 +47,9 @@
 	margin-top: 50px;
 }
 
-.submit_row  > input[type="submit"] {
+.submit_row  > .submit {
+	color: white;
+	background-color: #09d261;
 	border-radius: 5px;
 	height: 40px;
 	width: 100px;
