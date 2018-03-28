@@ -17,7 +17,6 @@ export default class NewProjectPage extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 	}
 
 	handleDelete(i) {

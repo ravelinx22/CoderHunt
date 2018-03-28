@@ -15,7 +15,6 @@ export default class Home extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props)
 	}
 
 	render() {

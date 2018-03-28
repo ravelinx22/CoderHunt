@@ -13,7 +13,6 @@ class EnterPage extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 	}
 
 	enterPage() {

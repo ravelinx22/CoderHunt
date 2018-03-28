@@ -19,7 +19,6 @@ class UserMenu extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 	}
 
 	goCreate() {

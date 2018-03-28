@@ -1,4 +1,5 @@
 import { Meteor } from "meteor/meteor";
+import { Accounts } from 'meteor/accounts-base'
 
 if(Meteor.isServer) {
 	ServiceConfiguration.configurations.upsert(
@@ -11,4 +12,9 @@ if(Meteor.isServer) {
 			}
 		}
 	);
+
+	Accounts.onCreateUser((options, user) => {
+		user.prueba = "asfasff";
+		return user;
+	});
 }
