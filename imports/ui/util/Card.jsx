@@ -82,7 +82,7 @@ export default class Card extends Component {
 					<Grid className="card_info">
 						<div className="card_name">{this.props.card.name}</div>
 						<div className="card_username">Ravelinx22</div>
-						<div className="card_description">This is a demo for Tinder like swipe cards</div>
+						<div className="card_description">This is a demo for CoderHunt like swipe cards</div>
 						<Row>
 							{this.renderFlags()}
 						</Row>

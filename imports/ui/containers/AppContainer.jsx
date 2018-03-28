@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import UserMenu from "../components/UserMenu.jsx";
-
-// Erase
 import ChatList from "../components/ChatList.jsx";
+import EnterPage from "../pages/EnterPage.jsx";
 
 export default class AppContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: false,
+			loggedIn: true,
 		};
 	}
 
@@ -19,9 +18,9 @@ export default class AppContainer extends Component {
 	render() {
 		return(
 			<Container>
-				{ this.state.loggedIn ? 
-						<Row>
-							<h1>Hello World</h1>
+				{ !this.state.loggedIn ? 
+						<Row className="content-row">
+							<EnterPage />
 						</Row>
 						:
 						<Row className="content-row">
