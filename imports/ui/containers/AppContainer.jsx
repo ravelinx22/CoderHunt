@@ -3,24 +3,31 @@ import { Container, Row, Col, Button } from "reactstrap";
 import UserMenu from "../components/UserMenu.jsx";
 import ChatList from "../components/ChatList.jsx";
 import EnterPage from "../pages/EnterPage.jsx";
+import { Meteor } from "meteor/meteor";
 
 export default class AppContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: true,
+			logged: (Meteor.user() !== null)
 		};
 	}
 
 	componentDidMount() {
 	}
 
+	onLogin() {
+		this.setState({
+			logged: (Meteor.user() !== null)
+		});
+	}
+
 	render() {
 		return(
 			<Container>
-				{ !this.state.loggedIn ? 
+				{ !this.state.logged ? 
 						<Row className="content-row">
-							<EnterPage />
+							<EnterPage onLogin={this.onLogin.bind(this)}/>
 						</Row>
 						:
 						<Row className="content-row">
