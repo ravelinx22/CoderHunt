@@ -1,5 +1,5 @@
 var url = 'https://api.github.com/users/';
-var users = ['ravelinx22', 'naguilar12', 'john-guerra','fabpot','andrew','egoist','ornicar'];
+var users = ['ravelinx22', 'naguilar12', 'john-guerra', 'fabpot', 'andrew', 'egoist', 'ornicar', 'bebraw', 'nelsonic', 'orta', 'rstacruz', 'afc163', 'bkeepers', 'atmos', 'ai', 'nvie', 'drnic', 'stof', 'phodal', 'ljharb', 'c9s', 'holman', 'dmalan', 'kylef', 'chjj', 'mdo', 'feross', 'matsko', 'curran', 'mattn'];
 
 // async function userInfoPromise(userName) {
 
@@ -86,27 +86,33 @@ export async function userInfoPromise(userName) {
     return userData;
 }
 
-export function usersByLanguage(language) {
+export async function usersByLanguage(language) {
     var usersLanguage = [];
 
-    users.map((user) => {
+    var promises = users.map((user) => {
         userInfoPromise(user)
             .then((userData) => {
                 if (userData.languages.includes(language))
                     usersLanguage.push(userData);
             });
     });
+
+    await Promise.all(promises);
+
     return usersLanguage;
 }
 
-export function allUsersInfo() {
+export async function allUsersInfo() {
     var allUsers = [];
 
-    users.map((user) => {
+    var promises = users.map((user) => {
         userInfoPromise(user)
-            .then((userData) => {
-                allUsers.push(userData);
-            });
+        .then((userData)=>{
+            allUsers.push(userData);
+        })
     });
+
+    await Promise.all(promises);
+
     return allUsers;
 }
