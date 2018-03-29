@@ -9,18 +9,11 @@ export default class HomeNavbar extends Component {
 		super(props);
 		this.state = {
 			checked: false,
-			mode: "Programmer",
 		};
 	}
 
 	componentDidMount() {
-	}
-
-	toggleSwitch(event) {
-		this.setState({ 
-			checked: !this.state.checked,
-			mode: "Project"
-		});
+		console.log(this.props)
 	}
 
 	render() {  
@@ -31,8 +24,8 @@ export default class HomeNavbar extends Component {
 						Start Swiping
 					</div>
 					<div className="ml-auto">
-						<span className="switch_label">{this.state.mode} mode</span>
-						<ToggleSwitch className="home_navbar_switch" checked={this.state.checked} onChange={this.toggleSwitch.bind(this)}/>
+						<span className="switch_label">{this.props.mode} mode</span>
+						<ToggleSwitch className="home_navbar_switch" checked={this.props.isUserMode} onChange={this.props.onToggle}/>
 					</div>
 				</Row>
 			</Container>
