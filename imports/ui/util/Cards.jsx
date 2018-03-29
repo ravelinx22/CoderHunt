@@ -106,8 +106,9 @@ class Cards extends Component {
 }
 
 export default withTracker((props) => {
-	Meteor.subscribe("projects");
+	Meteor.subscribe("projectsForUser", Meteor.userId());
 	Meteor.subscribe("users");
+
 	return {
 		isUserMode: props.isUserMode,
 		userId: Meteor.userId(),

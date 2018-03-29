@@ -8,6 +8,14 @@ if (Meteor.isServer) {
 	Meteor.publish('projects', function projectsPublication() {
 		return Projects.find({});
 	});
+
+	Meteor.publish ('projectsForUser', function projectsForUser(userId){
+		console.log(userId);
+		var user = Meteor.users.findOne({_id : userId});
+		var languages = user.tags;
+		
+		return Projects.find({ tags: { $in: languages }, userId : {$not :{$eq : userId}}});
+	});
 }
 
 Meteor.methods({
