@@ -10,7 +10,7 @@ export default class Home extends Component {
 		super(props);
 		var data = cards();
 		this.state = {
-			data: data
+			data: data,
 		}
 	}
 
@@ -22,7 +22,7 @@ export default class Home extends Component {
 		return(
 			<div className="swipe_content">
 				<HomeNavbar />
-				<Cards data={this.state.data} history={this.props.history} />	
+				<Cards data={this.state.data} history={this.props.history} isUserMode={true}/> 
 			</div>
 		);
 	}

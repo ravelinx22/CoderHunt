@@ -4,8 +4,8 @@ import { check } from "meteor/check";
 
 export const Projects = new Mongo.Collection("projects");
 
-if(Meteor.isServer) {
-	Meteor.publish("projects", () => {
+if (Meteor.isServer) {
+	Meteor.publish('projects', function projectsPublication() {
 		return Projects.find({});
 	});
 }

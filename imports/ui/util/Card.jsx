@@ -9,7 +9,7 @@ export default class Card extends Component {
 		super(props);
 		this.state =  {
 			classList: ["tinder--card"],
-			flags: ["Java", "Ruby", "Swift"]
+			flags: []
 		}
 	}
 
@@ -17,7 +17,7 @@ export default class Card extends Component {
 	}
 
 	renderFlags() {
-		return this.state.flags.map((flag) => {
+		return this.props.card.tags.map((flag) => {
 			return(
 				<Col key={flag} md={3}>
 					<CardFlag key={flag} name={flag} />
@@ -81,8 +81,8 @@ export default class Card extends Component {
 					<img src={this.props.card.image_url} />
 					<Grid className="card_info">
 						<div className="card_name">{this.props.card.name}</div>
-						<div className="card_username">Ravelinx22</div>
-						<div className="card_description">This is a demo for CoderHunt like swipe cards</div>
+						<div className="card_username">{this.props.card.username}</div>
+						<div className="card_description">{this.props.card.description}</div>
 						<Row>
 							{this.renderFlags()}
 						</Row>

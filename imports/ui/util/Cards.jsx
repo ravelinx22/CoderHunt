@@ -2,13 +2,20 @@ import React, { Component } from "react";
 import Card from "./Card.jsx";
 import "../css/cards.css";
 import { Container, Row, Col, Button } from "reactstrap";
+import { withTracker } from "meteor/react-meteor-data";
+import { Meteor } from "meteor/meteor";
+import { Projects } from "../../api/projects/Projects.js";
 
-export default class Cards extends Component {
+class Cards extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	componentDidMount() {
+		this.setupCards();	
+	}
+
+	componentDidUpdate() {
 		this.setupCards();	
 	}
 
@@ -89,3 +96,10 @@ export default class Cards extends Component {
 		);
 	}
 }
+
+export default withTracker((props) => {
+	Meteor.subscribe("projects");
+	return {
+		data: (props.isUserMode ? Projects.find({}).fetch(): []),
+	};
+})(Cards)
