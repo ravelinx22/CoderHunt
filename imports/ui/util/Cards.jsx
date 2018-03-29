@@ -103,7 +103,7 @@ export default withTracker((props) => {
 	Meteor.subscribe("projects");
 	Meteor.subscribe("users");
 	var x = Meteor.users.find({}).fetch();
-	console.log(x);
+	//console.log(x);
 	return {
 		data: (props.isUserMode ? Projects.find({}).fetch():x ), 
 	};
