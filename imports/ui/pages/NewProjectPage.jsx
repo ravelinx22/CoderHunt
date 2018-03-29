@@ -47,7 +47,6 @@ export default class NewProjectPage extends Component {
 			}
 			else {
 				body["image_url"] = downloadUrl;
-				console.log(body);
 				Meteor.call("projects.insert",body);
 			}
 		});

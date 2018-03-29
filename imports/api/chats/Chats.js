@@ -2,7 +2,7 @@ import { Meteor } from "meteor/meteor";
 import { Mongo } from "meteor/mongo";
 import { check } from "meteor/check";
 
-export const Chats = new Mongo.Collection("Chats");
+export const Chats = new Mongo.Collection("chats");
 
 if(Meteor.isServer) {
 	Meteor.publish("chats", () => {
@@ -17,15 +17,12 @@ Meteor.methods({
 			throw new Meteor.Error("not-authorized");
 		}
 
-			/*	Projects.insert({
-			name: object.name,
-			description: object.description,
-			tags: object.tags,
-			image_url: object.image_url,
+		Chats.insert({
+			userId: object.userId,
+			projectOwnerId: object.projectOwnerId,
+			projectId: object.projectId,
 			createdAt: new Date(),
-			userId: this.userId,
-			username: Meteor.users.findOne(this.userId).services.github.username,
-		});*/
+		})
 	},
 	"chats.remove"(chatId) {
 		// check

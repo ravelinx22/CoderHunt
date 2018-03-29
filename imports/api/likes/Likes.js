@@ -13,15 +13,18 @@ if(Meteor.isServer) {
 Likes.after.insert(function(likeId, doc) {
 	const otherLike = Likes.findOne({
 		userId: doc.userId,
-		projectId: doc.projectId,
+		projectOwnerId: doc.projectOwnerId,
 		comingFromUser: !doc.comingFromUser,
 	});
 
+	const foundProjectId = (doc.projectId ? doc.projectId : otherLike.projectId);
 	if(otherLike) {
 		console.log("Theres a match");
-		Meteor.call("matches.insert", {
+		Meteor.call("chats.insert", {
 			userId: doc.userId,
-			projectId: doc.projectId,
+			projectOwnerId: doc.projectOwnerId,
+			projectId: foundProjectId ,
+			createdAt: new Date(),
 		});
 	}
 });
@@ -36,6 +39,7 @@ Meteor.methods({
 		Likes.insert({
 			userId: this.userId,
 			projectId: object.projectId,
+			projectOwnerId: object.projectOwnerId,
 			comingFromUser: object.comingFromUser,
 			createdAt: new Date(),
 		});

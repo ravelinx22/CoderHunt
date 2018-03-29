@@ -17,12 +17,10 @@ class Cards extends Component {
 
 	componentDidUpdate() {
 		this.setupCards();	
-		console.log(this.props.posi);
 	}
 
 	renderCards() {
 		return this.props.data.map((card) => {
-			console.log(card);
 			return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}/>
 		});
 	}
@@ -46,12 +44,20 @@ class Cards extends Component {
 	}
 
 	onSwipeRight(card) {
-		console.log("Right " + card._id);
-		Meteor.call("likes.insert", {
-			userId: 2,
-			projectId: 2,
-			comingFromUser: false,
-		});
+		var body = {};
+
+		if(this.props.isUserMode) {
+			body["userId"] = this.props.userId;
+			body["projectId"] = card._id;
+			body["projectOwnerId"] = card.userId
+		} else {
+			body["userId"] = card._id; 
+			body["projectOwnerId"] = this.props.userId; 
+		}
+
+		body["comingFromUser"] = this.props.isUserMode;
+
+		Meteor.call("likes.insert", body);
 	}
 
 	onDoubleTap(card) {
@@ -102,9 +108,9 @@ class Cards extends Component {
 export default withTracker((props) => {
 	Meteor.subscribe("projects");
 	Meteor.subscribe("users");
-	var x = Meteor.users.find({}).fetch();
-	console.log(x);
 	return {
-		data: (props.isUserMode ? Projects.find({}).fetch():x ), 
+		isUserMode: props.isUserMode,
+		userId: Meteor.userId(),
+		data: (props.isUserMode ? Projects.find({}).fetch(): Meteor.users.find({}).fetch() ), 
 	};
 })(Cards)
