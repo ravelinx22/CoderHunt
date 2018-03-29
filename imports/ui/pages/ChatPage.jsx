@@ -5,8 +5,11 @@ import ChatMessage from "../components/ChatMessage.jsx";
 import ReactDOM from 'react-dom';
 import { chats } from "../testdata.jsx";
 import ChatNavbar from "../components/navbars/ChatNavbar.jsx";
+import { withTracker } from "meteor/react-meteor-data";
+import { Meteor } from "meteor/meteor";
+import { ChatMessages } from "../../api/chats/ChatMessages.js";
 
-export default class ChatPage extends Component {
+class ChatPage extends Component {
 	constructor(props) {
 		super(props);
 		var data = chats();
@@ -17,7 +20,7 @@ export default class ChatPage extends Component {
 	}
 
 	renderMessages() {
-		return this.state.data.map((chat) => {
+		return this.props.messages.map((chat) => {
 			return <ChatMessage chat={chat} key={chat._id}/>;
 		});
 	}
@@ -25,17 +28,12 @@ export default class ChatPage extends Component {
 	submitMessage(e) {
 		e.preventDefault();
 
-		this.setState({
-			data: this.state.data.concat([{
-				_id: this.state.lastId,
-				username: "ravelinx22",
-				content: ReactDOM.findDOMNode(this.refs.msg).value,
-				profile_pic: "https://avatars3.githubusercontent.com/u/16025512?s=460&v=4"
-			}]),
-			lastId: this.state.lastId+1,
-		}, () => {
-			ReactDOM.findDOMNode(this.refs.msg).value = "";
+		Meteor.call("chatmessages.insert", {
+			senderId: this.props.userId,
+			message: this.refs.msg.value,
+			chatId: this.props.match.params.id,
 		});
+			ReactDOM.findDOMNode(this.refs.msg).value = "";
 	}
 
 	componentDidMount() {
@@ -65,3 +63,11 @@ export default class ChatPage extends Component {
 		);
 	}
 }
+
+export default withTracker((props) => {
+	Meteor.subscribe("chatmessages", props.match.params.id);
+	return {
+		userId: Meteor.userId(),
+		messages: ChatMessages.find({}).fetch(),
+	};
+})(ChatPage);

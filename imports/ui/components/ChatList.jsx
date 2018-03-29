@@ -3,15 +3,17 @@ import { Container, Row, Col, Button } from "reactstrap";
 import "../css/ChatList.css";
 import ChatItem from "./ChatItem.jsx";
 import { chats_preview } from "../testdata.jsx";
+import { withTracker } from "meteor/react-meteor-data";
+import { Meteor } from "meteor/meteor";
+import { Chats } from "../../api/chats/Chats.js";
 
-export default class ChatList extends Component {
+class ChatList extends Component {
 	constructor(props) {
 		super(props);
 	}
 
-	renderChats() {
-		let chats = chats_preview();		
-		return chats.map((chat) => {
+	renderChats() {		
+		return this.props.chats.map((chat) => {
 			return <ChatItem key={chat._id} chat={chat} />;
 		});
 	}
@@ -24,3 +26,10 @@ export default class ChatList extends Component {
 		);
 	}
 }
+
+export default withTracker((props) => {
+	Meteor.subscribe("chats");
+	return {
+		chats: Chats.find({}).fetch(),	
+	};
+})(ChatList);
