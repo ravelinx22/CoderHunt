@@ -39,7 +39,9 @@ export default class Cards extends Component {
 	onSwipeRight(card) {
 		console.log("Right " + card._id);
 		Meteor.call("likes.insert", {
-			destId: 2,
+			userId: 2,
+			projectId: 2,
+			comingFromUser: false,
 		});
 	}
 
