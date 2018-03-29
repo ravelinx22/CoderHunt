@@ -13,7 +13,6 @@ export default class HomeNavbar extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props)
 	}
 
 	render() {  

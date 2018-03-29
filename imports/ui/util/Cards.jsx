@@ -17,10 +17,12 @@ class Cards extends Component {
 
 	componentDidUpdate() {
 		this.setupCards();	
+		console.log(this.props.posi);
 	}
 
 	renderCards() {
 		return this.props.data.map((card) => {
+			console.log(card);
 			return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}/>
 		});
 	}
@@ -99,7 +101,10 @@ class Cards extends Component {
 
 export default withTracker((props) => {
 	Meteor.subscribe("projects");
+	Meteor.subscribe("users");
+	var x = Meteor.users.find({}).fetch();
+	console.log(x);
 	return {
-		data: (props.isUserMode ? Projects.find({}).fetch(): []),
+		data: (props.isUserMode ? Projects.find({}).fetch():x ), 
 	};
 })(Cards)

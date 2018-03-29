@@ -43,10 +43,10 @@ if (Meteor.isServer) {
 						});
 					});
 
-					user.languages = [];
+					user.tags = [];
 					user.repos.map((repo) => {
-						if (!user.languages.includes(repo.language) && repo.language)
-							user.languages.push(repo.language);
+						if (!user.tags.includes(repo.language) && repo.language)
+							user.tags.push(repo.language);
 					});
 					return user;
 				});
