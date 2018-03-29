@@ -10,7 +10,6 @@ if (Meteor.isServer) {
 	});
 
 	Meteor.publish ('projectsForUser', function projectsForUser(userId){
-		console.log(userId);
 		var user = Meteor.users.findOne({_id : userId});
 		var languages = user.tags;
 		

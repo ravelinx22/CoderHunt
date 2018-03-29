@@ -12,16 +12,16 @@ class Cards extends Component {
 	}
 
 	componentDidMount() {
-		this.setupCards();	
+		this.setupCards();
 	}
 
 	componentDidUpdate() {
-		this.setupCards();	
+		this.setupCards();
 	}
 
 	renderCards() {
 		return this.props.data.map((card) => {
-			return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}/>
+				return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)} />
 		});
 	}
 
@@ -46,13 +46,13 @@ class Cards extends Component {
 	onSwipeRight(card) {
 		var body = {};
 
-		if(this.props.isUserMode) {
+		if (this.props.isUserMode) {
 			body["userId"] = this.props.userId;
 			body["projectId"] = card._id;
 			body["projectOwnerId"] = card.userId
 		} else {
-			body["userId"] = card._id; 
-			body["projectOwnerId"] = this.props.userId; 
+			body["userId"] = card._id;
+			body["projectOwnerId"] = this.props.userId;
 		}
 
 		body["comingFromUser"] = this.props.isUserMode;
@@ -87,7 +87,7 @@ class Cards extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<div className="tinder">
 				<div className="tinder--cards">
 					{this.renderCards()}
@@ -107,11 +107,17 @@ class Cards extends Component {
 
 export default withTracker((props) => {
 	Meteor.subscribe("projectsForUser", Meteor.userId());
-	Meteor.subscribe("users");
+	Meteor.subscribe("usersForProjects", Meteor.userId());
+
+	var users;
+	if(!props.isUserMode){
+		users = Meteor.users.find({}).fetch();
+		users.splice(0,1)
+	}
 
 	return {
 		isUserMode: props.isUserMode,
 		userId: Meteor.userId(),
-		data: (props.isUserMode ? Projects.find({}).fetch(): Meteor.users.find({}).fetch() ), 
+		data: (props.isUserMode ? Projects.find({}).fetch() : users),
 	};
 })(Cards)
