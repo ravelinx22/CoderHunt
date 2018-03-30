@@ -39,7 +39,9 @@ if (Meteor.isServer) {
 						user.repos.push({
 							name: repo.name,
 							description: repo.description,
-							language: repo.language
+							language: repo.language,
+							url : repo.html_url,
+							repoId: repo.id
 						});
 					});
 
