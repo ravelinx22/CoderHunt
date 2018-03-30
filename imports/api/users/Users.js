@@ -2,6 +2,8 @@ import { Meteor } from "meteor/meteor";
 import { Mongo } from "meteor/mongo";
 import { check } from "meteor/check";
 import { Projects } from "../projects/Projects";
+import { Likes } from "../likes/Likes";
+
 
 if (Meteor.isServer) {
 	Meteor.publish("users", function usersPublication() {
@@ -23,7 +25,13 @@ if (Meteor.isServer) {
 			});
 		});
 
-		return Meteor.users.find({ tags: { $in: projectsLanguages }, _id: { $not: { $eq: userId } } });
+		var likes = Likes.find({projectOwnerId: userId});
+		var usersLikedBefore = likes.map((like) => {
+			if(!like.comingFromUser)
+				return like.userId;
+		});
+
+		return Meteor.users.find({$nor:[{_id:{$in: usersLikedBefore}}, {_id:{$eq: userId}}], tags: { $in: projectsLanguages }});
 	});
 }
 
