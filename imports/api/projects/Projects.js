@@ -9,18 +9,21 @@ if (Meteor.isServer) {
 		return Projects.find({});
 	});
 
-	Meteor.publish ('projectsForUser', function projectsForUser(userId){
-		var user = Meteor.users.findOne({_id : userId});
-		var languages = user.tags;
-		
-		return Projects.find({ tags: { $in: languages }, userId : {$not :{$eq : userId}}});
+	Meteor.publish('projectsForUser', function projectsForUser(userId) {
+		var user = Meteor.users.findOne({ _id: userId });
+		var languages;
+
+		if (user !== undefined)
+			languages = user.tags;
+
+		return Projects.find({ tags: { $in: languages }, userId: { $not: { $eq: userId } } });
 	});
 }
 
 Meteor.methods({
 	"projects.insert"(object) {
 		//		check(object.name, String);
-		if(!this.userId) {
+		if (!this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
 
@@ -37,7 +40,7 @@ Meteor.methods({
 	"projects.remove"(projectId) {
 		// check
 		const project = Projects.findOne(projectId);
-		if(project.userId !== this.userId) {
+		if (project.userId !== this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
 
