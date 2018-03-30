@@ -12,7 +12,7 @@ class Cards extends Component {
 	}
 
 	componentDidMount() {
-		this.setupCards();	
+			this.setupCards();	
 	}
 
 	componentDidUpdate() {
@@ -51,12 +51,12 @@ class Cards extends Component {
 			body["projectId"] = card._id;
 			body["projectOwnerId"] = card.userId
 		} else {
+			console.log(card._id);
 			body["userId"] = card._id; 
 			body["projectOwnerId"] = this.props.userId; 
 		}
 
 		body["comingFromUser"] = this.props.isUserMode;
-
 		Meteor.call("likes.insert", body);
 	}
 
@@ -77,6 +77,7 @@ class Cards extends Component {
 
 	unlikeCard(event) {
 		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+		console.log(document.querySelectorAll('.tinder--card'));
 		var moveOutWidth = document.body.clientWidth * 1.5;
 		if (!cards.length) return false;
 		var card = cards[0];
@@ -106,11 +107,12 @@ class Cards extends Component {
 }
 
 export default withTracker((props) => {
-	Meteor.subscribe("projects");
 	Meteor.subscribe("users");
+	Meteor.subscribe("projects");
+
 	return {
 		isUserMode: props.isUserMode,
 		userId: Meteor.userId(),
-		data: (props.isUserMode ? Projects.find({}).fetch(): Meteor.users.find({}).fetch() ), 
+		data: (props.isUserMode ? Projects.find({}).fetch() : Meteor.users.find({}).fetch())
 	};
 })(Cards)

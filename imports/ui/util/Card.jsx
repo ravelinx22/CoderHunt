@@ -17,6 +17,9 @@ export default class Card extends Component {
 	}
 
 	renderFlags() {
+		if(!this.props.card.tags)
+			return null;
+
 		return this.props.card.tags.map((flag) => {
 			return(
 				<Col key={flag} md={3}>
@@ -81,7 +84,7 @@ export default class Card extends Component {
 					<img src={this.props.card.image_url} />
 					<Grid className="card_info">
 						<div className="card_name">{this.props.card.name}</div>
-						<div className="card_username">{!this.props.card.username ? this.props.card.services.github.username : this.props.card.username}</div>
+						<div className="card_username">{!this.props.card.username && this.props.card.services ? this.props.card.services.github.username : this.props.card.username}</div>
 						<div className="card_description">{this.props.card.description}</div>
 						<Row>
 							{this.renderFlags()}

@@ -42,6 +42,7 @@
 
 /* Card Flag Component */
 .card_flag {
+	font-size: 0.7vw;
 	color:white;
 	background: red;
 	border-radius: 5px;

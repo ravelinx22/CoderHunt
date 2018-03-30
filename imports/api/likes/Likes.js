@@ -17,8 +17,8 @@ Likes.after.insert(function(likeId, doc) {
 		comingFromUser: !doc.comingFromUser,
 	});
 
-	const foundProjectId = (doc.projectId ? doc.projectId : otherLike.projectId);
 	if(otherLike) {
+		const foundProjectId = (doc.projectId ? doc.projectId : otherLike.projectId);
 		console.log("Theres a match");
 		Meteor.call("chats.insert", {
 			userId: doc.userId,
@@ -37,7 +37,7 @@ Meteor.methods({
 		}
 
 		Likes.insert({
-			userId: this.userId,
+			userId: object.userId,
 			projectId: object.projectId,
 			projectOwnerId: object.projectOwnerId,
 			comingFromUser: object.comingFromUser,

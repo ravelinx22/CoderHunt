@@ -5,8 +5,11 @@ import { detail_card, repos } from "../testdata.jsx";
 import CardFlag from "../util/CardFlag.jsx";
 import RepoItem from "../components/RepoItem.jsx";
 import CardNavbar from "../components/navbars/CardNavbar.jsx";
+import { withTracker } from "meteor/react-meteor-data";
+import { Meteor } from "meteor/meteor";
+import { Projects } from "../../api/projects/Projects.js";
 
-export default class CardDetailPage extends Component {
+class CardDetailPage extends Component {
 	constructor(props) {
 		super(props);
 		var data = detail_card();
@@ -18,18 +21,23 @@ export default class CardDetailPage extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props);
+	}
+
+	componentDidUpdate() {
+		console.log(this.props);
 	}
 
 	renderFlags() {
-		return(
-			<Col key="1" md={2}>
-				<CardFlag key="1" name="buenas" />
-			</Col>
-		);
+		return this.props.dat.tags.map((tag) => {
+			return(<Col key={tag} md={2}>
+				<CardFlag key={tag} name={tag} />
+			</Col>);
+		});
 	}
 
 	renderRepos() {
-		return this.state.repos.map((repo) => {
+		return this.props.dat.repos.map((repo) => {
 			return(	
 				<Col key={repo._id} md={6}>
 					<RepoItem key={repo._id} url={repo.url} name={repo.name} description={repo.description} language={repo.language} />
@@ -47,27 +55,40 @@ export default class CardDetailPage extends Component {
 			<div className="data_detail">
 				<CardNavbar history={this.props.history} />
 				<div className="data_content">
-					<img src={this.state.data.image_url} alt="data_pic" className="detail_img"/>
+					<img src={this.props.dat.image_url} alt="data_pic" className="detail_img"/>
 					<div className="info_container">
-						<div className="detail_name">William</div>
-						<div className="detail_username">ravelinx22</div>
+						<div className="detail_name">{this.props.dat.name}</div>
+						<div className="detail_username">{!this.props.dat.username && this.props.dat.services ? this.props.dat.services.github.username : this.props.dat.username}</div>
 					</div>
+					{ this.props.dat.description ? 
 					<div className="info_container">
 						<div className="info_title">Bio</div>
-						<div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-					</div>
+						<div>{this.props.dat.description}</div>
+					</div> : null }
 					<div className="info_container">
 						<div className="info_title">Tags</div>
 						<Row>
 							{this.renderFlags()}
 						</Row>
 					</div>
+					{ this.props.dat.repos ?
 					<div className="info_container">
 						<div className="info_title">Repos</div>
 						<Row>{this.renderRepos()}</Row>
-					</div>
+					</div> : null }
 				</div>
 			</div>
 		);
 	}
 }
+
+export default withTracker((props) => {
+	Meteor.subscribe("users");
+	Meteor.subscribe("projects");
+	
+	const cardId = props.match.params.id;
+
+	return {
+		dat: (props.isUserMode ? Projects.findOne({_id: cardId}) : Meteor.users.findOne({_id: cardId}))
+	};
+})(CardDetailPage);

@@ -31,7 +31,7 @@ class UserMenu extends Component {
 				<a className="bti-secondary unselectable">ravelinx22</a>
 				{ this.state.open ?
 						<div className="starting_option">
-							<a className="bti-secondary">Change Project</a>
+							<a className="bti-secondary" onClick={() => {this.props.history.push("/")}}>Home</a>
 							<a className="bti-secondary" onClick={this.goCreate.bind(this)}>Create Project</a>
 							<a className="bti-secondary">Logout</a>
 						</div>
