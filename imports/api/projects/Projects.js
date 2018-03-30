@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { Mongo } from "meteor/mongo";
 import { check } from "meteor/check";
+import { Likes } from "../likes/Likes";
 
 export const Projects = new Mongo.Collection("projects");
 
@@ -16,7 +17,13 @@ if (Meteor.isServer) {
 		if (user !== undefined)
 			languages = user.tags;
 
-		return Projects.find({ tags: { $in: languages }, userId: { $not: { $eq: userId } } });
+		var userLikes = Likes.find({userId: userId});
+		var projectsWithUserLike = userLikes.map((like) => {
+			if(like.comingFromUser)
+				return like.projectId; 
+		});
+
+		return Projects.find({_id: {$not: {$in: projectsWithUserLike}}, tags: { $in: languages }, userId: { $not: { $eq: userId } } });
 	});
 }
 
