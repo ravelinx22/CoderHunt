@@ -12,16 +12,17 @@ class Cards extends Component {
 	}
 
 	componentDidMount() {
-			this.setupCards();	
+		this.setupCards();
 	}
 
 	componentDidUpdate() {
-		this.setupCards();	
+		console.log(this.props);
+		this.setupCards();
 	}
 
 	renderCards() {
 		return this.props.data.map((card) => {
-			return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}/>
+				return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)} />
 		});
 	}
 
@@ -46,12 +47,11 @@ class Cards extends Component {
 	onSwipeRight(card) {
 		var body = {};
 
-		if(this.props.isUserMode) {
+		if (this.props.isUserMode) {
 			body["userId"] = this.props.userId;
 			body["projectId"] = card._id;
 			body["projectOwnerId"] = card.userId
 		} else {
-			console.log(card._id);
 			body["userId"] = card._id; 
 			body["projectOwnerId"] = this.props.userId; 
 		}
@@ -65,14 +65,15 @@ class Cards extends Component {
 	}
 
 	likeCard(event) {
-		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+		console.log(this.props);
+		/*	var cards = document.querySelectorAll('.tinder--card:not(.removed)');
 		var moveOutWidth = document.body.clientWidth * 1.5;
 		if (!cards.length) return false;
 		var card = cards[0];
 		card.classList.add('removed');
 		card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
 		this.setupCards();
-		event.preventDefault();
+		event.preventDefault();*/
 	}
 
 	unlikeCard(event) {
@@ -88,7 +89,7 @@ class Cards extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<div className="tinder">
 				<div className="tinder--cards">
 					{this.renderCards()}
@@ -107,12 +108,12 @@ class Cards extends Component {
 }
 
 export default withTracker((props) => {
-	Meteor.subscribe("users");
-	Meteor.subscribe("projects");
+	Meteor.subscribe("projectsForUser");
+	Meteor.subscribe("usersForProjects");
 
 	return {
 		isUserMode: props.isUserMode,
 		userId: Meteor.userId(),
-		data: (props.isUserMode ? Projects.find({}).fetch() : Meteor.users.find({}).fetch())
+		data: (props.isUserMode ? Projects.find({}).fetch() : Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch())
 	};
 })(Cards)
