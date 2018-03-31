@@ -14,8 +14,11 @@ class ChatItem extends Component {
 	componentDidMount() {
 	}
 
-	getFirstName() {
-		return this.props.receiverUser.name.replace(/ .*/,'');
+	getName() {
+		if(this.props.receiverUser.name) {
+			return this.props.receiverUser.name.replace(/ .*/,'');
+		} 
+		return this.props.receiverUser.services.github.username;
 	}
 
 	renderLastMessage() {
@@ -36,7 +39,7 @@ class ChatItem extends Component {
 				<img src={this.props.receiverUser.image_url} alt="user_img" className="rounded-circle chat_item_img"/>
 				<div className="chat_item_info">
 					<div className="chat_item_info_row chat_item_info_name">
-						{this.getFirstName()}
+						{this.getName()}
 					</div>
 					<div className="chat_item_info_row chat_item_info_message">
 						{this.renderLastMessage()}						
