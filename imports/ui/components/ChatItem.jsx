@@ -19,7 +19,6 @@ class ChatItem extends Component {
 	}
 
 	renderLastMessage() {
-		console.log(this.props);
 		if(this.props.lastMessage.length > 0) {
 			return this.props.lastMessage[0].message;
 		} else {
@@ -44,8 +43,8 @@ class ChatItem extends Component {
 					</div>
 				</div>
 				<div className="chat_item_new">
-					<div className="chat_item_flag">
-						1
+					<div className={"chat_item_flag " + (this.props.unReadMessages.length > 0 ? "" : "hidden")}>
+						{this.props.unReadMessages.length}
 					</div>
 				</div>
 			</Link>
@@ -58,6 +57,7 @@ export default withTracker((props) => {
 	Meteor.subscribe("chatmessages");
 	return {
 		receiverUser: (props.isUserMode ? Meteor.users.findOne({_id: props.chat.projectOwnerId}) : Meteor.users.findOne({_id: props.chat.userId})),
-		lastMessage: ChatMessages.find({chatId: props.chat._id},{sort: {createdAt: -1}, limit: 1}).fetch()
+		lastMessage: ChatMessages.find({chatId: props.chat._id},{sort: {createdAt: -1}, limit: 1}).fetch(),
+		unReadMessages: ChatMessages.find({chatId: props.chat._id, isSeen: false, senderId: {$ne: Meteor.userId()}}).fetch(),
 	};
 })(ChatItem);

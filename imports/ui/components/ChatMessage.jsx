@@ -2,9 +2,16 @@ import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import "../css/ChatMessage.css";
 import {Meteor} from "meteor/meteor";
+
 export default class ChatMessage extends Component {
 	constructor(props) {
 		super(props);
+	}
+
+	componentDidMount() {
+		if(this.props.chat.senderId !== Meteor.userId() && !this.props.chat.isSeen) {
+			Meteor.call("chatmessages.seen", this.props.chat._id); 
+		}
 	}
 
 	render() {

@@ -21,8 +21,16 @@ Meteor.methods({
 			message: object.message,
 			chatId: object.chatId,
 			image_url: Meteor.users.findOne(this.userId).image_url,
+			isSeen: false,
 			createdAt: new Date(),
 		})
+	},
+	"chatmessages.seen"(messageId) {
+		if(!this.userId) {
+			throw new Meteor.Error("not-authorized");
+		}
+
+		ChatMessages.update({_id: messageId},{$set: {isSeen: true}});
 	},
 	"chatmessages.remove"(messageId) {
 		// check
