@@ -21,6 +21,8 @@ class CardDetailPage extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props);
+		this.props.changeMode(this.props.isUserMode);
 	}
 
 	componentDidUpdate() {
@@ -84,7 +86,7 @@ export default withTracker((props) => {
 	Meteor.subscribe("projects");
 	
 	const cardId = props.match.params.id;
-console.log(props);
+
 	return {
 		dat: (props.isUserMode ? Projects.findOne({_id: cardId}) : Meteor.users.findOne({_id: cardId}))
 	};

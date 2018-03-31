@@ -36,6 +36,12 @@ export default class AppContainer extends Component {
 		});
 	}
 
+	changeMode(state) {
+		this.setState({
+			isUserMode: state,
+		})
+	}
+
 	render() {
 		return(
 			<Container>
@@ -55,11 +61,11 @@ export default class AppContainer extends Component {
 										return React.createElement(Home, {...history, onChangeMode: this.onChangeMode.bind(this), isUserMode: this.state.isUserMode});}}/>
 									<Route path="/chat/:id" component={ChatPage} />
 									<Route path="/user/:id" render={(history) => {
-										return React.createElement(CardDetailPage, {...history, isUserMode: false})
+										return React.createElement(CardDetailPage, {...history, isUserMode: false, changeMode: this.changeMode.bind(this)})
 									}} />
 									<Route path="/project/new" component={NewProjectPage} />
 								<Route path="/project/:id" render={(history) => {
-									return React.createElement(CardDetailPage, {...history, isUserMode: true})
+									return React.createElement(CardDetailPage, {...history, isUserMode: true, changeMode: this.changeMode.bind(this)})
 								}} />
 									<Route path="*" component={NotFoundPage} />
 								</Switch>
