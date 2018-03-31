@@ -61,7 +61,11 @@ class Cards extends Component {
 	}
 
 	onDoubleTap(card) {
-		this.props.history.push("/user/" + card._id);
+		if(this.props.isUserMode) {
+			this.props.history.push("/project/" + card._id);
+		} else {
+			this.props.history.push("/user/" + card._id);
+		}
 	}
 
 	likeCard(event) {

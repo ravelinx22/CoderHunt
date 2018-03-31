@@ -13,7 +13,7 @@ export default class RepoItem extends Component {
 	render() {
 		return(
 			<div className="repo_item" >
-				<a className="repo_name" href={this.props.url} >{this.props.name}</a>
+				<a className="repo_name" href={this.props.url} target="_blank">{this.props.name}</a>
 				<p className="repo_info">{this.props.description}</p>
 				<p className="repo_lang">
 					<span className="repo_lang_color"></span>

@@ -21,11 +21,9 @@ class CardDetailPage extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 	}
 
 	componentDidUpdate() {
-		console.log(this.props);
 	}
 
 	renderFlags() {
@@ -39,18 +37,17 @@ class CardDetailPage extends Component {
 	renderRepos() {
 		return this.props.dat.repos.map((repo) => {
 			return(	
-				<Col key={repo._id} md={6}>
-					<RepoItem key={repo._id} url={repo.url} name={repo.name} description={repo.description} language={repo.language} />
+				<Col key={repo.repoId} md={6}>
+					<RepoItem key={repo.repoId} url={repo.url} name={repo.name} description={repo.description} language={repo.language} />
 				</Col>
 			);
 		});
 	}
 
-	goBack() {
-		console.log("buenas");
-	}
-
 	render() {
+		if(!this.props.dat) {
+			return null;
+		}
 		return(
 			<div className="data_detail">
 				<CardNavbar history={this.props.history} />
@@ -87,7 +84,7 @@ export default withTracker((props) => {
 	Meteor.subscribe("projects");
 	
 	const cardId = props.match.params.id;
-
+console.log(props);
 	return {
 		dat: (props.isUserMode ? Projects.findOne({_id: cardId}) : Meteor.users.findOne({_id: cardId}))
 	};
