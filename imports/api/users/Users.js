@@ -6,9 +6,6 @@ import { Likes } from "../likes/Likes";
 
 
 if (Meteor.isServer) {
-	Meteor.publish(null, function usersPublication() {
-		return [];
-	})
 
 	Meteor.publish("users", function usersPublication() {
 		return Meteor.users.find({});

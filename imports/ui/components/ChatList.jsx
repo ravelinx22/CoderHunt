@@ -14,7 +14,7 @@ class ChatList extends Component {
 
 	renderChats() {		
 		return this.props.chats.map((chat) => {
-			return <ChatItem key={chat._id} chat={chat} />;
+			return <ChatItem key={chat._id} chat={chat} isUserMode={this.props.isUserMode} />;
 		});
 	}
 

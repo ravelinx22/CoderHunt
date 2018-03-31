@@ -65,9 +65,9 @@ class ChatPage extends Component {
 }
 
 export default withTracker((props) => {
-	Meteor.subscribe("chatmessages", props.match.params.id);
+	Meteor.subscribe("chatmessages");
 	return {
 		userId: Meteor.userId(),
-		messages: ChatMessages.find({}).fetch(),
+		messages: ChatMessages.find({chatId: props.match.params.id}).fetch(),
 	};
 })(ChatPage);

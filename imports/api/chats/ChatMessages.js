@@ -5,9 +5,8 @@ import { check } from "meteor/check";
 export const ChatMessages = new Mongo.Collection("chatmessages");
 
 if(Meteor.isServer) {
-	Meteor.publish("chatmessages", (chatId) => {
-		console.log(ChatMessages.findOne({chatId: chatId}));
-		return ChatMessages.find({chatId: chatId});
+	Meteor.publish("chatmessages", () => {
+		return ChatMessages.find({});
 	});
 }
 
