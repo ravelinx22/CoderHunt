@@ -5,6 +5,9 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { withTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
 import { Projects } from "../../api/projects/Projects.js";
+import { Likes } from "../../api/likes/Likes";
+import { usersForProject } from "../../api/users/Users";
+import { projectsForUser } from "../../api/projects/Projects";
 
 class Cards extends Component {
 	constructor(props) {
@@ -112,12 +115,13 @@ class Cards extends Component {
 }
 
 export default withTracker((props) => {
-	Meteor.subscribe("projectsForUser");
-	Meteor.subscribe("usersForProjects");
+	Meteor.subscribe("users");
+	Meteor.subscribe("likes");
+	Meteor.subscribe('projects');
 
 	return {
 		isUserMode: props.isUserMode,
 		userId: Meteor.userId(),
-		data: (props.isUserMode ? Projects.find({}).fetch() : Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch())
+		data: (props.isUserMode ? projectsForUser().fetch() : usersForProject().fetch())
 	};
 })(Cards)
