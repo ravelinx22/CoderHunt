@@ -9,6 +9,7 @@
 	width: 100%;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	font-family: 'Cabin', sans-serif;
 }
 
 div > .data_detail {
@@ -29,14 +30,17 @@ div > .data_detail {
 .detail_name {
 	font-size: 26px;
 	font-weight: 600;
+	font-family: 'Lobster', cursive;
 }
 
 .detail_username {
 	font-size: 20px;
+	font-family: 'Cabin', sans-serif;
 }
 
 .info_title {
 	font-size: 26px;
 	font-weight: 600;
+	font-family: 'Cabin', sans-serif;
 }
 

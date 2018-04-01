@@ -24,6 +24,7 @@
 	font-weight: 600;
 	text-align: left;
 	pointer-events: none;
+	font-family: 'Lobster', cursive;
 }
 
 .card_username {
@@ -31,6 +32,7 @@
 	font-weight: 400;
 	text-align: left;
 	pointer-events: none;
+	font-family: 'Cabin', sans-serif;
 }
 
 .card_description {
@@ -38,6 +40,7 @@
 	text-align: left;
 	margin-top: 5px;
 	pointer-events: none;
+	font-family: 'Cabin', sans-serif;
 }
 
 /* Card Flag Component */
@@ -50,4 +53,5 @@
 	font-weight: 500;
 	text-align: center;
 	margin-top: 20px;
+	font-family: 'Cabin', sans-serif;
 }

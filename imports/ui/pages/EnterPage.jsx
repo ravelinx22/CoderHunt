@@ -31,7 +31,7 @@ class EnterPage extends Component {
 			<div className="enter_content">
 				<Col className="enter_side d-flex align-items-center" md={5} sm={12}>
 					<Container>
-						<Row className="enter_title justify-content-center">Start Swiping</Row>
+						<Row className="enter_title justify-content-center">CoderHunt</Row>
 						<Row className="github_row justify-content-center">		
 							<button className="enter_github" onClick={this.enterPage.bind(this)}>
 								<i className="fa fa-github"></i>

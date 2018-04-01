@@ -1,4 +1,9 @@
 /* CSS declarations go here */
+
+body {
+	font-family: 'Cabin', sans-serif !important;
+}
+
 .content-row {
 	height: 100vh;
 }
