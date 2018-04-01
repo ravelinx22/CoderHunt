@@ -92,7 +92,7 @@ div.ReactTags__selected span.ReactTags__tag {
     border-radius: 2px;
 }
 div.ReactTags__selected a.ReactTags__remove {
-    color: #aaa;
+    color: #5c5d5e;
     margin-left: 5px;
     cursor: pointer;
 }
