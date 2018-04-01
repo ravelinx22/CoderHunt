@@ -4,6 +4,8 @@
 	width: 100%;
 	border: 1px solid lightgrey;
 	font-family: 'Cabin', sans-serif;
+	background-color: #FCFFF5;
+	color: #193441;
 }
 
 .create_project_content {
@@ -49,8 +51,8 @@
 }
 
 .submit_row  > .submit {
-	color: white;
-	background-color: #09d261;
+	color: #FCFFF5;
+	background-color: #3E606F;
 	border-radius: 5px;
 	height: 40px;
 	width: 100px;

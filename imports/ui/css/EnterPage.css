@@ -1,5 +1,6 @@
 /* Enter Page */
 .enter_content {
+	color: #193441;
 	height: 100%;
 	width: 100%;
 }
@@ -7,19 +8,19 @@
 .enter_side {
 	width: 100%;
 	height: 100%;
-	background-color: red;
+	background-color: #D1DBBD;
 }
 
 .image_side {
 	height: 100%;
-	background-color: blue;
+	background-color: #91AA9D;
 }
 
 .enter_github {
 	border: none;
 	border-radius: 5px;
-	background-color: #333;
-	color: white;
+	background-color: #3E606F;
+	color: #FCFFF5;
 	outline: 0 !important;
 	width: 260px;
 	height: 43px;

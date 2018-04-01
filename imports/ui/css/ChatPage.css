@@ -6,7 +6,7 @@
 }
 
 .chat-content {
-	background-color: green;
+	background-color: #3E606F;
 	height: calc(100% - 43px - 59px);
 	box-sizing: border-box;
 	padding: 10px 20px;
@@ -36,8 +36,8 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-	color: white;
-	background: #09d261;
+	color: #FCFFF5;
+	background: #3E606F;
 	border: none;
 	height: 100%;
 	width: 10%;

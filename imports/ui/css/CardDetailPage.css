@@ -1,6 +1,8 @@
 .data_detail {
 	height: 100vh;
+	border: 1px solid lightgrey;
 	width: 100;
+	background-color: white;
 }
 
 .data_content {

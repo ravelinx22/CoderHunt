@@ -1,6 +1,7 @@
 /* Home Navbar */
 .home_navbar {
-	background-color: #f5f1ee;
+	background-color: #FCFFF5;
+	border-bottom: 1px solid lightgrey;
 	height: 43px;
 	width: 100%;
 	font-family: 'Lobster', cursive;
@@ -21,4 +22,10 @@
 	font-size: 14px;
 	font-weight: 600;
 	margin-right: 10px;
+}
+
+/* Toggle */
+.toggle-switch---switch---3EchW.toggle-switch---checked---3aC9B .toggle-switch---toggle---mncCu {
+	background-color: #3E606F !important;
+	border-color: #3E606F !important;
 }
