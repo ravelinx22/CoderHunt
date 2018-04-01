@@ -6,3 +6,6 @@ import "../imports/api/matches/Matches.js";
 import "../imports/api/users/Users.js";
 import "../imports/api/chats/Chats.js";
 import "../imports/api/chats/ChatMessages.js";
+import { WebApp } from 'meteor/webapp';
+
+WebApp.addHtmlAttributeHook(() => ({ lang: 'en' }));
