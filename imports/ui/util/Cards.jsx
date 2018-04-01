@@ -71,15 +71,28 @@ class Cards extends Component {
 	}
 
 	likeCard(event) {
-		console.log(this.props);
-		/*	var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+		const index = this.indexOfLastLike();
+		this.onSwipeRight(this.props.data[index]);
+		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
 		var moveOutWidth = document.body.clientWidth * 1.5;
 		if (!cards.length) return false;
 		var card = cards[0];
 		card.classList.add('removed');
 		card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
 		this.setupCards();
-		event.preventDefault();*/
+		event.preventDefault();
+	}
+
+	indexOfLastLike() {
+		const cards = document.querySelectorAll(".tinder--card");
+		var i = 0;
+		for(i = 0; i < cards.length; i++) {
+			if(!cards[i].className.includes("removed")) {
+				break;
+			}
+		}
+
+		return (i < cards.length ? i : -1);
 	}
 
 	unlikeCard(event) {
