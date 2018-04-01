@@ -27,18 +27,10 @@ class UserMenu extends Component {
 		this.props.history.push("/project/new");
 	}
 
-	renderName() {
-		if(this.props.user && this.props.user.services) {
-			return this.props.user.services.github.username;
-		}
-
-		return "";
-	}
-
 	render() {
 		return(
 			<div className="user-menu vertical" onClick={this.toggle.bind(this)}>
-				<a className="bti-secondary unselectable">{this.renderName()}</a>
+				<a className="bti-secondary unselectable">ravelinx22</a>
 				{ this.state.open ?
 						<div className="starting_option">
 							<a className="bti-secondary" onClick={() => {this.props.history.push("/")}}>Home</a>

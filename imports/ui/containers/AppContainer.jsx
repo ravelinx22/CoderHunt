@@ -11,9 +11,8 @@ import CardDetailPage from "../../ui/pages/CardDetailPage.jsx";
 import NewProjectPage from "../../ui/pages/NewProjectPage.jsx";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Projects } from "../../api/projects/Projects.js";
-import { withTracker } from "meteor/react-meteor-data";
 
-class AppContainer extends Component {
+export default class AppContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -53,7 +52,7 @@ class AppContainer extends Component {
 						:
 						<Row className="content-row">
 							<Col className="left_content" md={4}> 
-								<UserMenu user={this.props.user} />
+								<UserMenu />
 								<ChatList isUserMode={this.state.isUserMode} />
 							</Col>
 							<Col className="right_content" md={8}>
@@ -80,11 +79,3 @@ class AppContainer extends Component {
 		);
 	}
 }
-
-export default withTracker((props) => {
-	Meteor.subscribe("users");
-
-	return {
-		user: Meteor.users.findOne({_id: Meteor.userId()}),
-	}
-})(AppContainer);
