@@ -42,6 +42,12 @@ export default class AppContainer extends Component {
 		})
 	}
 
+	onLogout() {
+		this.setState({
+			logged: false,
+		});
+	}
+
 	render() {
 		return(
 			<Container>
@@ -52,7 +58,7 @@ export default class AppContainer extends Component {
 						:
 						<Row className="content-row">
 							<Col className="left_content" md={4}> 
-								<UserMenu />
+								<UserMenu onLogout={this.onLogout.bind(this)} />
 								<ChatList isUserMode={this.state.isUserMode} />
 							</Col>
 							<Col className="right_content" md={8}>
