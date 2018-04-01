@@ -19,7 +19,9 @@ Meteor.methods({
 
 		Chats.insert({
 			userId: object.userId,
+			userName: object.userName,
 			projectOwnerId: object.projectOwnerId,
+			projectOwnerName: object.projectOwnerName,
 			projectId: object.projectId,
 			createdAt: new Date(),
 		})

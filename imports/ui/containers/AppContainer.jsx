@@ -59,7 +59,9 @@ export default class AppContainer extends Component {
 								<Switch>
 									<Route exact path="/" render={(history) => {
 										return React.createElement(Home, {...history, onChangeMode: this.onChangeMode.bind(this), isUserMode: this.state.isUserMode});}}/>
-									<Route path="/chat/:id" component={ChatPage} />
+									<Route path="/chat/:id" render={(history) => { 
+										return React.createElement(ChatPage, {...history, isUserMode: this.state.isUserMode});
+									}}/>
 									<Route path="/user/:id" render={(history) => {
 										return React.createElement(CardDetailPage, {...history, isUserMode: false, changeMode: this.changeMode.bind(this)})
 									}} />

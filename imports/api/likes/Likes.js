@@ -22,7 +22,9 @@ Likes.after.insert(function(likeId, doc) {
 		console.log("Theres a match");
 		Meteor.call("chats.insert", {
 			userId: doc.userId,
+			userName: (Meteor.users.findOne({_id: doc.userId}).name ? Meteor.users.findOne({_id: doc.userId}).name : Meteor.users.findOne({_id: doc.userId}).services.github.username),
 			projectOwnerId: doc.projectOwnerId,
+			projectOwnerName:  (Meteor.users.findOne({_id: doc.projectOwnerId}).name ? Meteor.users.findOne({_id: doc.projectOwnerId}).name : Meteor.users.findOne({_id: doc.projectOwnerId}).services.github.username),
 			projectId: foundProjectId ,
 			createdAt: new Date(),
 		});

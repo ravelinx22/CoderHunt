@@ -51,7 +51,7 @@ class ChatPage extends Component {
 	render() {
 		return(
 			<div className="chats">
-				<ChatNavbar history={this.props.history}/>
+				<ChatNavbar history={this.props.history} chatId={this.props.match.params.id} isUserMode={this.props.isUserMode}/>
 				<div className="chat-content" ref="chats"> 
 					{this.renderMessages()}	
 				</div>
