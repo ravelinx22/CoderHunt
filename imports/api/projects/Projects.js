@@ -5,24 +5,40 @@ import { Likes } from "../likes/Likes";
 
 export const Projects = new Mongo.Collection("projects");
 
+export const projectsForUser = function () {
+	var user = Meteor.users.findOne({ _id: Meteor.userId() });
+	console.log(user);
+	var languages = [];
+
+	if (user && user.tags)
+			languages = user.tags;
+
+	var userLikes = Likes.find({ userId: Meteor.userId() });
+	var projectsWithUserLike = userLikes.map((like) => {
+		if (like.comingFromUser)
+			return like.projectId;
+	});
+	return Projects.find({ _id: { $not: { $in: projectsWithUserLike } }, tags: { $in: languages }, userId: { $not: { $eq: Meteor.userId() } } });
+}
+
 if (Meteor.isServer) {
 	Meteor.publish('projects', function projectsPublication() {
 		return Projects.find({});
 	});
 
-	Meteor.publish('projectsForUser', function projectsForUser() {
+	Meteor.publish('projectsForUser', function () {
 		var user = Meteor.users.findOne({ _id: this.userId });
 		var languages = [];
 
-		if(user)
+		if (user)
 			languages = user.tags;
 
-		var userLikes = Likes.find({userId: this.userId});
+		var userLikes = Likes.find({ userId: this.userId });
 		var projectsWithUserLike = userLikes.map((like) => {
-			if(like.comingFromUser)
-				return like.projectId; 
+			if (like.comingFromUser)
+				return like.projectId;
 		});
-		return Projects.find({_id: {$not: {$in: projectsWithUserLike}}, tags: { $in: languages }, userId: { $not: { $eq: this.userId } } });
+		return Projects.find({ _id: { $not: { $in: projectsWithUserLike } }, tags: { $in: languages }, userId: { $not: { $eq: this.userId } } });
 	});
 }
 
