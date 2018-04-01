@@ -19,7 +19,6 @@ class Cards extends Component {
 	}
 
 	componentDidUpdate() {
-		console.log(this.props);
 		this.setupCards();
 	}
 

@@ -7,7 +7,6 @@ export const Projects = new Mongo.Collection("projects");
 
 export const projectsForUser = function () {
 	var user = Meteor.users.findOne({ _id: Meteor.userId() });
-	console.log(user);
 	var languages = [];
 
 	if (user && user.tags)
