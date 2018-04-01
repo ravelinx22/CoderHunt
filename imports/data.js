@@ -1,6 +1,7 @@
 var url = 'https://api.github.com/users/';
 var users = ['ravelinx22', 'naguilar12', 'john-guerra', 'fabpot', 'andrew', 'egoist', 'ornicar', 'bebraw', 'nelsonic', 'orta', 'rstacruz', 'afc163', 'bkeepers', 'atmos', 'ai', 'nvie', 'drnic', 'stof', 'phodal', 'ljharb', 'c9s', 'holman', 'dmalan', 'kylef', 'chjj', 'mdo', 'feross', 'matsko', 'curran', 'mattn'];
 
+
 // async function userInfoPromise(userName) {
 
 //     var userData = {};
