@@ -29,5 +29,6 @@ Meteor.methods({
 	"chats.remove"(chatId) {
 		// check
 		Chats.remove(chatId);
+		Meteor.call("chatmessages.remove", chatId);
 	}
 });

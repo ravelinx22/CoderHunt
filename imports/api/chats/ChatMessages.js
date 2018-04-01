@@ -32,8 +32,8 @@ Meteor.methods({
 
 		ChatMessages.update({_id: messageId},{$set: {isSeen: true}});
 	},
-	"chatmessages.remove"(messageId) {
+	"chatmessages.remove"(chatId) {
 		// check
-		ChatMessages.remove(messageId);
+		ChatMessages.remove({chatId:  chatId});
 	}
 });

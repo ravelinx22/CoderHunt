@@ -42,6 +42,7 @@ class ChatPage extends Component {
 
 	componentDidUpdate() {
 		this.scrollToBot();
+		console.log(this.props)
 	}
 
 	scrollToBot() {

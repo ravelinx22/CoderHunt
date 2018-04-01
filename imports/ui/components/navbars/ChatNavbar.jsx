@@ -15,6 +15,15 @@ class ChatNavbar extends Component {
 	}
 
 	componentDidMount() {
+		if(!this.props.chat) {
+			this.props.history.push("/");
+		}
+	}
+
+	componentDidUpdate() {
+		if(!this.props.chat) {
+			this.props.history.push("/");
+		}
 	}
 
 	goBack() {
@@ -22,7 +31,7 @@ class ChatNavbar extends Component {
 	}
 
 	removeChat() {
-		console.log(this.props);
+		Meteor.call("chats.remove", this.props.chatId);
 	}
 
 	renderName() {
