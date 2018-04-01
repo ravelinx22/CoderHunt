@@ -11,12 +11,13 @@ import CardDetailPage from "../../ui/pages/CardDetailPage.jsx";
 import NewProjectPage from "../../ui/pages/NewProjectPage.jsx";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Projects } from "../../api/projects/Projects.js";
+import { withTracker } from "meteor/react-meteor-data";
 
-export default class AppContainer extends Component {
+class AppContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			logged: (Meteor.user() !== null),
+			logged: (Meteor.userId() !== null),
 			isUserMode: true,
 		};
 	}
@@ -26,7 +27,7 @@ export default class AppContainer extends Component {
 
 	onLogin() {
 		this.setState({
-			logged: (Meteor.user() !== null)
+			logged: (Meteor.userId() !== null)
 		});
 	}
 
@@ -52,7 +53,7 @@ export default class AppContainer extends Component {
 						:
 						<Row className="content-row">
 							<Col className="left_content" md={4}> 
-								<UserMenu/>
+								<UserMenu user={this.props.user} />
 								<ChatList isUserMode={this.state.isUserMode} />
 							</Col>
 							<Col className="right_content" md={8}>
@@ -79,3 +80,11 @@ export default class AppContainer extends Component {
 		);
 	}
 }
+
+export default withTracker((props) => {
+	Meteor.subscribe("users");
+
+	return {
+		user: Meteor.users.findOne({_id: Meteor.userId()}),
+	}
+})(AppContainer);
