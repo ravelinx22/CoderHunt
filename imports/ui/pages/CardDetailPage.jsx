@@ -5,6 +5,7 @@ import { detail_card, repos } from "../testdata.jsx";
 import CardFlag from "../util/CardFlag.jsx";
 import RepoItem from "../components/RepoItem.jsx";
 import CardNavbar from "../components/navbars/CardNavbar.jsx";
+import ProjectNavbar from "../components/navbars/ProjectNavbar.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
 import { Projects } from "../../api/projects/Projects.js";
@@ -26,6 +27,9 @@ class CardDetailPage extends Component {
 	}
 
 	componentDidUpdate() {
+		if(!this.props.dat) {
+			this.props.history.push("/projects");
+		}
 	}
 
 	renderFlags() {
@@ -52,7 +56,10 @@ class CardDetailPage extends Component {
 		}
 		return(
 			<div className="data_detail">
-				<CardNavbar history={this.props.history} card={this.props.dat} isUserMode={this.props.isUserMode} />
+				{this.props.dat.userId !== Meteor.userId() ?
+						<CardNavbar history={this.props.history} card={this.props.dat} isUserMode={this.props.isUserMode} /> :
+						<ProjectNavbar history={this.props.history} card={this.props.dat} />
+				}
 				<div className="data_content">
 					<img src={this.props.dat.image_url} alt="data_pic" className="detail_img"/>
 					<div className="info_container">

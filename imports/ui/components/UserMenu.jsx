@@ -48,6 +48,7 @@ class UserMenu extends Component {
 				{ this.state.open ?
 						<div className="starting_option">
 							<a className="bti-secondary" onClick={() => {this.props.history.push("/")}}>Home</a>
+							<a className="bti-secondary" onClick={() => {this.props.history.push("/projects")}}>My Projects</a>
 							<a className="bti-secondary" onClick={this.goCreate.bind(this)}>Create Project</a>
 							<a className="bti-secondary" onClick={this.logout.bind(this)}>Logout</a>
 						</div>

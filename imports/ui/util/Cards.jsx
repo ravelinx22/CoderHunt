@@ -24,7 +24,7 @@ class Cards extends Component {
 
 	renderCards() {
 		return this.props.data.map((card) => {
-				return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)} />
+			return <Card key={card._id}  onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)} />
 		});
 	}
 
@@ -43,23 +43,30 @@ class Cards extends Component {
 	}
 
 	onSwipeLeft(card) {
+		if(this.props.projectViewMode) {
+			this.shift();
+		}
 		console.log("Left " + card._id);
 	}
 
 	onSwipeRight(card) {
-		var body = {};
-
-		if (this.props.isUserMode) {
-			body["userId"] = this.props.userId;
-			body["projectId"] = card._id;
-			body["projectOwnerId"] = card.userId
+		if(this.props.projectViewMode) {
+			this.shift();
 		} else {
-			body["userId"] = card._id; 
-			body["projectOwnerId"] = this.props.userId; 
-		}
+			var body = {};
 
-		body["comingFromUser"] = this.props.isUserMode;
-		Meteor.call("likes.insert", body);
+			if (this.props.isUserMode) {
+				body["userId"] = this.props.userId;
+				body["projectId"] = card._id;
+				body["projectOwnerId"] = card.userId
+			} else {
+				body["userId"] = card._id; 
+				body["projectOwnerId"] = this.props.userId; 
+			}
+
+			body["comingFromUser"] = this.props.isUserMode;
+			Meteor.call("likes.insert", body);
+		}
 	}
 
 	onDoubleTap(card) {
@@ -71,15 +78,21 @@ class Cards extends Component {
 	}
 
 	likeCard(event) {
-		const index = this.indexOfLastLike();
-		this.onSwipeRight(this.props.data[index]);
 		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
 		var moveOutWidth = document.body.clientWidth * 1.5;
 		if (!cards.length) return false;
 		var card = cards[0];
 		card.classList.add('removed');
 		card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
-		this.setupCards();
+
+		if(this.props.projectViewMode) {
+			this.shift();
+		} else  {
+			const index = this.indexOfLastLike();
+			this.onSwipeRight(this.props.data[index]);
+			this.setupCards();
+		}
+
 		event.preventDefault();
 	}
 
@@ -97,14 +110,39 @@ class Cards extends Component {
 
 	unlikeCard(event) {
 		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
-		console.log(document.querySelectorAll('.tinder--card'));
 		var moveOutWidth = document.body.clientWidth * 1.5;
 		if (!cards.length) return false;
 		var card = cards[0];
 		card.classList.add('removed');
 		card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
-		this.setupCards();
+
+		if(this.props.projectViewMode) {
+			this.shift();
+		} else {
+			this.setupCards();
+		}
+
 		event.preventDefault();
+	}
+
+	shift() {
+		var tinderContainer = document.querySelector('.tinder');
+		var allCards = document.querySelectorAll('.tinder--card');
+
+		var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
+		if(newCards.length <= 0) {
+			var removedClass = document.querySelectorAll(".removed");
+			removedClass.forEach((card,index) => {
+				card.classList.remove("removed");
+			});
+		}
+		newCards = document.querySelectorAll('.tinder--card:not(.removed)');
+		newCards.forEach(function (card, index) {
+			card.style.zIndex = allCards.length - index;
+			card.style.transform = 'scale(' + (20 - index) / 20 + ') translateY(-' + 30 * index + 'px)';
+			card.style.opacity = (10 - index) / 10;
+		});
+		tinderContainer.classList.add('loaded');
 	}
 
 	render() {
@@ -134,6 +172,6 @@ export default withTracker((props) => {
 	return {
 		isUserMode: props.isUserMode,
 		userId: Meteor.userId(),
-		data: (props.isUserMode ? projectsForUser().fetch() : usersForProject().fetch())
+		data: (props.projectViewMode ? Projects.find({userId: Meteor.userId()}).fetch() : (props.isUserMode ? projectsForUser().fetch() : usersForProject().fetch()))
 	};
 })(Cards)

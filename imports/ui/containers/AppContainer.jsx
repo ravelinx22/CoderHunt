@@ -6,6 +6,7 @@ import EnterPage from "../pages/EnterPage.jsx";
 import { Meteor } from "meteor/meteor";
 import NotFoundPage from "../../ui/pages/NotFoundPage.jsx";
 import Home from "../../ui/pages/Home.jsx";
+import ProjectsPage from "../../ui/pages/ProjectsPage.jsx";
 import ChatPage from "../../ui/pages/ChatPage.jsx";
 import CardDetailPage from "../../ui/pages/CardDetailPage.jsx";
 import NewProjectPage from "../../ui/pages/NewProjectPage.jsx";
@@ -65,6 +66,11 @@ export default class AppContainer extends Component {
 								<Switch>
 									<Route exact path="/" render={(history) => {
 										return React.createElement(Home, {...history, onChangeMode: this.onChangeMode.bind(this), isUserMode: this.state.isUserMode});}}/>
+								
+									<Route path="/projects" render={(history) => {
+										return React.createElement(ProjectsPage, {...history, isUserMode: this.state.isUserMode});
+									}}/>
+									
 									<Route path="/chat/:id" render={(history) => { 
 										return React.createElement(ChatPage, {...history, isUserMode: this.state.isUserMode});
 									}}/>

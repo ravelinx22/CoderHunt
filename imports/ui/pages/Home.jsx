@@ -28,7 +28,7 @@ export default class Home extends Component {
 		return(
 			<div className="swipe_content">
 				<HomeNavbar onToggle={this.onToggle.bind(this)} mode={this.state.mode} isUserMode={this.props.isUserMode} />
-				<Cards history={this.props.history} isUserMode={this.props.isUserMode} /> 
+				<Cards history={this.props.history} isUserMode={this.props.isUserMode} projectViewMode={false} /> 
 			</div>
 		);
 	}
