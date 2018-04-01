@@ -52,7 +52,7 @@ class CardDetailPage extends Component {
 		}
 		return(
 			<div className="data_detail">
-				<CardNavbar history={this.props.history} />
+				<CardNavbar history={this.props.history} card={this.props.dat} isUserMode={this.props.isUserMode} />
 				<div className="data_content">
 					<img src={this.props.dat.image_url} alt="data_pic" className="detail_img"/>
 					<div className="info_container">

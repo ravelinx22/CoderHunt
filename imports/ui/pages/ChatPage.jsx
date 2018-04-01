@@ -3,7 +3,6 @@ import { Container, Row, Col, Button } from "reactstrap";
 import "../css/ChatPage.css";
 import ChatMessage from "../components/ChatMessage.jsx";
 import ReactDOM from 'react-dom';
-import { chats } from "../testdata.jsx";
 import ChatNavbar from "../components/navbars/ChatNavbar.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
@@ -12,11 +11,6 @@ import { ChatMessages } from "../../api/chats/ChatMessages.js";
 class ChatPage extends Component {
 	constructor(props) {
 		super(props);
-		var data = chats();
-		this.state = {
-			lastId: 1,
-			data: data		
-		};
 	}
 
 	renderMessages() {
@@ -42,7 +36,6 @@ class ChatPage extends Component {
 
 	componentDidUpdate() {
 		this.scrollToBot();
-		console.log(this.props)
 	}
 
 	scrollToBot() {

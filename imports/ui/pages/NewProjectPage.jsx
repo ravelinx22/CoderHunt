@@ -41,6 +41,7 @@ export default class NewProjectPage extends Component {
 			tags: this.getTags(),
 		};
 
+		const that = this;
 		uploader.send(this.refs.fileSelector.files[0], function (error, downloadUrl) {
 			if (error) {
 				alert (error);
@@ -48,6 +49,7 @@ export default class NewProjectPage extends Component {
 			else {
 				body["image_url"] = downloadUrl;
 				Meteor.call("projects.insert",body);
+				that.props.history.push("/");
 			}
 		});
 	}

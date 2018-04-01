@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../../css/CardNavbar.css";
 import { Link } from "react-router-dom"
 import { Container, Row, Col, Button } from "reactstrap";
+import { Meteor } from "meteor/meteor";
 
 export default class CardNavbar extends Component {
 	constructor(props) {
@@ -9,18 +10,33 @@ export default class CardNavbar extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props);
 	}
 
 	goBack() {
 		this.props.history.goBack();	
 	}
 
-	like() {
-		console.log("like");
+	like() {		
+		var body = {};
+
+		if (this.props.isUserMode) {
+			body["userId"] = Meteor.userId();
+			body["projectId"] = this.props.card._id;
+			body["projectOwnerId"] = this.props.card.userId
+		} else {
+			body["userId"] = this.props.card._id; 
+			body["projectOwnerId"] = Meteor.userId(); 
+		}
+
+		body["comingFromUser"] = this.props.isUserMode;
+		Meteor.call("likes.insert", body);
+		this.props.history.push("/");
 	}
 
 	unlike() {
 		console.log("unlike");
+		this.props.history.push("/");
 	}
 
 	render() {  
