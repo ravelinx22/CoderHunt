@@ -28,6 +28,9 @@ class ChatPage extends Component {
 			message: this.refs.msg.value,
 			chatId: this.props.match.params.id,
 		});
+
+		Meteor.call("chats.message", this.props.match.params.id);
+
 		ReactDOM.findDOMNode(this.refs.msg).value = "";
 	}
 

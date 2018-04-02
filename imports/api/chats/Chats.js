@@ -24,7 +24,15 @@ Meteor.methods({
 			projectOwnerName: object.projectOwnerName,
 			projectId: object.projectId,
 			createdAt: new Date(),
+			updatedAt: new Date(),
 		})
+	},
+	"chats.message"(chatId) {
+		if(!this.userId) {
+			throw new Meteor.Error("not-authorized");
+		}
+
+		Chats.update({_id: chatId}, {$set: {updatedAt: new Date()}});
 	},
 	"chats.remove"(chatId) {
 		// check

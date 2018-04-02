@@ -30,6 +30,6 @@ class ChatList extends Component {
 export default withTracker((props) => {
 	Meteor.subscribe("chats");
 	return {
-		chats: (props.isUserMode ? Chats.find({userId: Meteor.userId()}).fetch() :  Chats.find({projectOwnerId: Meteor.userId()}).fetch() ),	
+		chats: (props.isUserMode ? Chats.find({userId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() :  Chats.find({projectOwnerId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() ),	
 	};
 })(ChatList);
