@@ -1,0 +1,33 @@
+/* Projects Navbar */
+.chat_navbar {
+	background-color: #FCFFF5;
+	border-bottom: 1px solid lightgrey;
+	height: 43px;
+	width: 100%;
+	font-family: 'Lobster', cursive;
+}
+
+.chat_navbar_row {
+	width: 100%;
+	padding: 0 15px;
+	text-align: center;
+}
+
+.btn_go_back {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.btn_go_back > .fa-arrow-left {
+	margin-right: 10px;
+}
+
+.btn_remove_chat {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.chat_title {
+	font-size: 18px;
+	font-weight: 600;
+}
