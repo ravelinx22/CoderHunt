@@ -99,15 +99,18 @@ class Cards extends Component {
 	}
 
 	indexOfLastLike() {
-		const cards = document.querySelectorAll(".tinder--card");
+		const cards = document.querySelectorAll(".tinder--card:not(.looking--card)");
 		var i = 0;
 		for(i = 0; i < cards.length; i++) {
 			if(!cards[i].className.includes("removed")) {
 				break;
 			}
+			console.log("iterator " + i);
 		}
 
-		return (i < cards.length ? i : -1);
+		console.log("Buenas" + i);
+
+		return (cards.length > 0 ? i-1 : -1);
 	}
 
 	unlikeCard(event) {
