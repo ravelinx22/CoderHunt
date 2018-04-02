@@ -4,12 +4,14 @@ import "../css/NewProjectPage.css";
 import { Container, Row, Col, Button } from "reactstrap";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Meteor } from "meteor/meteor";
+import Dropzone from 'react-dropzone'
 
 export default class NewProjectPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			tags: [{ text: "Programming" }],
+			files: [],
 		};
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleAddition = this.handleAddition.bind(this);
@@ -42,7 +44,10 @@ export default class NewProjectPage extends Component {
 		};
 
 		const that = this;
-		uploader.send(this.refs.fileSelector.files[0], function (error, downloadUrl) {
+		if(this.state.files.length <= 0)
+			return null;
+
+		uploader.send(this.state.files[0], function (error, downloadUrl) {
 			if (error) {
 				alert (error);
 			}
@@ -60,6 +65,12 @@ export default class NewProjectPage extends Component {
 		});
 	}
 
+	onDrop(files) {
+		this.setState({
+			files
+		});
+	}
+
 	render() {
 		const { tags } = this.state;
 
@@ -69,11 +80,11 @@ export default class NewProjectPage extends Component {
 				<Container className="create_project_content">
 					<div>
 						<form className="create_project_form">
-							<label>
+							<label className="insert_photo_label">
 								Insert Photo
-								<Row className="justify-content-center">
-									<input type="file" accept="image/*" ref="fileSelector" />
-								</Row>
+          <Dropzone accept="image/*" onDrop={this.onDrop.bind(this)}>
+			  <p>{ this.state.files.length > 0 ? this.state.files[0].name  : "Try dropping some files here, or click to select files to upload."}</p>
+          </Dropzone>
 							</label>
 							<label>
 								Name

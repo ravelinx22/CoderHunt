@@ -31,3 +31,10 @@
 	font-size: 18px;
 	font-weight: 600;
 }
+
+.insert_photo_label > div {
+	margin-top: 15px;
+	padding: 10px;
+	width: 100% !important;
+    height: 100px !important;
+}
