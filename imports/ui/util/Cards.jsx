@@ -152,7 +152,7 @@ class Cards extends Component {
 			<div className="tinder">
 				<div className="tinder--cards">
 					{this.renderCards()}
-					{ this.props.projectViewMode ? null : <LookingCard /> }
+					{ this.props.projectViewMode ? (this.props.data && this.props.data.length <= 0 ? <LookingCard emptyProjects={true}/> : null) : <LookingCard emptyProjects={false} /> }
 				</div>
 				<div className="card-buttons">
 					<button className="unlike" onClick={this.unlikeCard.bind(this)} aria-label="Unlike card button">
