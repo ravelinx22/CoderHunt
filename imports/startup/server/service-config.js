@@ -17,7 +17,7 @@ if (Meteor.isServer) {
 	);
 
 	Accounts.onCreateUser((options, user) => {
-
+		//Me parece muy interesante que hallan utilizado la posibilidad de autenticar con github.
 		var promisedResult = fetch('https://api.github.com/user?access_token=' + user.services.github.accessToken)
 				.then((res) => {
 					return res.json();
