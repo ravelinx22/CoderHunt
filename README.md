@@ -40,8 +40,8 @@ The project runs in http://localhost:3000/
 - NPM
 
 ## Authors
-- William Ravelo Mendez -ravelinx22
-- Nicolas Aguilar Leon -naguilar12
+- William Ravelo Mendez **-ravelinx22**
+- Nicolas Aguilar Leon **-naguilar12**
 
 ## License
 MIT
