@@ -6,6 +6,11 @@ body {
 	color: #193441 !important;
 }
 
+main {
+	height: 100%;
+	width: 100%;
+}
+
 .content-row {
 	height: 100vh;
 }

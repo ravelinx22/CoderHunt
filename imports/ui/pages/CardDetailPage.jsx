@@ -69,7 +69,7 @@ class CardDetailPage extends Component {
 					{ this.props.dat.description ? 
 					<div className="info_container">
 						<div className="info_title">Bio</div>
-						<div>{this.props.dat.description}</div>
+						<div className="info_description">{this.props.dat.description}</div>
 					</div> : null }
 					<div className="info_container">
 						<div className="info_title">Tags</div>
