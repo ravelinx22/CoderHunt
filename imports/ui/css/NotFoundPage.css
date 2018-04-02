@@ -1,0 +1,11 @@
+/* Not Found */
+.not_found_title {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.not_found {
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
