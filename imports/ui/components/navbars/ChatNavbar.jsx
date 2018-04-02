@@ -30,10 +30,6 @@ class ChatNavbar extends Component {
 		this.props.history.goBack();	
 	}
 
-	goUserPage() {
-		this.props.history.push("/user/" + ( this.props.isUserMode ? this.props.chat.projectOwnerId : this.props.chat.userId ));
-	}
-
 	removeChat() {
 		Meteor.call("chats.remove", this.props.chatId);
 	}
@@ -46,6 +42,7 @@ class ChatNavbar extends Component {
 		}
 	}
 
+
 	render() {  
 		return(
 			<Container className="chat_navbar d-flex align-items-center">
@@ -54,7 +51,7 @@ class ChatNavbar extends Component {
 						<i className="fa fa-arrow-left"></i>
 						Go Back
 					</a>
-					<a className="chat_title" onClick={this.goUserPage.bind(this)}>{this.renderName()}</a>
+					<div className="chat_title">{this.renderName()}</div>
 					<a className="btn_remove_chat ml-auto" onClick={this.removeChat.bind(this)}>
 						<i className="fa fa-trash"></i>
 					</a>
