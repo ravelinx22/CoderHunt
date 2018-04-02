@@ -45,7 +45,7 @@ class EnterPage extends Component {
 				</Col>
 				<Col className="image_side"  md={7} sm={12}>
 					<Row className="image_row justify-content-center d-flex align-items-center">
-						<img src="/images/test_photo.png" alt="enter_page_photo"/>
+						<img src="/images/home.png" alt="enter_page_photo"/>
 					</Row>
 				</Col>
 			</div>
