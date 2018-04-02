@@ -38,6 +38,9 @@ The project runs in http://localhost:3000/
 - Meteor
 - React
 - NPM
+- HammerJS
+- Amazon S3
+
 
 ## Authors
 - William Ravelo Mendez **-ravelinx22**
