@@ -20,6 +20,7 @@ class ChatPage extends Component {
 	}
 
 	submitMessage(e) {
+		(new Audio('/sounds/message_send.mp3')).play();
 		e.preventDefault();
 
 		Meteor.call("chatmessages.insert", {
@@ -52,7 +53,7 @@ class ChatPage extends Component {
 					</ul>
 				</div>
 				<form className="chat_form" onSubmit={(e) => this.submitMessage(e)}>
-					<input type="text" ref="msg" placeholder="Type a message" aria-label="Message text field"/>
+					<input type="text" ref="msg" placeholder="Type a message" aria-label="Message text field" />
 					<input type="submit" value="Submit" />
 				</form>
 			</div>
