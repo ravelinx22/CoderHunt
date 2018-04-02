@@ -16,6 +16,14 @@
 	width: 100%;
 }
 
+.insert_photo > div {
+	margin-top: 15px;
+	padding: 10px;
+	width: 100% !important;
+    height: 100px !important;
+	font-size: 12px;
+}
+
 .create_project_form  > label, .create_project_form  > input, .create_project_form  > textarea {
 	display: block !important;
 }

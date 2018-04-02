@@ -5,6 +5,8 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Meteor } from "meteor/meteor";
 import Dropzone from 'react-dropzone'
+import { Line } from 'rc-progress';
+import { Tracker } from 'meteor/tracker';
 
 export default class NewProjectPage extends Component {
 	constructor(props) {
@@ -12,6 +14,8 @@ export default class NewProjectPage extends Component {
 		this.state = {
 			tags: [{ text: "Programming" }],
 			files: [],
+			progress: 0,
+			disabled: false,
 		};
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleAddition = this.handleAddition.bind(this);
@@ -47,6 +51,12 @@ export default class NewProjectPage extends Component {
 		if(this.state.files.length <= 0)
 			return null;
 
+		this.setState({disabled: true});
+
+		Tracker.autorun(function () {
+			that.setState({progress: uploader.progress()*100});
+		});
+
 		uploader.send(this.state.files[0], function (error, downloadUrl) {
 			if (error) {
 				alert (error);
@@ -80,12 +90,14 @@ export default class NewProjectPage extends Component {
 				<Container className="create_project_content">
 					<div>
 						<form className="create_project_form">
-							<label className="insert_photo_label">
+							<label>
 								Insert Photo
-          <Dropzone accept="image/*" onDrop={this.onDrop.bind(this)}>
-			  <p>{ this.state.files.length > 0 ? this.state.files[0].name  : "Try dropping some files here, or click to select files to upload."}</p>
-          </Dropzone>
 							</label>
+							<span className="insert_photo">
+								<Dropzone disabled={this.state.disabled} accept="image/*" onDrop={this.onDrop.bind(this)}>
+									<p>{ this.state.files.length > 0 ? this.state.files[0].name  : "Try dropping some files here, or click to select files to upload."}</p>
+								</Dropzone>
+							</span>
 							<label>
 								Name
 								<input ref="name" type="text"/>
@@ -98,12 +110,14 @@ export default class NewProjectPage extends Component {
 									handleAddition={this.handleAddition}/>
 							</label>
 						</form>
-						<Row className="submit_row justify-content-center">
-							<button className="submit" onClick={this.handleSubmit.bind(this)}>Submit</button>
-						</Row>
+						{!this.state.disabled ? 
+								<Row className="submit_row justify-content-center">
+									<button className="submit" onClick={this.handleSubmit.bind(this)}>Submit</button> 
+								</Row> :
+								<Line percent={this.state.progress} strokeWidth="2"/> }
+							</div>
+						</Container>
 					</div>
-				</Container>
-			</div>
 		);
 	}
 }
