@@ -23,7 +23,7 @@ class CardDetailPage extends Component {
 
 	componentDidMount() {
 		console.log(this.props);
-		this.props.changeMode(this.props.isUserMode);
+		//this.props.changeMode(this.props.isUserMode);
 	}
 
 	componentDidUpdate() {
