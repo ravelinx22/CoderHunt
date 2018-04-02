@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "./Card.jsx";
+import LookingCard from "./LookingCard.jsx";
 import "../css/cards.css";
 import { Container, Row, Col, Button } from "reactstrap";
 import { withTracker } from "meteor/react-meteor-data";
@@ -15,6 +16,7 @@ class Cards extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props);
 		this.setupCards();
 	}
 
@@ -78,7 +80,7 @@ class Cards extends Component {
 	}
 
 	likeCard(event) {
-		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+		var cards = document.querySelectorAll('.tinder--card:not(.removed):not(.looking--card)');
 		var moveOutWidth = document.body.clientWidth * 1.5;
 		if (!cards.length) return false;
 		var card = cards[0];
@@ -109,7 +111,7 @@ class Cards extends Component {
 	}
 
 	unlikeCard(event) {
-		var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+		var cards = document.querySelectorAll('.tinder--card:not(.removed):not(.looking--card)');
 		var moveOutWidth = document.body.clientWidth * 1.5;
 		if (!cards.length) return false;
 		var card = cards[0];
@@ -150,6 +152,7 @@ class Cards extends Component {
 			<div className="tinder">
 				<div className="tinder--cards">
 					{this.renderCards()}
+					{ this.props.projectViewMode ? null : <LookingCard /> }
 				</div>
 				<div className="card-buttons">
 					<button className="unlike" onClick={this.unlikeCard.bind(this)} aria-label="Unlike card button">

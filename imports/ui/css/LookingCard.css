@@ -1,0 +1,31 @@
+/* Looking Card */
+.looking_card_img {
+	height: 150px !important;
+	width: 150px !important;
+	margin-top: 50px;
+	position: relative;
+	z-index: 2;
+}
+
+.card_title {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.spinner {
+	display: inline;
+}
+
+.spinner > div {
+	left: 100px;
+	z-index: 1;
+	position: absolute !important;
+	width: 200px;
+	height: 200px;
+}
+
+.spinner > div > div {
+	margin-top: 25px;
+	width: 200px;
+	height: 200px;
+}
