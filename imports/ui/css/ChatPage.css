@@ -48,3 +48,7 @@ input[type="submit"] {
 	cursor: pointer;
 	transition: all 0.3s ease;
 }
+
+ul{
+	padding-left: 0px;
+}

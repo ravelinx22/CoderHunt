@@ -152,10 +152,10 @@ class Cards extends Component {
 					{this.renderCards()}
 				</div>
 				<div className="card-buttons">
-					<button className="unlike" onClick={this.unlikeCard.bind(this)}>
+					<button className="unlike" onClick={this.unlikeCard.bind(this)} aria-label="Unlike card button">
 						<i className="fa fa-thumbs-down"></i>
 					</button>
-					<button className="like" onClick={this.likeCard.bind(this)}>
+					<button className="like" onClick={this.likeCard.bind(this)} aria-label="Like card button">
 						<i className="fa fa-thumbs-up"></i>
 					</button>
 				</div>

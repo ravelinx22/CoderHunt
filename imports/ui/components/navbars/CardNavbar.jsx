@@ -49,10 +49,10 @@ export default class CardNavbar extends Component {
 					</a>
 					<div className="card_title">Profile</div>
 					<div className="ml-auto detail_card_buttons">
-						<button className="unlike" onClick={this.unlike.bind(this)}>
+						<button className="unlike" onClick={this.unlike.bind(this)} aria-label="Unlike card button">
 							<i className="fa fa-thumbs-down"></i>
 						</button>
-						<button className="like" onClick={this.like.bind(this)}>
+						<button className="like" onClick={this.like.bind(this)} aria-label="Like card button">
 							<i className="fa fa-thumbs-up"></i>
 						</button>
 

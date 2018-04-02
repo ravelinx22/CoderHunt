@@ -81,7 +81,7 @@ export default class Card extends Component {
 		return(
 			<Hammer onPan={this.onPan.bind(this)} onPanEnd={this.onPanEnd.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}> 
 				<div className={this.state.classList.join(" ")}>
-					<img src={this.props.card.image_url} />
+					<img src={this.props.card.image_url} alt={this.props.card.name + " profile image"} />
 					<Grid className="card_info">
 						<div className="card_name">{this.props.card.name}</div>
 						<div className="card_username">{!this.props.card.username && this.props.card.services ? this.props.card.services.github.username : this.props.card.username}</div>

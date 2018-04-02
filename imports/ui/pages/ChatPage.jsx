@@ -15,7 +15,7 @@ class ChatPage extends Component {
 
 	renderMessages() {
 		return this.props.messages.map((chat) => {
-			return <ChatMessage chat={chat} key={chat._id}/>;
+			return <ChatMessage chat={chat} key={chat._id} />;
 		});
 	}
 
@@ -27,7 +27,7 @@ class ChatPage extends Component {
 			message: this.refs.msg.value,
 			chatId: this.props.match.params.id,
 		});
-			ReactDOM.findDOMNode(this.refs.msg).value = "";
+		ReactDOM.findDOMNode(this.refs.msg).value = "";
 	}
 
 	componentDidMount() {
@@ -43,14 +43,16 @@ class ChatPage extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<div className="chats">
-				<ChatNavbar history={this.props.history} chatId={this.props.match.params.id} isUserMode={this.props.isUserMode}/>
-				<div className="chat-content" ref="chats"> 
-					{this.renderMessages()}	
+				<ChatNavbar history={this.props.history} chatId={this.props.match.params.id} isUserMode={this.props.isUserMode} />
+				<div className="chat-content" ref="chats">
+					<ul>
+						{this.renderMessages()}
+					</ul>
 				</div>
 				<form className="chat_form" onSubmit={(e) => this.submitMessage(e)}>
-					<input type="text" ref="msg" placeholder="Type a message" />
+					<input type="text" ref="msg" placeholder="Type a message" aria-label="Message text field"/>
 					<input type="submit" value="Submit" />
 				</form>
 			</div>
@@ -62,6 +64,6 @@ export default withTracker((props) => {
 	Meteor.subscribe("chatmessages");
 	return {
 		userId: Meteor.userId(),
-		messages: ChatMessages.find({chatId: props.match.params.id}).fetch(),
+		messages: ChatMessages.find({ chatId: props.match.params.id }).fetch(),
 	};
 })(ChatPage);

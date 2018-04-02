@@ -24,7 +24,7 @@ export default class HomeNavbar extends Component {
 					</div>
 					<div className="ml-auto">
 						<span className="switch_label">{this.props.mode} mode</span>
-						<ToggleSwitch className="home_navbar_switch" checked={this.props.isUserMode} onChange={this.props.onToggle}/>
+						<ToggleSwitch className="home_navbar_switch" checked={this.props.isUserMode} onChange={this.props.onToggle} aria-label="Toggle search mode."/>
 					</div>
 				</Row>
 			</Container>

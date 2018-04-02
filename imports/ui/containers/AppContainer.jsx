@@ -50,42 +50,44 @@ export default class AppContainer extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<Container>
-				{ !this.state.logged ? 
-						<Row className="content-row">
-							<EnterPage onLogin={this.onLogin.bind(this)}/>
-						</Row>
-						:
-						<Row className="content-row">
-							<Col className="left_content" md={4}> 
-								<UserMenu onLogout={this.onLogout.bind(this)} />
-								<ChatList isUserMode={this.state.isUserMode} />
-							</Col>
-							<Col className="right_content" md={8}>
+				{!this.state.logged ?
+					<Row className="content-row">
+						<EnterPage onLogin={this.onLogin.bind(this)} />
+					</Row>
+					:
+					<Row className="content-row">
+						<Col className="left_content" md={4}>
+							<UserMenu onLogout={this.onLogout.bind(this)} />
+							<ChatList isUserMode={this.state.isUserMode} />
+						</Col>
+						<Col className="right_content" md={8}>
+							<main>
 								<Switch>
 									<Route exact path="/" render={(history) => {
-										return React.createElement(Home, {...history, onChangeMode: this.onChangeMode.bind(this), isUserMode: this.state.isUserMode});}}/>
-								
+										return React.createElement(Home, { ...history, onChangeMode: this.onChangeMode.bind(this), isUserMode: this.state.isUserMode });
+									}} />
+
 									<Route path="/projects" render={(history) => {
-										return React.createElement(ProjectsPage, {...history, isUserMode: this.state.isUserMode});
-									}}/>
-									
-									<Route path="/chat/:id" render={(history) => { 
-										return React.createElement(ChatPage, {...history, isUserMode: this.state.isUserMode});
-									}}/>
+										return React.createElement(ProjectsPage, { ...history, isUserMode: this.state.isUserMode });
+									}} />
+
+									<Route path="/chat/:id" render={(history) => {
+										return React.createElement(ChatPage, { ...history, isUserMode: this.state.isUserMode });
+									}} />
 									<Route path="/user/:id" render={(history) => {
-										return React.createElement(CardDetailPage, {...history, isUserMode: false, changeMode: this.changeMode.bind(this)})
+										return React.createElement(CardDetailPage, { ...history, isUserMode: false, changeMode: this.changeMode.bind(this) })
 									}} />
 									<Route path="/project/new" component={NewProjectPage} />
-								<Route path="/project/:id" render={(history) => {
-									return React.createElement(CardDetailPage, {...history, isUserMode: true, changeMode: this.changeMode.bind(this)})
-								}} />
+									<Route path="/project/:id" render={(history) => {
+										return React.createElement(CardDetailPage, { ...history, isUserMode: true, changeMode: this.changeMode.bind(this) })
+									}} />
 									<Route path="*" component={NotFoundPage} />
 								</Switch>
-
-							</Col>
-						</Row>
+							</main>
+						</Col>
+					</Row>
 				}
 			</Container>
 		);
