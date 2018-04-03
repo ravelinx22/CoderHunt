@@ -40,13 +40,14 @@ export default class NewProjectPage extends Component {
 	}
 
 	handleSubmit(e) {
+		//Me parece muy interesante que utilicen slingshot para subir fotos a Amazon S3. 
 		var uploader = new Slingshot.Upload("projectPhotos");
 		body =   {
 			name: this.refs.name.value,
 			description: this.refs.description.value,
 			tags: this.getTags(),
 		};
-
+		//Es una muy buena adición que permitan a los usuarios subir fotos sobre los proyectos.
 		const that = this;
 		if(this.state.files.length <= 0)
 			return null;
