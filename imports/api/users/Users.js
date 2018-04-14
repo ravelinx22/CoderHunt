@@ -17,7 +17,11 @@ export const usersForProject = function () {
 
 	var likes = Likes.find({ projectOwnerId: Meteor.userId() });
 	var usersLikedBefore = likes.map((like) => {
-		if (!like.comingFromUser)
+		var today = new Date();
+		var diffMs = (today - like.createdAt);
+		var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+
+		if (!like.comingFromUser && !like.dislike || like.dislike && (diffMins < 5))
 			return like.userId;
 	});
 

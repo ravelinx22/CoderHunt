@@ -44,6 +44,7 @@ Meteor.methods({
 			projectOwnerId: object.projectOwnerId,
 			comingFromUser: object.comingFromUser,
 			createdAt: new Date(),
+			dislike: object.dislike,
 		});
 	},
 });

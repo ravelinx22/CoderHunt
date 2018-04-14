@@ -10,11 +10,15 @@ export const projectsForUser = function () {
 	var languages = [];
 
 	if (user && user.tags)
-			languages = user.tags;
+		languages = user.tags;
 
 	var userLikes = Likes.find({ userId: Meteor.userId() });
 	var projectsWithUserLike = userLikes.map((like) => {
-		if (like.comingFromUser)
+		var today = new Date();
+		var diffMs = (today - like.createdAt);
+		var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+
+		if (like.comingFromUser && !like.dislike || like.dislike && (diffMins < 5))
 			return like.projectId;
 	});
 	return Projects.find({ _id: { $not: { $in: projectsWithUserLike } }, tags: { $in: languages }, userId: { $not: { $eq: Meteor.userId() } } });

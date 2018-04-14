@@ -47,6 +47,22 @@ class Cards extends Component {
 	onSwipeLeft(card) {
 		if(this.props.projectViewMode) {
 			this.shift();
+		} else{
+
+			var body = {};
+			if (this.props.isUserMode) {
+				body["userId"] = this.props.userId;
+				body["projectId"] = card._id;
+				body["projectOwnerId"] = card.userId
+			} else {
+				body["userId"] = card._id; 
+				body["projectOwnerId"] = this.props.userId; 
+			}
+			body["dislike"] = true;
+
+			body["comingFromUser"] = this.props.isUserMode;
+			Meteor.call("likes.insert", body);
+
 		}
 		console.log("Left " + card._id);
 	}
@@ -65,6 +81,8 @@ class Cards extends Component {
 				body["userId"] = card._id; 
 				body["projectOwnerId"] = this.props.userId; 
 			}
+			body["dislike"] = false;
+
 
 			body["comingFromUser"] = this.props.isUserMode;
 			Meteor.call("likes.insert", body);
