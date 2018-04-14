@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import "../css/EnterForm.css";
+import { Accounts  } from 'meteor/accounts-base'
 
 export default class EnterForm extends Component {
 	constructor(props) {
@@ -15,7 +16,6 @@ export default class EnterForm extends Component {
 
 	onSubmit(e) {
 		e.preventDefault();
-		alert("hola");
 	}
 
 	changeLog(e) {
@@ -26,6 +26,29 @@ export default class EnterForm extends Component {
 		});
 	}
 
+	signUpWithPassword(e) {
+		e.preventDefault();
+		Accounts.createUser({
+			username: "william",
+			name: "william",
+			email: "drummerwilliam@gmail.com",
+			password: "12",
+			isLoginWithPassword: true
+		}, (error) => {
+			if(error) {
+				console.log(error);
+			}
+		});
+	}
+
+	enterWithPassword(e) {
+		e.preventDefault();
+		Meteor.loginWithPassword("drummerwilliam@gmail.com", "12", (error) => {
+			if(error) {
+				console.log(error);
+			}
+		});
+	} 
 
 	enterWithGithub(e) {
 		e.preventDefault();
@@ -61,7 +84,7 @@ export default class EnterForm extends Component {
 					<input type="email" placeholder="Email" className="enter_input"/>
 					<input type="password" placeholder="Password" className="enter_input"/>
 
-					<button className="enter_submit" onClick={this.onSubmit.bind(this)}>Sign Up</button>
+					<button className="enter_submit" onClick={this.signUpWithPassword.bind(this)}>Sign Up</button>
 				</form>
 			);
 		} else {

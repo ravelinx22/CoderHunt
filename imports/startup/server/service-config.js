@@ -17,6 +17,10 @@ if (Meteor.isServer) {
 	);
 
 	Accounts.onCreateUser((options, user) => {
+		if(options.isLoginWithPassword) {
+			user.name = options.name;
+			return user;
+		}
 
 		var promisedResult = fetch('https://api.github.com/user?access_token=' + user.services.github.accessToken)
 				.then((res) => {

@@ -20,13 +20,13 @@ class EnterPage extends Component {
 	render() {
 		return(
 			<div className="enter_content">
-				<Col className="enter_side d-flex align-items-center" md={5} sm={12}>
-					<EnterForm onLogin={this.props.onLogin} /> 
-				</Col>
 				<Col className="image_side"  md={7} sm={12}>
 					<Row className="image_row justify-content-center d-flex align-items-center">
 						<img src="/images/home.png" alt="enter_page_photo"/>
 					</Row>
+				</Col>
+				<Col className="enter_side d-flex align-items-center" md={5} sm={12}>
+					<EnterForm onLogin={this.props.onLogin} /> 
 				</Col>
 			</div>
 		);
