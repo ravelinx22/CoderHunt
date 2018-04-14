@@ -53,10 +53,11 @@ class Cards extends Component {
 			if (this.props.isUserMode) {
 				body["userId"] = this.props.userId;
 				body["projectId"] = card._id;
+				body["projectName"] = card.name;
 				body["projectOwnerId"] = card.userId
 			} else {
 				body["userId"] = card._id; 
-				body["projectOwnerId"] = this.props.userId; 
+				body["projectOwnerId"] = this.props.userId;
 			}
 			body["dislike"] = true;
 
@@ -76,6 +77,7 @@ class Cards extends Component {
 			if (this.props.isUserMode) {
 				body["userId"] = this.props.userId;
 				body["projectId"] = card._id;
+				body["projectName"] = card.name;
 				body["projectOwnerId"] = card.userId
 			} else {
 				body["userId"] = card._id; 

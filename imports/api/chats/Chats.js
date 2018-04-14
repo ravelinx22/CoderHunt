@@ -25,6 +25,7 @@ Meteor.methods({
 			projectId: object.projectId,
 			createdAt: new Date(),
 			updatedAt: new Date(),
+			projectName: object.projectName,
 		})
 	},
 	"chats.message"(chatId) {
