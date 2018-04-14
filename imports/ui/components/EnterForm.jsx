@@ -14,10 +14,6 @@ export default class EnterForm extends Component {
 	componentDidMount() {
 	}
 
-	onSubmit(e) {
-		e.preventDefault();
-	}
-
 	changeLog(e) {
 		e.preventDefault();
 
@@ -29,10 +25,10 @@ export default class EnterForm extends Component {
 	signUpWithPassword(e) {
 		e.preventDefault();
 		Accounts.createUser({
-			username: "william",
-			name: "william",
-			email: "drummerwilliam@gmail.com",
-			password: "12",
+			username: this.refs.sign_username.value,
+			name: this.refs.sign_username.value,
+			email: this.refs.sign_email.value,
+			password: this.refs.sign_password.value,
 			isLoginWithPassword: true
 		}, (error) => {
 			if(error) {
@@ -43,7 +39,7 @@ export default class EnterForm extends Component {
 
 	enterWithPassword(e) {
 		e.preventDefault();
-		Meteor.loginWithPassword("drummerwilliam@gmail.com", "12", (error) => {
+		Meteor.loginWithPassword(this.refs.log_username.value, this.refs.log_password.value , (error) => {
 			if(error) {
 				console.log(error);
 			}
@@ -80,10 +76,9 @@ export default class EnterForm extends Component {
 						<button className="enter_github" onClick={this.enterWithGithub.bind(this)}> <i className="fa fa-github"></i> Enter with Github</button>
 					</Row>
 					<div className="enter_option_title">Or, sign up with email</div>
-					<input type="text" placeholder="Name" className="enter_input"/>
-					<input type="email" placeholder="Email" className="enter_input"/>
-					<input type="password" placeholder="Password" className="enter_input"/>
-
+					<input type="text" placeholder="Username" ref="sign_username" className="enter_input"/>
+					<input type="email" placeholder="Email" ref="sign_email" className="enter_input"/>
+					<input type="password" placeholder="Password" ref="sign_password" className="enter_input"/>
 					<button className="enter_submit" onClick={this.signUpWithPassword.bind(this)}>Sign Up</button>
 				</form>
 			);
@@ -102,9 +97,9 @@ export default class EnterForm extends Component {
 						</Row>
 						<div className="enter_option_title">Or, log in with email</div>
 					</div>
-					<input type="email" placeholder="Email" className="enter_input"/>
-					<input type="password" placeholder="Password" className="enter_input"/>
-					<button className="enter_submit" onClick={this.onSubmit.bind(this)}>Log In</button>
+					<input type="text" placeholder="Username" ref="log_username" className="enter_input"/>
+					<input type="password" placeholder="Password" ref="log_password" className="enter_input"/>
+					<button className="enter_submit" onClick={this.enterWithPassword.bind(this)}>Log In</button>
 				</form>
 			);
 		}
@@ -113,6 +108,7 @@ export default class EnterForm extends Component {
 	render() {
 		return(
 			<Row className="enter_form justify-content-center">
+				<div className="enter_form_title">CoderHunt</div>
 				{this.renderForm()}
 			</Row>
 		);

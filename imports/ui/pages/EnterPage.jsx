@@ -22,8 +22,10 @@ class EnterPage extends Component {
 			<div className="enter_content">
 				<Col className="image_side"  md={7} sm={12}>
 					<Row className="image_row justify-content-center d-flex align-items-center">
+						<div className="landing_info">
+						<div className="enter_image_title">Start Swiping</div>
 						<img src="/images/home.png" alt="enter_page_photo"/>
-					</Row>
+				</div></Row>
 				</Col>
 				<Col className="enter_side d-flex align-items-center" md={5} sm={12}>
 					<EnterForm onLogin={this.props.onLogin} /> 

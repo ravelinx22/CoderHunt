@@ -89,3 +89,12 @@ button {
 	font-size: 15px;
 	color: #3E606F;
 }
+
+.enter_form_title {
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 40px;
+	font-family: 'Lobster', cursive;
+}
