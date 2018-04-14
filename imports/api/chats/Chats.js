@@ -17,6 +17,8 @@ Meteor.methods({
 			throw new Meteor.Error("not-authorized");
 		}
 
+		Meteor.call("users.updateProjectStats", object);
+
 		Chats.insert({
 			userId: object.userId,
 			userName: object.userName,
