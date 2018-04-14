@@ -51,7 +51,7 @@ export default class AppContainer extends Component {
 
 	render() {
 		return (
-			<Container>
+			<Container fluid={true}>
 				{!this.state.logged ?
 					<Row className="content-row">
 						<EnterPage onLogin={this.onLogin.bind(this)} />

@@ -1,0 +1,91 @@
+/* Enter Form */
+.enter_form {
+	width: 100%;
+	/*border: 1px solid #3E606F;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);*/
+}
+
+
+.enter_form > form {
+	width: 400px;
+	padding: 20px 30px;
+	margin: 0 20px;
+	background-color: white;
+	border: 2px solid #3E606F;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);
+}
+
+.enter_input {
+	font-size: 15px;
+	display: block;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 2px solid lightgrey;
+	margin-bottom: 30px;
+	height: 25px;
+	width: 100%;
+}
+
+.enter_input:focus {
+	border-bottom: 2px solid #3E606F;
+}
+
+.enter_submit {
+	width: 100%;
+	height: 50px;
+	font-size: 15px;
+	background-color: #3E606F;
+	color: #FCFFF5;
+	border-radius: 5px;
+}
+
+.change_log_login, .change_log_sign {
+	color: #3E606F;
+	width: 50%;
+	height: 30px;
+	font-size: 13px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 2px solid lightgrey;
+	margin-bottom: 20px;
+	padding-bottom: 35px;
+}
+
+.change_active {
+	border-bottom: 2px solid #3E606F;	
+}
+
+button {
+	outline: 0 !important;
+}
+
+.github_row {
+	margin-bottom: 20px;
+}
+
+.enter_github {
+	border: none;
+	border-radius: 5px;
+	background-color: #3E606F;
+	color: #FCFFF5;
+	outline: 0 !important;
+	width: 260px;
+	height: 43px;
+	font-size: 16px;
+}
+
+.enter_github > .fa-github {
+	font-size: 20px;
+	margin-right: 10px;
+}
+
+.enter_option_title {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 15px;
+	color: #3E606F;
+}

@@ -21,7 +21,7 @@
 	padding: 15px 10px;
 }
 
-input[type="text"] {
+.chat_form > input[type="text"] {
 	background: white;
 	outline: 0;
 	border: none;
@@ -35,7 +35,7 @@ input[type="text"] {
 	font-size: 14px;
 }
 
-input[type="submit"] {
+.chat_form > input[type="submit"] {
 	color: #FCFFF5;
 	background: #3E606F;
 	border: none;
