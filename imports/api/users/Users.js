@@ -97,6 +97,13 @@ Meteor.methods({
 				Meteor.users.update({ _id: this.userId }, { $addToSet: { projectsRatedBefore: projectId } });
 			}
 		}
+	},
+	"users.ratedBefore"(id) {
+			var usersRatedBefore = Meteor.users.findOne({ _id: this.userId }).usersRatedBefore;
+			var ratedBeforeUser = usersRatedBefore && usersRatedBefore.includes(id);
+			var projectsRatedBefore = Meteor.users.findOne({ _id: this.userId }).projectsRatedBefore;
+			var ratedBeforeProject = projectsRatedBefore && projectsRatedBefore.includes(id);
+		return ratedBeforeProject || ratedBeforeUser;
 	}
 });
 
