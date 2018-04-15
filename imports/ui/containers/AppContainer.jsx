@@ -16,6 +16,7 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 import { withRouter  } from "react-router-dom";
+import { withTracker  } from "meteor/react-meteor-data";
 
 class AppContainer extends Component {
 	constructor(props) {
@@ -28,7 +29,6 @@ class AppContainer extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 	}
 
 	onLogin() {
@@ -63,16 +63,21 @@ class AppContainer extends Component {
 	}
 
 	renderChangeModeBtn() {
-		if(this.state.isUserMode) {
+		if(this.props.user && this.props.user.repos) {
+			if(this.state.isUserMode) {
 
-		return(
-			<button className="btn_programmer_mode" onClick={this.onChangeMode.bind(this)}><i className="fa fa-code programmer_mode_icon"/> Look For Programmers</button>
-		);
+				return(
+					<button className="btn_programmer_mode" onClick={this.onChangeMode.bind(this)}><i className="fa fa-code programmer_mode_icon"/> Look For Programmers</button>
+				);
+			} else {
+
+				return(
+					<button className="btn_project_mode" onClick={this.onChangeMode.bind(this)}><i className="fa fa-briefcase project_mode_icon"/> Look For Projects</button>
+				);
+			}
+
 		} else {
 
-		return(
-			<button className="btn_project_mode" onClick={this.onChangeMode.bind(this)}><i className="fa fa-briefcase project_mode_icon"/> Look For Projects</button>
-		);
 		}
 	}
 
@@ -89,7 +94,7 @@ class AppContainer extends Component {
 							<UserMenu onLogout={this.onLogout.bind(this)} onToggle={this.onToggleUserMenu.bind(this)} />
 							<ChatList className={this.state.openUserMenu ? "chat_list_open" : ""} isUserMode={this.state.isUserMode} />
 							{this.renderChangeModeBtn()}	
-					</Col>
+						</Col>
 						<Col className="right_content" md={8}>
 							<main>
 								<Switch>
@@ -123,4 +128,11 @@ class AppContainer extends Component {
 	}
 }
 
-export default withRouter(AppContainer);
+export default withRouter(
+	withTracker((props) => {
+		Meteor.subscribe("users");
+		return {
+			user: Meteor.users.findOne({_id: Meteor.userId()}),
+		}
+	})(AppContainer)
+);

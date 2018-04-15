@@ -34,6 +34,7 @@ export default class EnterForm extends Component {
 			if(error) {
 				console.log(error);
 			}
+			this.props.onLogin();
 		});
 	}
 
@@ -43,6 +44,7 @@ export default class EnterForm extends Component {
 			if(error) {
 				console.log(error);
 			}
+			this.props.onLogin();
 		});
 	} 
 
