@@ -23,6 +23,9 @@ class ChatItem extends Component {
 
 	renderLastMessage() {
 		if (this.props.lastMessage.length > 0) {
+			if(this.props.lastMessage[0].message.length >= 25) {
+				return this.props.lastMessage[0].message.substring(1,25) + "...";
+			}
 			return this.props.lastMessage[0].message;
 		} else {
 			return "Be the first to message";
