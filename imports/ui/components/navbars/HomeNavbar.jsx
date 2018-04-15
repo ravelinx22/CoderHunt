@@ -7,9 +7,6 @@ import ToggleSwitch from '@trendmicro/react-toggle-switch';
 export default class HomeNavbar extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			checked: false,
-		};
 	}
 
 	componentDidMount() {
@@ -23,8 +20,7 @@ export default class HomeNavbar extends Component {
 						Start Swiping
 					</div>
 					<div className="ml-auto">
-						<span className="switch_label">{this.props.mode} mode</span>
-						<ToggleSwitch className="home_navbar_switch" checked={this.props.isUserMode} onChange={this.props.onToggle} aria-label="Toggle search mode."/>
+						<span className="switch_label">{this.props.isUserMode ? "Looking for projects" : "Looking for programmers"}</span>
 					</div>
 				</Row>
 			</Container>

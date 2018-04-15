@@ -44,7 +44,7 @@ class ChatList extends Component {
 
 	render() {
 		return(
-			<ul className="chat_list"> 
+			<ul className={"chat_list " + this.props.className}> 
 				{this.renderChats()}
 			</ul>
 		);

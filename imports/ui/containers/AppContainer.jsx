@@ -15,17 +15,20 @@ import { Projects } from "../../api/projects/Projects.js";
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
+import { withRouter  } from "react-router-dom";
 
-export default class AppContainer extends Component {
+class AppContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			logged: (Meteor.userId() !== null),
 			isUserMode: true,
+			openUserMenu: false,
 		};
 	}
 
 	componentDidMount() {
+		console.log(this.props);
 	}
 
 	onLogin() {
@@ -38,6 +41,7 @@ export default class AppContainer extends Component {
 		this.setState({
 			isUserMode: !this.state.isUserMode,
 		});
+		this.props.history.push("/");
 	}
 
 	changeMode(state) {
@@ -52,6 +56,26 @@ export default class AppContainer extends Component {
 		});
 	}
 
+	onToggleUserMenu(state) {
+		this.setState({
+			openUserMenu: state,
+		})
+	}
+
+	renderChangeModeBtn() {
+		if(this.state.isUserMode) {
+
+		return(
+			<button className="btn_programmer_mode" onClick={this.onChangeMode.bind(this)}><i className="fa fa-code programmer_mode_icon"/> Look For Programmers</button>
+		);
+		} else {
+
+		return(
+			<button className="btn_project_mode" onClick={this.onChangeMode.bind(this)}><i className="fa fa-briefcase project_mode_icon"/> Look For Projects</button>
+		);
+		}
+	}
+
 	render() {
 		return (
 			<Container fluid={true}>
@@ -62,9 +86,10 @@ export default class AppContainer extends Component {
 					:
 					<Row className="content-row">
 						<Col className="left_content" md={4}>
-							<UserMenu onLogout={this.onLogout.bind(this)} />
-							<ChatList isUserMode={this.state.isUserMode} />
-						</Col>
+							<UserMenu onLogout={this.onLogout.bind(this)} onToggle={this.onToggleUserMenu.bind(this)} />
+							<ChatList className={this.state.openUserMenu ? "chat_list_open" : ""} isUserMode={this.state.isUserMode} />
+							{this.renderChangeModeBtn()}	
+					</Col>
 						<Col className="right_content" md={8}>
 							<main>
 								<Switch>
@@ -97,3 +122,5 @@ export default class AppContainer extends Component {
 		);
 	}
 }
+
+export default withRouter(AppContainer);

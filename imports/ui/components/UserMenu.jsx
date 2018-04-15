@@ -15,6 +15,7 @@ class UserMenu extends Component {
 	}
 
 	toggle() {
+		this.props.onToggle(!this.state.open);
 		this.setState({
 			open: !this.state.open,
 		})

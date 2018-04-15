@@ -2,8 +2,16 @@
 .chat_list {
 	width: 100%;
 	padding: 0 !important;
+	margin-bottom: 0;
+	height: calc(100% - 128px);
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 li {
     list-style-type: none;
+}
+
+.chat_list_open {
+	height: calc(100% - 300px);
 }

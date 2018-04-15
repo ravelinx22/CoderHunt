@@ -11,6 +11,10 @@ main {
 	width: 100%;
 }
 
+.container-fluid {
+	padding: 0 !important;
+}
+
 .content-row {
 	height: 100vh;
 }
@@ -23,8 +27,7 @@ main {
 
 .left_content {
 	height: 100vh;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 *.unselectable {
@@ -37,6 +40,26 @@ main {
 
 .hidden {
 	visibility: hidden;
+}
+
+.btn_programmer_mode, .btn_project_mode {
+	background-color: #193441;
+	font-size: 16px;
+	color: #FCFFF5;
+	width: 100%;
+	height: 60px;
+}
+
+.btn_project_mode {
+	background-color: #3E606F;
+}
+
+.programmer_mode_icon, .project_mode_icon {
+	margin-right: 10px;
+}
+
+.programmer_mode_icon {
+	font-weight: 700;
 }
 
 /* Media types */
