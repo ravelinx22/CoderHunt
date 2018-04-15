@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { Mongo } from "meteor/mongo";
 import { check } from "meteor/check";
+import { Match } from 'meteor/check';
 
 export const Likes = new Mongo.Collection("likes");
 
@@ -11,6 +12,17 @@ if (Meteor.isServer) {
 }
 
 Likes.after.insert(function (likeId, doc) {
+	check(likeId, String)
+	check(doc, {
+		projectId: Match.OneOf(String, undefined, null),
+		_id: String,
+		createdAt: Date,
+		userId: String,
+		projectOwnerId: String,
+		comingFromUser: Boolean,
+		dislike: Match.Optional(Boolean),
+		projectName: Match.OneOf(String, undefined, null),
+	});
 	if (!doc.dislike) {
 		const otherLike = Likes.findOne({
 			userId: doc.userId,
@@ -38,7 +50,15 @@ Likes.after.insert(function (likeId, doc) {
 
 Meteor.methods({
 	"likes.insert"(object) {
-		//		check(object.name, String);
+		check(object, {
+			userId: String,
+			projectId: Match.Maybe(String),
+			projectOwnerId: String,
+			comingFromUser: Boolean,
+			projectName: Match.Optional(String),
+			dislike: Match.Optional(Boolean),
+		});
+
 		if (!this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
