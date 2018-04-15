@@ -73,6 +73,7 @@ Meteor.methods({
 			Meteor.users.update({ _id: this.userId }, { $addToSet: { usersRatedBefore: userId } });
 	},
 	"users.rateProject"(projectId, grade) {
+		console.log("hola " + projectId + " rate: " +grade );
 		var projectsRatedBefore = Meteor.users.findOne({ _id: this.userId }).projectsRatedBefore;
 
 			var projectInfoBeforeRating = Projects.findOne({ _id: projectId }, { grade: 1, _id: 0, numberOfRates: 1 });

@@ -34,6 +34,14 @@ class ChatNavbar extends Component {
 		Meteor.call("chats.remove", this.props.chatId);
 	}
 
+	rateChat() {
+		if(this.props.isUserMode) {
+			Meteor.call("users.rateProject", this.props.chat.projectId, 1);
+		} else {
+			Meteor.call("users.rateUser", this.props.chat.userId, 4);
+		}
+	}
+
 	renderName() {
 		if(this.props.chat) {
 			return ( this.props.isUserMode ? this.props.chat.projectOwnerName : this.props.chat.userName );
@@ -52,9 +60,8 @@ class ChatNavbar extends Component {
 						Go Back
 					</a>
 					<div className="chat_title">{this.renderName()}</div>
-					<a className="btn_remove_chat ml-auto" onClick={this.removeChat.bind(this)}>
-						<i className="fa fa-trash"></i>
-					</a>
+					<button className="btn_rate_chat ml-auto" onClick={this.rateChat.bind(this)}>Rate</button>
+					<button className="btn_remove_chat" onClick={this.removeChat.bind(this)}>Delete</button>
 				</Row>
 			</Container>
 		);

@@ -27,6 +27,20 @@
 	cursor: pointer;
 }
 
+.btn_rate_chat {
+	font-size: 18px;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.btn_remove_chat, .btn_rate_chat {
+	background-color: #3E606F;
+	border: none;
+	border-radius: 3px;
+	color: #FCFFF5;
+	padding: 1px 15px;
+}
+
 .chat_title {
 	font-size: 18px;
 	font-weight: 600;
