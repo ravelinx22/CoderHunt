@@ -7,6 +7,7 @@ import ChatNavbar from "../components/navbars/ChatNavbar.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
 import { ChatMessages } from "../../api/chats/ChatMessages.js";
+import { Chats } from "../../api/chats/Chats.js";
 
 class ChatPage extends Component {
 	constructor(props) {
@@ -51,6 +52,9 @@ class ChatPage extends Component {
 			<div className="chats">
 				<ChatNavbar history={this.props.history} chatId={this.props.match.params.id} isUserMode={this.props.isUserMode} />
 				<div className="chat-content" ref="chats">
+					<Row className="justify-content-center">
+						<div className="chat_buble">There's a match with {this.props.chat && this.props.chat.projectName ? "the " + this.props.chat.projectName : "a"} project</div>
+					</Row>
 					<ul>
 						{this.renderMessages()}
 					</ul>
@@ -69,5 +73,6 @@ export default withTracker((props) => {
 	return {
 		userId: Meteor.userId(),
 		messages: ChatMessages.find({ chatId: props.match.params.id }).fetch(),
+		chat: Chats.findOne({_id: props.match.params.id}), 
 	};
 })(ChatPage);

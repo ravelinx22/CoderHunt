@@ -52,3 +52,11 @@
 ul{
 	padding-left: 0px;
 }
+
+.chat_buble {
+	background-color: #FCFFF5;
+	color: #3E606F;
+	border-radius: 15px;
+	padding: 5px 20px;
+	font-size: 10px;
+}
