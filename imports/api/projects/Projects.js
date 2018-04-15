@@ -59,7 +59,7 @@ Meteor.methods({
 			image_url: object.image_url,
 			createdAt: new Date(),
 			userId: this.userId,
-			username: Meteor.users.findOne(this.userId).services.github.username,
+			username: (Meteor.users.findOne(this.userId).username ? Meteor.users.findOne(this.userId).username : Meteor.users.findOne(this.userId).services.github.username)
 		});
 	},
 	"projects.remove"(projectId) {
@@ -68,7 +68,6 @@ Meteor.methods({
 		if (project.userId !== this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
-
 		Projects.remove(projectId);
 	}
 });

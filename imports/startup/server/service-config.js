@@ -19,6 +19,7 @@ if (Meteor.isServer) {
 	Accounts.onCreateUser((options, user) => {
 		if(options.isLoginWithPassword) {
 			user.name = options.name;
+			user.image_url = "https://www.thesourcepartnership.com/wp-content/uploads/2017/05/facebook-default-no-profile-pic-300x300.jpg";
 			return user;
 		}
 

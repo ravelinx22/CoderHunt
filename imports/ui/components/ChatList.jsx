@@ -6,6 +6,9 @@ import { chats_preview } from "../testdata.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
 import { Chats } from "../../api/chats/Chats.js";
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 
 class ChatList extends Component {
 	constructor(props) {
@@ -22,8 +25,8 @@ class ChatList extends Component {
 		const that = this;
 		Tracker.autorun(function () {
 			const currentTime = new Date();
-			Chats.find({createdAt: {$gt: currentTime}}).observe({
-				added: function(document) {
+			Chats.find(that.props.getOptions(currentTime)).observe({
+				added: function(doc) {
 					that.onMatch();
 				}
 			});
@@ -31,7 +34,12 @@ class ChatList extends Component {
 	}
 
 	onMatch() {
-		console.log("afasf22");
+		Alert.info('<h4>There\' a match</h4>', {
+			position: 'top',
+			effect: 'jelly',
+			timeout: 2000,
+			html: true,
+		});
 	}
 
 	render() {
@@ -46,7 +54,15 @@ class ChatList extends Component {
 export default withTracker((props) => {
 	Meteor.subscribe("chats") ;
 
+	function getOptions(currentTime) {
+		return {
+			$or: [{userId: Meteor.userId()},{projectOwnerId: Meteor.userId() }], 
+			createdAt: {$gt: currentTime}
+		}
+	}
+
 	return {
 		chats: (props.isUserMode ? Chats.find({userId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() :  Chats.find({projectOwnerId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() ),
+		getOptions: getOptions,
 	};
 })(ChatList);

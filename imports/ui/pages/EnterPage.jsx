@@ -6,6 +6,9 @@ import { withRouter } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 import EnterForm from "../components/EnterForm.jsx";
 
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 class EnterPage extends Component {
 	constructor(props) {
 		super(props);

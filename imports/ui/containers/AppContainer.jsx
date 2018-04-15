@@ -12,6 +12,9 @@ import CardDetailPage from "../../ui/pages/CardDetailPage.jsx";
 import NewProjectPage from "../../ui/pages/NewProjectPage.jsx";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Projects } from "../../api/projects/Projects.js";
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 
 export default class AppContainer extends Component {
 	constructor(props) {
@@ -69,26 +72,27 @@ export default class AppContainer extends Component {
 										return React.createElement(Home, { ...history, onChangeMode: this.onChangeMode.bind(this), isUserMode: this.state.isUserMode });
 									}} />
 
-									<Route path="/projects" render={(history) => {
-										return React.createElement(ProjectsPage, { ...history, isUserMode: this.state.isUserMode });
-									}} />
+								<Route path="/projects" render={(history) => {
+									return React.createElement(ProjectsPage, { ...history, isUserMode: this.state.isUserMode });
+								}} />
 
-									<Route path="/chat/:id" render={(history) => {
-										return React.createElement(ChatPage, { ...history, isUserMode: this.state.isUserMode });
-									}} />
-									<Route path="/user/:id" render={(history) => {
-										return React.createElement(CardDetailPage, { ...history, isUserMode: false, changeMode: this.changeMode.bind(this) })
-									}} />
-									<Route path="/project/new" component={NewProjectPage} />
-									<Route path="/project/:id" render={(history) => {
-										return React.createElement(CardDetailPage, { ...history, isUserMode: true, changeMode: this.changeMode.bind(this) })
-									}} />
-									<Route path="*" component={NotFoundPage} />
-								</Switch>
-							</main>
-						</Col>
-					</Row>
+							<Route path="/chat/:id" render={(history) => {
+								return React.createElement(ChatPage, { ...history, isUserMode: this.state.isUserMode });
+							}} />
+						<Route path="/user/:id" render={(history) => {
+							return React.createElement(CardDetailPage, { ...history, isUserMode: false, changeMode: this.changeMode.bind(this) })
+						}} />
+					<Route path="/project/new" component={NewProjectPage} />
+					<Route path="/project/:id" render={(history) => {
+						return React.createElement(CardDetailPage, { ...history, isUserMode: true, changeMode: this.changeMode.bind(this) })
+					}} />
+				<Route path="*" component={NotFoundPage} />
+			</Switch>
+		</main>
+	</Col>
+</Row>
 				}
+				<Alert stack={{limit: 3}} />
 			</Container>
 		);
 	}

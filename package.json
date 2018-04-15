@@ -19,6 +19,7 @@
     "react-popup-layer": "^0.2.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-s-alert": "^1.4.1",
     "react-spinners": "^0.2.6",
     "react-tag-input": "^4.9.1",
     "reactstrap": "^5.0.0-beta.3"
