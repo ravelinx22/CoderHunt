@@ -4,7 +4,7 @@ import { check } from "meteor/check";
 
 export const Chats = new Mongo.Collection("chats");
 
-if(Meteor.isServer) {
+if (Meteor.isServer) {
 	Meteor.publish("chats", () => {
 		return Chats.find({});
 	});
@@ -12,8 +12,16 @@ if(Meteor.isServer) {
 
 Meteor.methods({
 	"chats.insert"(object) {
-		//		check(object.name, String);
-		if(!this.userId) {
+		check(object, {
+			userId: String,
+			userName: String,
+			projectOwnerId: String,
+			projectOwnerName: String,
+			projectId: String,
+			createdAt: Date,
+			projectName: String,
+		});
+		if (!this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
 
@@ -31,14 +39,15 @@ Meteor.methods({
 		})
 	},
 	"chats.message"(chatId) {
-		if(!this.userId) {
+		check(chatId, String);
+		if (!this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
 
-		Chats.update({_id: chatId}, {$set: {updatedAt: new Date()}});
+		Chats.update({ _id: chatId }, { $set: { updatedAt: new Date() } });
 	},
 	"chats.remove"(chatId) {
-		// check
+		check(chatId, String);
 		Chats.remove(chatId);
 		Meteor.call("chatmessages.remove", chatId);
 	},

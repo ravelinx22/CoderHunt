@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { Mongo } from "meteor/mongo";
 import { check } from "meteor/check";
+import { Match } from 'meteor/check';
 
 export const Matches = new Mongo.Collection("matches");
 
@@ -16,7 +17,7 @@ Matches.after.insert(function(matchId, doc) {
 
 Meteor.methods({
 	"matches.insert"(object) {
-		//		check(object.name, String);
+		check(object, Match.Optional());
 		if(!this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}

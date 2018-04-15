@@ -47,7 +47,12 @@ if (Meteor.isServer) {
 
 Meteor.methods({
 	"projects.insert"(object) {
-		//		check(object.name, String);
+		check(object, {
+			name: String,
+			description: String,
+			tags: Array,
+			image_url: String,
+		});
 		if (!this.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
@@ -63,7 +68,7 @@ Meteor.methods({
 		});
 	},
 	"projects.remove"(projectId) {
-		// check
+		check(projectId, String);
 		const project = Projects.findOne(projectId);
 		if (project.userId !== this.userId) {
 			throw new Meteor.Error("not-authorized");
