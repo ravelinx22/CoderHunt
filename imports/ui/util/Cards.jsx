@@ -88,13 +88,8 @@ class Cards extends Component {
 
 			Meteor.call("likes.insert", body);
 
-			if (!this.props.isUserMode){
+			if (!this.props.isUserMode)
 				Meteor.call("users.updateLikeStats", body.userId);
-				Meteor.call("users.rateUser", body.userId, 50);
-			}
-			else{
-				Meteor.call("users.rateProject", body.projectId, 50);
-			}
 		}
 	}
 
