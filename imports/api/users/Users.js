@@ -7,7 +7,7 @@ import { Likes } from "../likes/Likes";
 export const usersForProject = function () {
 	var projects = Projects.find({ userId: Meteor.userId() });
 	var projectsLanguages = [];
-	
+
 	projects.map((project) => {
 		project.tags.map((tag) => {
 			if (!projectsLanguages.includes(tag))
@@ -42,4 +42,24 @@ if (Meteor.isServer) {
 		return usersForProject();
 	});
 }
+
+Meteor.methods({
+	"users.updateLikeStats"() {
+		Likes.find({ projectOwnerId: this.userId, comingFromUser: false, dislike: false }, { fields: { userId: 1, _id: 0 } })
+			.forEach(element => {
+				Meteor.users.update({ _id: element.userId }, { $inc: { numberOfLikes: 1 } });
+			});
+	},
+	"users.updateProjectStats"(object) {
+		Meteor.users.update({ _id: object.userId }, { $push: { userProjects: object.projectName } });
+
+		Projects.findOne({ _id: object.projectId }, { fields: { _id: 0, tags: 1 } }).tags
+			.forEach(element => {
+				var query ={};
+				query["projectsByLanguage." +  element] = 1;
+				Meteor.users.update({ _id: object.userId },{ $inc: query} );
+			});
+
+	},
+});
 

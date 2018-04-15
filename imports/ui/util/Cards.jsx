@@ -88,6 +88,7 @@ class Cards extends Component {
 
 			body["comingFromUser"] = this.props.isUserMode;
 			Meteor.call("likes.insert", body);
+			Meteor.call("users.updateLikeStats");
 		}
 	}
 
