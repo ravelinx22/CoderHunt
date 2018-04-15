@@ -26,7 +26,7 @@ class Cards extends Component {
 
 	renderCards() {
 		return this.props.data.map((card) => {
-			return <Card key={card._id}  onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)} />
+			return <Card key={card._id} onSwipe={this.setupCards} card={card} onSwipeLeft={this.onSwipeLeft.bind(this)} onSwipeRight={this.onSwipeRight.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)} />
 		});
 	}
 
@@ -45,9 +45,9 @@ class Cards extends Component {
 	}
 
 	onSwipeLeft(card) {
-		if(this.props.projectViewMode) {
+		if (this.props.projectViewMode) {
 			this.shift();
-		} else{
+		} else {
 
 			var body = {};
 			if (this.props.isUserMode) {
@@ -56,7 +56,7 @@ class Cards extends Component {
 				body["projectName"] = card.name;
 				body["projectOwnerId"] = card.userId
 			} else {
-				body["userId"] = card._id; 
+				body["userId"] = card._id;
 				body["projectOwnerId"] = this.props.userId;
 			}
 			body["dislike"] = true;
@@ -69,7 +69,7 @@ class Cards extends Component {
 	}
 
 	onSwipeRight(card) {
-		if(this.props.projectViewMode) {
+		if (this.props.projectViewMode) {
 			this.shift();
 		} else {
 			var body = {};
@@ -80,20 +80,21 @@ class Cards extends Component {
 				body["projectName"] = card.name;
 				body["projectOwnerId"] = card.userId
 			} else {
-				body["userId"] = card._id; 
-				body["projectOwnerId"] = this.props.userId; 
+				body["userId"] = card._id;
+				body["projectOwnerId"] = this.props.userId;
 			}
 			body["dislike"] = false;
-
-
 			body["comingFromUser"] = this.props.isUserMode;
+
 			Meteor.call("likes.insert", body);
-			Meteor.call("users.updateLikeStats");
+
+			if (!this.props.isUserMode)
+				Meteor.call("users.updateLikeStats", body.userId);
 		}
 	}
 
 	onDoubleTap(card) {
-		if(this.props.isUserMode) {
+		if (this.props.isUserMode) {
 			this.props.history.push("/project/" + card._id);
 		} else {
 			this.props.history.push("/user/" + card._id);
@@ -108,9 +109,9 @@ class Cards extends Component {
 		card.classList.add('removed');
 		card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
 
-		if(this.props.projectViewMode) {
+		if (this.props.projectViewMode) {
 			this.shift();
-		} else  {
+		} else {
 			const index = this.indexOfLastLike();
 			this.onSwipeRight(this.props.data[index]);
 			this.setupCards();
@@ -122,8 +123,8 @@ class Cards extends Component {
 	indexOfLastLike() {
 		const cards = document.querySelectorAll(".tinder--card:not(.looking--card)");
 		var i = 0;
-		for(i = 0; i < cards.length; i++) {
-			if(!cards[i].className.includes("removed")) {
+		for (i = 0; i < cards.length; i++) {
+			if (!cards[i].className.includes("removed")) {
 				break;
 			}
 			console.log("iterator " + i);
@@ -131,7 +132,7 @@ class Cards extends Component {
 
 		console.log("Buenas" + i);
 
-		return (cards.length > 0 ? i-1 : -1);
+		return (cards.length > 0 ? i - 1 : -1);
 	}
 
 	unlikeCard(event) {
@@ -142,7 +143,7 @@ class Cards extends Component {
 		card.classList.add('removed');
 		card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
 
-		if(this.props.projectViewMode) {
+		if (this.props.projectViewMode) {
 			this.shift();
 		} else {
 			this.setupCards();
@@ -156,9 +157,9 @@ class Cards extends Component {
 		var allCards = document.querySelectorAll('.tinder--card');
 
 		var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
-		if(newCards.length <= 0) {
+		if (newCards.length <= 0) {
 			var removedClass = document.querySelectorAll(".removed");
-			removedClass.forEach((card,index) => {
+			removedClass.forEach((card, index) => {
 				card.classList.remove("removed");
 			});
 		}
@@ -176,7 +177,7 @@ class Cards extends Component {
 			<div className="tinder">
 				<div className="tinder--cards">
 					{this.renderCards()}
-					{ this.props.projectViewMode ? (this.props.data && this.props.data.length <= 0 ? <LookingCard emptyProjects={true}/> : null) : <LookingCard emptyProjects={false} /> }
+					{this.props.projectViewMode ? (this.props.data && this.props.data.length <= 0 ? <LookingCard emptyProjects={true} /> : null) : <LookingCard emptyProjects={false} />}
 				</div>
 				<div className="card-buttons">
 					<button className="unlike" onClick={this.unlikeCard.bind(this)} aria-label="Unlike card button">
@@ -199,6 +200,6 @@ export default withTracker((props) => {
 	return {
 		isUserMode: props.isUserMode,
 		userId: Meteor.userId(),
-		data: (props.projectViewMode ? Projects.find({userId: Meteor.userId()}).fetch() : (props.isUserMode ? projectsForUser().fetch() : usersForProject().fetch()))
+		data: (props.projectViewMode ? Projects.find({ userId: Meteor.userId() }).fetch() : (props.isUserMode ? projectsForUser().fetch() : usersForProject().fetch()))
 	};
 })(Cards)
