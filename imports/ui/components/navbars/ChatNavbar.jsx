@@ -5,12 +5,15 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { withTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
 import { Chats } from "../../../api/chats/Chats.js";
+import Modal from 'react-responsive-modal';
+import Rating from "react-rating";
 
 class ChatNavbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
+			open: false,
+			rating: 3,
 		}
 	}
 
@@ -36,9 +39,11 @@ class ChatNavbar extends Component {
 
 	rateChat() {
 		if(this.props.isUserMode) {
-			Meteor.call("users.rateProject", this.props.chat.projectId, 1);
+			Meteor.call("users.rateProject", this.props.chat.projectId, this.state.rating);
+			this.onCloseModal();
 		} else {
-			Meteor.call("users.rateUser", this.props.chat.userId, 4);
+			Meteor.call("users.rateUser", this.props.chat.userId, this.state.rating);
+			this.onCloseModal();
 		}
 	}
 
@@ -50,6 +55,19 @@ class ChatNavbar extends Component {
 		}
 	}
 
+	onOpenModal() {
+		this.setState({ open: true  });	  
+	};
+
+	onCloseModal() {
+		this.setState({ open: false  }); 
+	};
+
+	onChangeRating(value) {
+		this.setState({
+			rating: value,
+		})
+	}
 
 	render() {  
 		return(
@@ -60,7 +78,17 @@ class ChatNavbar extends Component {
 						Go Back
 					</a>
 					<div className="chat_title">{this.renderName()}</div>
-					<button className="btn_rate_chat ml-auto" onClick={this.rateChat.bind(this)}>Rate</button>
+					<Modal open={this.state.open} onClose={this.onCloseModal.bind(this)} little>
+						<div className="rating_title">Rate {this.props.isUserMode ? "project" : this.renderName()}</div>
+						<Row className="rating_stars justify-content-center">
+							<Rating emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" initialRating={this.state.rating} onChange={this.onChangeRating.bind(this)} />
+						</Row>
+						<Row className="justify-content-center">
+
+						<button className="modal_rate" onClick={this.rateChat.bind(this)}>Rate</button>
+						</Row>
+					</Modal>
+					<button className="btn_rate_chat ml-auto" onClick={this.onOpenModal.bind(this)}>Rate</button>
 					<button className="btn_remove_chat" onClick={this.removeChat.bind(this)}>Delete</button>
 				</Row>
 			</Container>
