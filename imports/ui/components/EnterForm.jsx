@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import "../css/EnterForm.css";
 import { Accounts  } from 'meteor/accounts-base'
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 
 export default class EnterForm extends Component {
 	constructor(props) {
@@ -33,8 +36,15 @@ export default class EnterForm extends Component {
 		}, (error) => {
 			if(error) {
 				console.log(error);
+				Alert.error(error.reason, {
+					position: 'top-right',
+					effect: 'jelly',
+					timeout: 2000,
+				});
+
+			} else {
+				this.props.onLogin();
 			}
-			this.props.onLogin();
 		});
 	}
 
@@ -43,22 +53,35 @@ export default class EnterForm extends Component {
 		Meteor.loginWithPassword(this.refs.log_username.value, this.refs.log_password.value , (error) => {
 			if(error) {
 				console.log(error);
+				Alert.error(error.reason, {
+					position: 'top-right',
+					effect: 'jelly',
+					timeout: 2000,
+				});
+
+			} else {
+				this.props.onLogin();
 			}
-			this.props.onLogin();
 		});
 	} 
 
 	enterWithGithub(e) {
 		e.preventDefault();
-		console.log("buenas");
 		Meteor.loginWithGithub({
 			requestPermissions: ['user', 'repo']
 
 		}, (error) => {
-			if (error) {
+			if(error) {
 				console.log(error);
+				Alert.error(error.reason, {
+					position: 'top-right',
+					effect: 'jelly',
+					timeout: 2000,
+				});
+
+			} else {
+				this.props.onLogin();
 			}
-			this.props.onLogin();
 		});
 	}
 

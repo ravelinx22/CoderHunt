@@ -7,6 +7,9 @@ import { Meteor } from "meteor/meteor";
 import Dropzone from 'react-dropzone'
 import { Line } from 'rc-progress';
 import { Tracker } from 'meteor/tracker';
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 
 export default class NewProjectPage extends Component {
 	constructor(props) {
@@ -48,8 +51,23 @@ export default class NewProjectPage extends Component {
 		};
 
 		const that = this;
-		if(this.state.files.length <= 0)
+		if(this.state.files.length <= 0) {
+			Alert.error("You need to specify a valid file", {
+				position: 'top-right',
+				effect: 'jelly',
+				timeout: 2000,
+			});
 			return null;
+		}
+
+		if(body.name.trim() === "" || body.description.trim() === "") {
+			Alert.error("You need to fill all fields", {
+				position: 'top-right',
+				effect: 'jelly',
+				timeout: 2000,
+			});
+			return null;
+		}
 
 		this.setState({disabled: true});
 
