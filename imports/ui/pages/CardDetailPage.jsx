@@ -27,22 +27,77 @@ class CardDetailPage extends Component {
 	}
 
 	componentDidUpdate() {
-		if(!this.props.dat) {
+		if (!this.props.dat) {
 			this.props.history.push("/projects");
 		}
 	}
 
 	renderFlags() {
 		return this.props.dat.tags.map((tag) => {
-			return(<Col key={tag} md={2}>
+			return (<Col key={tag} md={2}>
 				<CardFlag key={tag} name={tag} />
 			</Col>);
 		});
 	}
 
+	renderStats() {
+		if (this.props.isUserMode) {
+			var numberOfRates = this.props.dat.numberOfRates ? this.props.dat.numberOfRates : "-";
+			var grade = this.props.dat.grade ? this.props.dat.grade : "-";
+			return (
+				<div className="profile-content">
+					<ul>
+						<li>
+							<div className="digits">{numberOfRates}</div>
+							Times rated
+							</li>
+						<li>
+							<div className="digits">{grade}</div>
+							Rating
+							</li>
+					</ul>
+					<div className="clear"></div>
+				</div>)
+		}
+		else {
+			var numberOfRates = this.props.dat.numberOfRates ? this.props.dat.numberOfRates : "-";
+			var grade = this.props.dat.grade ? this.props.dat.grade : "-";
+			var numberOfLikes = this.props.dat.numberOfLikes ? this.props.dat.numberOfLikes : "-";
+			var projectsByLanguage = this.props.dat.projectsByLanguage;
+			delete projectsByLanguage["Programming"];
+
+			var languageWithMoreProjects = _.max(Object.keys(projectsByLanguage), function (o) { return projectsByLanguage[o] });
+
+			languageWithMoreProjects = languageWithMoreProjects == 0 ? "-" : languageWithMoreProjects;
+
+			return (
+				<div className="profile-content">
+					<ul>
+						<li>
+							<div className="digits">{numberOfRates}</div>
+							Times rated
+						</li>
+						<li>
+							<div className="digits">{grade}</div>
+							Rating
+						</li>
+						<li>
+							<div className="digits">{numberOfLikes}</div>
+							Likes
+						</li>
+						<li>
+							<div className="digits">{languageWithMoreProjects}</div>
+							Most proficient in
+						</li>
+					</ul>
+					<div className="clear"></div>
+				</div>)
+		}
+	}
+
 	renderRepos() {
 		return this.props.dat.repos.map((repo) => {
-			return(	
+			return (
 				<Col key={repo.repoId} md={6}>
 					<RepoItem key={repo.repoId} url={repo.url} name={repo.name} description={repo.description} language={repo.language} />
 				</Col>
@@ -51,37 +106,40 @@ class CardDetailPage extends Component {
 	}
 
 	render() {
-		if(!this.props.dat) {
+		if (!this.props.dat) {
 			return null;
 		}
-		return(
+		return (
 			<div className="data_detail">
 				{this.props.dat.userId !== Meteor.userId() ?
-						<CardNavbar history={this.props.history} card={this.props.dat} isUserMode={this.props.isUserMode} /> :
-						<ProjectNavbar history={this.props.history} card={this.props.dat} />
+					<CardNavbar history={this.props.history} card={this.props.dat} isUserMode={this.props.isUserMode} /> :
+					<ProjectNavbar history={this.props.history} card={this.props.dat} />
 				}
 				<div className="data_content">
-					<img src={this.props.dat.image_url} alt="data_pic" className="detail_img"/>
+					<img src={this.props.dat.image_url} alt="data_pic" className="detail_img" />
+
+					{this.renderStats()}
+
 					<div className="info_container">
 						<div className="detail_name">{this.props.dat.name}</div>
 						<div className="detail_username">{!this.props.dat.username && this.props.dat.services ? this.props.dat.services.github.username : this.props.dat.username}</div>
 					</div>
-					{ this.props.dat.description ? 
-					<div className="info_container">
-						<div className="info_title">Bio</div>
-						<div className="info_description">{this.props.dat.description}</div>
-					</div> : null }
+					{this.props.dat.description ?
+						<div className="info_container">
+							<div className="info_title">Bio</div>
+							<div className="info_description">{this.props.dat.description}</div>
+						</div> : null}
 					<div className="info_container">
 						<div className="info_title">Tags</div>
 						<Row>
 							{this.renderFlags()}
 						</Row>
 					</div>
-					{ this.props.dat.repos ?
-					<div className="info_container">
-						<div className="info_title">Repos</div>
-						<Row>{this.renderRepos()}</Row>
-					</div> : null }
+					{this.props.dat.repos ?
+						<div className="info_container">
+							<div className="info_title">Repos</div>
+							<Row>{this.renderRepos()}</Row>
+						</div> : null}
 				</div>
 			</div>
 		);
@@ -91,10 +149,10 @@ class CardDetailPage extends Component {
 export default withTracker((props) => {
 	Meteor.subscribe("users");
 	Meteor.subscribe("projects");
-	
+
 	const cardId = props.match.params.id;
 
 	return {
-		dat: (props.isUserMode ? Projects.findOne({_id: cardId}) : Meteor.users.findOne({_id: cardId}))
+		dat: (props.isUserMode ? Projects.findOne({ _id: cardId }) : Meteor.users.findOne({ _id: cardId }))
 	};
 })(CardDetailPage);
