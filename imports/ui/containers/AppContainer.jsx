@@ -23,7 +23,7 @@ class AppContainer extends Component {
 		super(props);
 		this.state = {
 			logged: (Meteor.userId() !== null),
-			isUserMode: true,
+			isUserMode: false,
 			openUserMenu: false,
 		};
 	}
@@ -81,6 +81,12 @@ class AppContainer extends Component {
 		}
 	}
 
+	renderChatList() {
+		const heightClass = (this.props.user && this.props.user.repos ? "" : "chat_list_password_mode ");
+
+		return <ChatList className={this.state.openUserMenu ? "chat_list_open " + heightClass : "" + heightClass} isUserMode={this.state.isUserMode} />
+	}
+
 	render() {
 		return (
 			<Container fluid={true}>
@@ -91,8 +97,8 @@ class AppContainer extends Component {
 					:
 					<Row className="content-row">
 						<Col className="left_content" md={4}>
-							<UserMenu onLogout={this.onLogout.bind(this)} onToggle={this.onToggleUserMenu.bind(this)} />
-							<ChatList className={this.state.openUserMenu ? "chat_list_open" : ""} isUserMode={this.state.isUserMode} />
+							<UserMenu onLogout={this.onLogout.bind(this)} onToggle={this.onToggleUserMenu.bind(this)}/>
+							{this.renderChatList()}
 							{this.renderChangeModeBtn()}	
 						</Col>
 						<Col className="right_content" md={8}>

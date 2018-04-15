@@ -15,3 +15,11 @@ li {
 .chat_list_open {
 	height: calc(100% - 300px);
 }
+
+.chat_list_password_mode {
+	height: calc(100% - 68px);
+}
+
+.chat_list_open.chat_list_password_mode {
+	height: calc(100% - 240px);
+}
