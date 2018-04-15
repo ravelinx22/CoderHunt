@@ -18,6 +18,22 @@ class ChatList extends Component {
 		});
 	}
 
+	componentDidMount() {
+		const that = this;
+		Tracker.autorun(function () {
+			const currentTime = new Date();
+			Chats.find({createdAt: {$gt: currentTime}}).observe({
+				added: function(document) {
+					that.onMatch();
+				}
+			});
+		})
+	}
+
+	onMatch() {
+		console.log("afasf22");
+	}
+
 	render() {
 		return(
 			<ul className="chat_list"> 
@@ -28,8 +44,9 @@ class ChatList extends Component {
 }
 
 export default withTracker((props) => {
-	Meteor.subscribe("chats");
+	Meteor.subscribe("chats") ;
+
 	return {
-		chats: (props.isUserMode ? Chats.find({userId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() :  Chats.find({projectOwnerId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() ),	
+		chats: (props.isUserMode ? Chats.find({userId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() :  Chats.find({projectOwnerId: Meteor.userId()}, {sort: {updatedAt: -1}}).fetch() ),
 	};
 })(ChatList);
