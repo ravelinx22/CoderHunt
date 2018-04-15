@@ -27,6 +27,7 @@ class EnterPage extends Component {
 					<Row className="image_row justify-content-center d-flex align-items-center">
 						<div className="landing_info">
 							<div className="enter_image_title">Start Swiping</div>
+							<div className="enter_image_subtitle">Find programmers for your projects. Find projects for your portafolio.</div>
 							<img src="/images/home.png" alt="enter_page_photo"/>
 					</div></Row>
 				</Col>

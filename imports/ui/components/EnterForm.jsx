@@ -105,6 +105,7 @@ export default class EnterForm extends Component {
 					<input type="email" placeholder="Email" ref="sign_email" className="enter_input"/>
 					<input type="password" placeholder="Password" ref="sign_password" className="enter_input"/>
 					<button className="enter_submit" onClick={this.signUpWithPassword.bind(this)}>Sign Up</button>
+					<div className="privacy_terms_title">By clicking I Accept, you confirm that we can monitor user activity for analytic purposes.</div>
 				</form>
 			);
 		} else {
@@ -125,6 +126,7 @@ export default class EnterForm extends Component {
 					<input type="text" placeholder="Username" ref="log_username" className="enter_input"/>
 					<input type="password" placeholder="Password" ref="log_password" className="enter_input"/>
 					<button className="enter_submit" onClick={this.enterWithPassword.bind(this)}>Log In</button>
+					<div className="privacy_terms_title">By clicking I Accept, you confirm that we can monitor user activity for analytic purposes.</div>
 				</form>
 			);
 		}

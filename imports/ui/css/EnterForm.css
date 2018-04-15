@@ -98,3 +98,8 @@ button {
 	font-size: 40px;
 	font-family: 'Lobster', cursive;
 }
+
+.privacy_terms_title {
+	text-align: center;
+	margin-top: 5px;
+}
