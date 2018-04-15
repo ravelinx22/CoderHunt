@@ -94,6 +94,11 @@ class Cards extends Component {
 	}
 
 	onDoubleTap(card) {
+		if(this.props.projectViewMode) {
+			this.props.history.push("/project/" + card._id);
+			return;
+		}
+
 		if (this.props.isUserMode) {
 			this.props.history.push("/project/" + card._id);
 		} else {

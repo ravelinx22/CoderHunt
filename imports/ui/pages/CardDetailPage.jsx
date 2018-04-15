@@ -50,11 +50,11 @@ class CardDetailPage extends Component {
 						<li>
 							<div className="digits">{numberOfRates}</div>
 							Times rated
-							</li>
+						</li>
 						<li>
 							<div className="digits">{grade}</div>
 							Rating
-							</li>
+						</li>
 					</ul>
 					<div className="clear"></div>
 				</div>)
@@ -96,13 +96,16 @@ class CardDetailPage extends Component {
 	}
 
 	renderRepos() {
-		return this.props.dat.repos.map((repo) => {
-			return (
+		var repos = [];
+		for(var i = 0; i < this.props.dat.repos.length && i < 4; i++) {
+			const repo = this.props.dat.repos[i];
+			repos.push(
 				<Col key={repo.repoId} md={6}>
 					<RepoItem key={repo.repoId} url={repo.url} name={repo.name} description={repo.description} language={repo.language} />
 				</Col>
 			);
-		});
+		}
+		return repos;
 	}
 
 	render() {
@@ -112,8 +115,8 @@ class CardDetailPage extends Component {
 		return (
 			<div className="data_detail">
 				{this.props.dat.userId !== Meteor.userId() ?
-					<CardNavbar history={this.props.history} card={this.props.dat} isUserMode={this.props.isUserMode} /> :
-					<ProjectNavbar history={this.props.history} card={this.props.dat} />
+						<CardNavbar history={this.props.history} card={this.props.dat} isUserMode={this.props.isUserMode} /> :
+						<ProjectNavbar history={this.props.history} card={this.props.dat} />
 				}
 				<div className="data_content">
 					<img src={this.props.dat.image_url} alt="data_pic" className="detail_img" />
@@ -125,23 +128,23 @@ class CardDetailPage extends Component {
 						<div className="detail_username">{!this.props.dat.username && this.props.dat.services ? this.props.dat.services.github.username : this.props.dat.username}</div>
 					</div>
 					{this.props.dat.description ?
-						<div className="info_container">
-							<div className="info_title">Bio</div>
-							<div className="info_description">{this.props.dat.description}</div>
-						</div> : null}
-					<div className="info_container">
-						<div className="info_title">Tags</div>
-						<Row>
-							{this.renderFlags()}
-						</Row>
-					</div>
-					{this.props.dat.repos ?
-						<div className="info_container">
-							<div className="info_title">Repos</div>
-							<Row>{this.renderRepos()}</Row>
-						</div> : null}
-				</div>
-			</div>
+							<div className="info_container">
+								<div className="info_title">Bio</div>
+								<div className="info_description">{this.props.dat.description}</div>
+							</div> : null}
+							<div className="info_container">
+								<div className="info_title">Tags</div>
+								<Row>
+									{this.renderFlags()}
+								</Row>
+							</div>
+							{this.props.dat.repos ?
+									<div className="info_container">
+										<div className="info_title">Repos</div>
+										<Row>{this.renderRepos()}</Row>
+									</div> : null}
+								</div>
+							</div>
 		);
 	}
 }

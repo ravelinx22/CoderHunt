@@ -23,3 +23,10 @@ li {
 .chat_list_open.chat_list_password_mode {
 	height: calc(100% - 240px);
 }
+
+.empty_chats_title {
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	color: lightgrey;
+}

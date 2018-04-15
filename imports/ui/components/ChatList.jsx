@@ -15,10 +15,14 @@ class ChatList extends Component {
 		super(props);
 	}
 
-	renderChats() {		
-		return this.props.chats.map((chat) => {
-			return <ChatItem key={chat._id} chat={chat} isUserMode={this.props.isUserMode} />;
-		});
+	renderChats() {
+		if(this.props.chats && this.props.chats.length > 0) {
+			return this.props.chats.map((chat) => {
+				return <ChatItem key={chat._id} chat={chat} isUserMode={this.props.isUserMode} />;
+			});
+		} else {
+			return <div className="empty_chats_title">No chats or messages found</div>
+		}
 	}
 
 	componentDidMount() {
