@@ -65,15 +65,17 @@ Meteor.methods({
 			var userInfoBeforeRating = Meteor.users.findOne({ _id: userId }, { grade: 1, _id: 0, numberOfRates: 1 });
 			var newRating;
 
-			var ratedBefore = usersRatedBefore && !usersRatedBefore.includes("userId") || !usersRatedBefore;
+			var ratedBefore = usersRatedBefore && usersRatedBefore.includes("userId");
 
-			if (userInfoBeforeRating.grade && userInfoBeforeRating.numberOfRates && ratedBefore)
-				newRating = (userInfoBeforeRating.grade * userInfoBeforeRating.numberOfRates + grade) / (userInfoBeforeRating.numberOfRates + 1);
-			else
-				newRating = grade;
+			if (!ratedBefore) {
+				if (userInfoBeforeRating.grade && userInfoBeforeRating.numberOfRates)
+					newRating = (userInfoBeforeRating.grade * userInfoBeforeRating.numberOfRates + grade) / (userInfoBeforeRating.numberOfRates + 1);
+				else
+					newRating = grade;
 
-			Meteor.users.update({ _id: userId }, { $set: { numberOfRates: (userInfoBeforeRating.numberOfRates ? userInfoBeforeRating.numberOfRates + 1 : 1), grade: newRating } });
-			Meteor.users.update({ _id: this.userId }, { $addToSet: { usersRatedBefore: userId } });
+				Meteor.users.update({ _id: userId }, { $set: { numberOfRates: (userInfoBeforeRating.numberOfRates ? userInfoBeforeRating.numberOfRates + 1 : 1), grade: newRating } });
+				Meteor.users.update({ _id: this.userId }, { $addToSet: { usersRatedBefore: userId } });
+			}
 		}
 	},
 	"users.rateProject"(projectId, grade) {
@@ -83,16 +85,17 @@ Meteor.methods({
 			var projectInfoBeforeRating = Projects.findOne({ _id: projectId }, { grade: 1, _id: 0, numberOfRates: 1 });
 			var newRating;
 
+			var ratedBefore = projectsRatedBefore && projectsRatedBefore.includes(projectId);
 
-			var ratedBefore = projectsRatedBefore && !projectsRatedBefore.includes(projectId) || !projectsRatedBefore;
+			if (!ratedBefore) {
+				if (projectInfoBeforeRating.grade && projectInfoBeforeRating.numberOfRates)
+					newRating = (projectInfoBeforeRating.grade * projectInfoBeforeRating.numberOfRates + grade) / (projectInfoBeforeRating.numberOfRates + 1);
+				else
+					newRating = grade;
 
-			if (projectInfoBeforeRating.grade && projectInfoBeforeRating.numberOfRates && ratedBefore)
-				newRating = (projectInfoBeforeRating.grade * projectInfoBeforeRating.numberOfRates + grade) / (projectInfoBeforeRating.numberOfRates + 1);
-			else
-				newRating = grade;
-
-			Projects.update({ _id: projectId }, { $set: { numberOfRates: (projectInfoBeforeRating.numberOfRates ? projectInfoBeforeRating.numberOfRates + 1 : 1), grade: newRating } });
-			Meteor.users.update({ _id: this.userId }, { $addToSet: { projectsRatedBefore: projectId } });
+				Projects.update({ _id: projectId }, { $set: { numberOfRates: (projectInfoBeforeRating.numberOfRates ? projectInfoBeforeRating.numberOfRates + 1 : 1), grade: newRating } });
+				Meteor.users.update({ _id: this.userId }, { $addToSet: { projectsRatedBefore: projectId } });
+			}
 		}
 	}
 });
