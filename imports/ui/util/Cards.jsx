@@ -146,6 +146,8 @@ class Cards extends Component {
 		if (this.props.projectViewMode) {
 			this.shift();
 		} else {
+			const index = this.indexOfLastLike();
+			this.onSwipeLeft(this.props.data[index]);
 			this.setupCards();
 		}
 
