@@ -7,6 +7,9 @@ import { Meteor } from "meteor/meteor";
 import { Chats } from "../../../api/chats/Chats.js";
 import Modal from 'react-responsive-modal';
 import Rating from "react-rating";
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 
 class ChatNavbar extends Component {
 	constructor(props) {
@@ -62,7 +65,17 @@ class ChatNavbar extends Component {
 	}
 
 	removeChat() {
-		Meteor.call("chats.remove", this.props.chatId);
+		if(!this.state.rated) {
+		Alert.error('You can\'t delete chat without rating first', {
+			position: 'top-right',
+			effect: 'jelly',
+			timeout: 2000,
+		});
+
+		} else {
+			Meteor.call("chats.remove", this.props.chatId);
+			this.props.history.push("/");
+		}
 	}
 
 	rateChat() {	
