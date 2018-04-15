@@ -20,12 +20,18 @@ export default class Card extends Component {
 		if(!this.props.card.tags)
 			return null;
 
-		return this.props.card.tags.map((flag) => {
-			return(
+		var cards = [];
+
+		for(var i = 0; i < this.props.card.tags.length && i < 3; i++) {
+			const flag = this.props.card.tags[i];
+			cards.push(
 				<Col key={flag} md={3}>
 					<CardFlag key={flag} name={flag} />
-				</Col>);
-		});
+				</Col>
+			);
+		}
+
+		return cards;
 	}
 
 	onPan(event) {
@@ -77,20 +83,28 @@ export default class Card extends Component {
 		this.props.onDoubleTap(this.props.card);
 	}
 
+	renderDescription() {
+		if(this.props.card.description && this.props.card.description.length > 77) {
+			return this.props.card.description.substring(1,77) + "...";
+		} 
+
+		return this.props.card.description;
+	}
+
 	render() {
 		return(
 			<Hammer onPan={this.onPan.bind(this)} onPanEnd={this.onPanEnd.bind(this)} onDoubleTap={this.onDoubleTap.bind(this)}> 
-				<div className={this.state.classList.join(" ")}>
-					<img src={this.props.card.image_url} alt={this.props.card.name + " profile image"} />
-					<Grid className="card_info">
-						<div className="card_name">{this.props.card.name}</div>
-						<div className="card_username">{!this.props.card.username && this.props.card.services ? this.props.card.services.github.username : this.props.card.username}</div>
-						<div className="card_description">{this.props.card.description}</div>
-						<Row>
-							{this.renderFlags()}
-						</Row>
-					</Grid>
-				</div>
+			<div className={this.state.classList.join(" ")}>
+				<img src={this.props.card.image_url} alt={this.props.card.name + " profile image"} />
+				<Grid className="card_info">
+					<div className="card_name">{this.props.card.name}</div>
+					<div className="card_username">{!this.props.card.username && this.props.card.services ? this.props.card.services.github.username : this.props.card.username}</div>
+					<div className="card_description">{this.renderDescription()}</div>
+					<Row>
+						{this.renderFlags()}
+					</Row>
+				</Grid>
+			</div>
 			</Hammer>
 		);
 	}
