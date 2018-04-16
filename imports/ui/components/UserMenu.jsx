@@ -46,6 +46,11 @@ class UserMenu extends Component {
 	render() {
 		return(
 			<div className="user-menu vertical" onClick={this.toggle.bind(this)}>
+				{
+					// Sin pasar el mouse por encima, no parece un elemento clickeable.
+					// Se debería ofrecer una pista visual más clara que indique que
+					// se trata de un dropdown.
+				}
 				<a className="bti-secondary unselectable">{this.renderName()}</a>
 				{ this.state.open ?
 						<div className="starting_option">
