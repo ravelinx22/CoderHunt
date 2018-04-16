@@ -5,6 +5,8 @@ import { Accounts  } from 'meteor/accounts-base'
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
+import { confirmAlert  } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css' 
 
 export default class EnterForm extends Component {
 	constructor(props) {
@@ -27,24 +29,40 @@ export default class EnterForm extends Component {
 
 	signUpWithPassword(e) {
 		e.preventDefault();
-		Accounts.createUser({
-			username: this.refs.sign_username.value,
-			name: this.refs.sign_username.value,
-			email: this.refs.sign_email.value,
-			password: this.refs.sign_password.value,
-			isLoginWithPassword: true
-		}, (error) => {
-			if(error) {
-				console.log(error);
-				Alert.error(error.reason, {
-					position: 'top-right',
-					effect: 'jelly',
-					timeout: 2000,
-				});
+		confirmAlert({
+			title: 'Confirm Log In',
+			message: "If you sign up with password you won\' have access to the list of projects available",
+			buttons: [
+				{
+					label: 'Accept',
+					onClick: () => {
+						Accounts.createUser({
+							username: this.refs.sign_username.value,
+							name: this.refs.sign_username.value,
+							email: this.refs.sign_email.value,
+							password: this.refs.sign_password.value,
+							isLoginWithPassword: true
+						}, (error) => {
+							if(error) {
+								console.log(error);
+								Alert.error(error.reason, {
+									position: 'top-right',
+									effect: 'jelly',
+									timeout: 2000,
+								});
+							} else {
+								this.props.onLogin();
+							}
+						});
+					}
 
-			} else {
-				this.props.onLogin();
-			}
+				},
+				{
+					label: 'Cancel',
+					onClick: () => {} 
+				}
+
+			]
 		});
 	}
 
