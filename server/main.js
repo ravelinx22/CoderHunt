@@ -9,3 +9,8 @@ import "../imports/api/chats/ChatMessages.js";
 import { WebApp } from 'meteor/webapp';
 
 WebApp.addHtmlAttributeHook(() => ({ lang: 'en' }));
+
+// Deny all client-side updates to user documents
+Meteor.users.deny({
+    update() { return true; }
+});

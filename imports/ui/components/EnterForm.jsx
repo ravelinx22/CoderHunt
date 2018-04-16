@@ -119,9 +119,9 @@ export default class EnterForm extends Component {
 						<button className="enter_github" onClick={this.enterWithGithub.bind(this)}> <i className="fa fa-github"></i> Enter with Github</button>
 					</Row>
 					<div className="enter_option_title">Or, sign up with email</div>
-					<input type="text" placeholder="Username" ref="sign_username" className="enter_input"/>
-					<input type="email" placeholder="Email" ref="sign_email" className="enter_input"/>
-					<input type="password" placeholder="Password" ref="sign_password" className="enter_input"/>
+					<input type="text" placeholder="Username" ref="sign_username" className="enter_input" aria-label="Username input field"/>
+					<input type="email" placeholder="Email" ref="sign_email" className="enter_input" aria-label="Email input field"/>
+					<input type="password" placeholder="Password" ref="sign_password" className="enter_input" aria-label="Password input field"/>
 					<button className="enter_submit" onClick={this.signUpWithPassword.bind(this)}>Sign Up</button>
 					<div className="privacy_terms_title">By clicking I Accept, you confirm that we can monitor user activity for analytic purposes.</div>
 				</form>
@@ -141,8 +141,8 @@ export default class EnterForm extends Component {
 						</Row>
 						<div className="enter_option_title">Or, log in with email</div>
 					</div>
-					<input type="text" placeholder="Username" ref="log_username" className="enter_input"/>
-					<input type="password" placeholder="Password" ref="log_password" className="enter_input"/>
+					<input type="text" placeholder="Username" ref="log_username" className="enter_input" aria-label="Username input field"/>
+					<input type="password" placeholder="Password" ref="log_password" className="enter_input" aria-label="Password input field"/>
 					<button className="enter_submit" onClick={this.enterWithPassword.bind(this)}>Log In</button>
 					<div className="privacy_terms_title">By clicking I Accept, you confirm that we can monitor user activity for analytic purposes.</div>
 				</form>
