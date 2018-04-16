@@ -14,33 +14,60 @@ export default class CardNavbar extends Component {
 	}
 
 	goBack() {
-		this.props.history.goBack();	
+		this.props.history.goBack();
 	}
 
-	like() {		
-		var body = {};
-
-		if (this.props.isUserMode) {
-			body["userId"] = Meteor.userId();
-			body["projectId"] = this.props.card._id;
-			body["projectOwnerId"] = this.props.card.userId
+	like() {
+		if (this.props.projectViewMode) {
+			this.shift();
 		} else {
-			body["userId"] = this.props.card._id; 
-			body["projectOwnerId"] = Meteor.userId(); 
-		}
+			var body = {};
 
-		body["comingFromUser"] = this.props.isUserMode;
-		Meteor.call("likes.insert", body);
-		this.props.history.push("/");
+			if (this.props.isUserMode) {
+				body["userId"] = Meteor.userId();
+				body["projectId"] = this.props.card._id;
+				body["projectName"] = this.props.card.name;
+				body["projectOwnerId"] = this.props.card.userId
+			} else {
+				body["userId"] = this.props.card._id;
+				body["projectOwnerId"] = Meteor.userId();
+			}
+			body["dislike"] = false;
+			body["comingFromUser"] = this.props.isUserMode;
+
+			Meteor.call("likes.insert", body);
+			this.props.history.push("/");
+
+			if (!this.props.isUserMode)
+				Meteor.call("users.updateLikeStats", body.userId);
+		}
 	}
 
 	unlike() {
-		console.log("unlike");
-		this.props.history.push("/");
+		if (this.props.projectViewMode) {
+			this.shift();
+		} else {
+			var body = {};
+			if (this.props.isUserMode) {
+				body["userId"] = Meteor.userId();
+				body["projectId"] = this.props.card._id;
+				body["projectName"] = this.props.card.name;
+				body["projectOwnerId"] = this.props.card.userId
+			} else {
+				body["userId"] = this.props.card._id;
+				body["projectOwnerId"] = Meteor.userId();
+			}
+			console.log(this.props.card);
+			body["dislike"] = true;
+			body["comingFromUser"] = this.props.isUserMode;
+
+			Meteor.call("likes.insert", body);
+			this.props.history.push("/");
+		}
 	}
 
-	render() {  
-		return(
+	render() {
+		return (
 			<Container className="card_navbar d-flex align-items-center">
 				<Row className="card_navbar_row">
 					<a className="btn_go_back mr-auto" onClick={this.goBack.bind(this)}>
