@@ -21,7 +21,7 @@ Meteor.methods({
 			createdAt: Date,
 			projectName: String,
 		});
-		if (!this.userId) {
+		if (!Meteor.userId) {
 			throw new Meteor.Error("not-authorized");
 		}
 
@@ -40,7 +40,7 @@ Meteor.methods({
 	},
 	"chats.message"(chatId) {
 		check(chatId, String);
-		if (!this.userId) {
+		if (!Meteor.userId()) {
 			throw new Meteor.Error("not-authorized");
 		}
 
