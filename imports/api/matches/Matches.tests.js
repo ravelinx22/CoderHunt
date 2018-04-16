@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { assert } from "meteor/practicalmeteor:chai";
 import faker from "faker";
-import { Likes } from "../likes/Likes";
+import { Matches } from "../matches/Matches";
 import { resetDatabase } from "meteor/xolvio:cleaner";
 import { Factory } from "meteor/dburles:factory";
 import { sinon } from 'meteor/practicalmeteor:sinon';
@@ -9,7 +9,7 @@ import { sinon } from 'meteor/practicalmeteor:sinon';
 
 if (Meteor.isServer) {
 
-    describe("likes", function () {
+    describe("matches", function () {
         let user;
 
         beforeEach(function() {
@@ -25,20 +25,15 @@ if (Meteor.isServer) {
 			resetDatabase();
 		});	
 
-        describe("likes.insert", function () {         
-            it("should insert the like", function(){
+        describe("matches.insert", function () {         
+            it("should create a new match", function(){
                 var a = {
                     userId: faker.lorem.word(),
                     projectId: faker.lorem.word(),
-                    projectOwnerId: faker.lorem.word(),
-                    comingFromUser: true,
-                    dislike: false,
-                    projectName: faker.lorem.word(),
                 }
-                assert.equal(Likes.findOne(a), null);
-                Meteor.call("likes.insert", a);
-                let like = Likes.findOne(a);
-                assert(like);
+                assert.equal(Matches.findOne(a), null);
+                Meteor.call("matches.insert", a);
+                assert(Matches.findOne(a));
             })
 
         })
