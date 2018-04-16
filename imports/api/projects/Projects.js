@@ -53,7 +53,7 @@ Meteor.methods({
 			tags: Array,
 			image_url: String,
 		});
-		if (!this.userId) {
+		if (!Meteor.userId()) {
 			throw new Meteor.Error("not-authorized");
 		}
 
@@ -63,14 +63,14 @@ Meteor.methods({
 			tags: object.tags,
 			image_url: object.image_url,
 			createdAt: new Date(),
-			userId: this.userId,
-			username: (Meteor.users.findOne(this.userId).username ? Meteor.users.findOne(this.userId).username : Meteor.users.findOne(this.userId).services.github.username)
+			userId: Meteor.userId(),
+			username: (Meteor.users.findOne(Meteor.userId()).username ? Meteor.users.findOne(Meteor.userId()).username : Meteor.users.findOne(Meteor.userId()).services.github.username)
 		});
 	},
 	"projects.remove"(projectId) {
 		check(projectId, String);
 		const project = Projects.findOne(projectId);
-		if (project.userId !== this.userId) {
+		if (project.userId !== Meteor.userId()) {
 			throw new Meteor.Error("not-authorized");
 		}
 		Projects.remove(projectId);

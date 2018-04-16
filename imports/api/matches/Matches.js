@@ -17,8 +17,12 @@ Matches.after.insert(function(matchId, doc) {
 
 Meteor.methods({
 	"matches.insert"(object) {
-		check(object, Match.Optional());
-		if(!this.userId) {
+		check(object, Match.Optional({
+			userId: String,
+			projectId: String,
+		}));
+
+		if(!Meteor.userId()) {
 			throw new Meteor.Error("not-authorized");
 		}
 
