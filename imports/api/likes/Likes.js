@@ -59,7 +59,7 @@ Meteor.methods({
 			dislike: Match.Optional(Boolean),
 		});
 
-		if (!this.userId) {
+		if (!Meteor.userId()) {
 			throw new Meteor.Error("not-authorized");
 		}
 
