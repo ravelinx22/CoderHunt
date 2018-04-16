@@ -18,21 +18,21 @@ Meteor.methods({
 			chatId: String,
 		});
 
-		if (!this.userId) {
+		if (!Meteor.userId()) {
 			throw new Meteor.Error("not-authorized");
 		}
 		ChatMessages.insert({
 			senderId: object.senderId,
 			message: object.message,
 			chatId: object.chatId,
-			image_url: Meteor.users.findOne(this.userId).image_url,
+			image_url: Meteor.users.findOne(Meteor.userId()).image_url,
 			isSeen: false,
 			createdAt: new Date(),
 		})
 	},
 	"chatmessages.seen"(messageId) {
 		check(messageId, String);
-		if (!this.userId) {
+		if (!Meteor.userId()) {
 			throw new Meteor.Error("not-authorized");
 		}
 
