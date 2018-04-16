@@ -64,11 +64,6 @@ class CardDetailPage extends Component {
 			var grade = this.props.dat.grade ? this.props.dat.grade : "-";
 			var numberOfLikes = this.props.dat.numberOfLikes ? this.props.dat.numberOfLikes : "-";
 			var projectsByLanguage = this.props.dat.projectsByLanguage;
-			delete projectsByLanguage["Programming"];
-
-			var languageWithMoreProjects = _.max(Object.keys(projectsByLanguage), function (o) { return projectsByLanguage[o] });
-
-			languageWithMoreProjects = languageWithMoreProjects == 0 ? "-" : languageWithMoreProjects;
 
 			return (
 				<div className="profile-content">
@@ -84,10 +79,6 @@ class CardDetailPage extends Component {
 						<li>
 							<div className="digits">{numberOfLikes}</div>
 							Likes
-						</li>
-						<li>
-							<div className="digits">{languageWithMoreProjects}</div>
-							Most proficient in
 						</li>
 					</ul>
 					<div className="clear"></div>

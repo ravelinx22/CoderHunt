@@ -29,6 +29,7 @@ class UserMenu extends Component {
 	}
 
 	renderName() {
+		console.log(this.props);
 		if(this.props.user && this.props.user.services) {
 			return (this.props.user.name ? this.props.user.name : this.props.user.services.github.username);
 		} 

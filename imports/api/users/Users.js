@@ -33,7 +33,7 @@ export const usersForProject = function () {
 if (Meteor.isServer) {
 
 	Meteor.publish("users", function usersPublication() {
-		return Meteor.users.find({},{fields: {services:0, projectsRatedBefore: 0, usersRatedBefore: 0}});
+		return Meteor.users.find({});
 	});
 
 	Meteor.publish("usersByLanguage", function usersByLanguage(language) {
