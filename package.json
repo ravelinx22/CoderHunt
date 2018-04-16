@@ -30,6 +30,6 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "faker": "^4.1.0",
-    "react-test-renderer": "^16.3.1"
+    "ignore-styles": "^5.0.1"
   }
 }
