@@ -33,6 +33,11 @@ meteor --settings settings.json
 
 The project runs in http://localhost:3000/
 
+#### Running tests
+```
+meteor test --driver-package=cultofcoders:mocha --port 3100
+```
+
 ## Technologies
 
 - Meteor
