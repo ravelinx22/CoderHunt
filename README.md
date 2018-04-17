@@ -34,6 +34,7 @@ meteor --settings settings.json
 The project runs in http://localhost:3000/
 
 #### Running tests
+In Windows you need to run the terminal as administrator
 ```
 meteor test --driver-package=cultofcoders:mocha --port 3100
 ```
