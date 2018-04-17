@@ -1,0 +1,26 @@
+import {Meteor} from "meteor/meteor";
+import { assert, chai   } from "meteor/practicalmeteor:chai";
+import faker from "faker";
+import { resetDatabase    } from "meteor/xolvio:cleaner";
+import { Factory    } from "meteor/dburles:factory";
+import { sinon    } from 'meteor/practicalmeteor:sinon';
+import { shallow   } from "enzyme";
+import React from "react";
+
+if(Meteor.isClient) {
+	import Cards from "./Cards.jsx";
+
+	describe("Cards", function() {
+		it("should render cards", function() {
+			let item = shallow(<Cards />);
+			assert(item.find(".tinder"));
+			assert(item.find(".tinder--cards"));
+			assert(item.find(".card-buttons"));
+			assert(item.find(".unlike"));
+			assert(item.find(".like"));
+
+			assert.equal(item.find("LookingCard").length , 1);
+			assert.equal(item.find("button").length , 2);
+		});
+	});
+}
