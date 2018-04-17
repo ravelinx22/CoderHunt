@@ -76,7 +76,7 @@ Meteor.methods({
 		check(userId, String);
 		check(grade, Number);
 		if (Meteor.isServer) {
-			var usersRatedBefore = Meteor.users.findOne({ _id: this.userId }).usersRatedBefore;
+			var usersRatedBefore = Meteor.users.findOne({ _id: Meteor.userId() }).usersRatedBefore;
 			var userInfoBeforeRating = Meteor.users.findOne({ _id: userId }, { grade: 1, _id: 0, numberOfRates: 1 });
 			var newRating;
 
@@ -89,7 +89,7 @@ Meteor.methods({
 					newRating = grade;
 
 				Meteor.users.update({ _id: userId }, { $set: { numberOfRates: (userInfoBeforeRating.numberOfRates ? userInfoBeforeRating.numberOfRates + 1 : 1), grade: newRating } });
-				Meteor.users.update({ _id: this.userId }, { $addToSet: { usersRatedBefore: userId } });
+				Meteor.users.update({ _id: Meteor.userId() }, { $addToSet: { usersRatedBefore: userId } });
 			}
 		}
 	},
@@ -98,7 +98,7 @@ Meteor.methods({
 		check(grade, Number)
 
 		if (Meteor.isServer) {
-			var projectsRatedBefore = Meteor.users.findOne({ _id: this.userId }).projectsRatedBefore;
+			var projectsRatedBefore = Meteor.users.findOne({ _id: Meteor.userId() }).projectsRatedBefore;
 
 			var projectInfoBeforeRating = Projects.findOne({ _id: projectId }, { grade: 1, _id: 0, numberOfRates: 1 });
 			var newRating;
@@ -112,15 +112,15 @@ Meteor.methods({
 					newRating = grade;
 
 				Projects.update({ _id: projectId }, { $set: { numberOfRates: (projectInfoBeforeRating.numberOfRates ? projectInfoBeforeRating.numberOfRates + 1 : 1), grade: newRating } });
-				Meteor.users.update({ _id: this.userId }, { $addToSet: { projectsRatedBefore: projectId } });
+				Meteor.users.update({ _id: Meteor.userId() }, { $addToSet: { projectsRatedBefore: projectId } });
 			}
 		}
 	},
 	"users.ratedBefore"(id) {
 		check(id, String)
-		var usersRatedBefore = Meteor.users.findOne({ _id: this.userId }).usersRatedBefore;
+		var usersRatedBefore = Meteor.users.findOne({ _id: Meteor.userId() }).usersRatedBefore;
 		var ratedBeforeUser = usersRatedBefore && usersRatedBefore.includes(id);
-		var projectsRatedBefore = Meteor.users.findOne({ _id: this.userId }).projectsRatedBefore;
+		var projectsRatedBefore = Meteor.users.findOne({ _id: Meteor.userId() }).projectsRatedBefore;
 		var ratedBeforeProject = projectsRatedBefore && projectsRatedBefore.includes(id);
 		return ratedBeforeProject || ratedBeforeUser;
 	}
