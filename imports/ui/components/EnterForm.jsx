@@ -22,8 +22,8 @@ export default class EnterForm extends Component {
 	changeLog(e) {
 		e.preventDefault();
 
-		this.setState({
-			signUpMode: !this.state.signUpMode,
+		this.setState(state => {
+			signUpMode: !state.signUpMode,
 		});
 	}
 
